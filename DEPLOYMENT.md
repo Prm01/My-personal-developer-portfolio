@@ -58,46 +58,9 @@ Deploy the portfolio to **Vercel** (frontend) + **Render** or **Railway** (backe
 
 ### Update API base URL
 
-In production, the frontend must call the deployed backend. Update `client/src` to use:
 
-```js
-const API_URL = import.meta.env.VITE_API_URL || '/api';
-```
 
-Then in Contact, Projects, AIChat components, use `${API_URL}/contact`, `${API_URL}/projects`, etc.
 
----
-
-## 4. CORS & Proxy
-
-**Backend** (`server/index.js`): CORS should allow your Vercel domain:
-```js
-app.use(cors({ origin: ['https://your-portfolio.vercel.app', 'http://localhost:2000'] }));
-```
-
-**Frontend**: In production, `fetch('/api/...')` won't work (no proxy). Use full backend URL:
-- Set `VITE_API_URL=https://your-backend.onrender.com` in Vercel
-- Components should use: `const API_URL = import.meta.env.VITE_API_URL || '/api'`
-
----
-
-## 5. Seed Data
-
-After first deploy, seed projects:
-```bash
-cd server
-MONGODB_URI="your-uri" node seed/projects.js
-```
-
-Or add a one-time deploy script.
-
----
-
-## 6. Custom Domain (Optional)
-
-- **Vercel**: Add domain in project settings
-- **Render**: Upgrade for custom domain or use `.onrender.com`
-- **Railway**: Custom domain in project settings
 
 ---
 
