@@ -2,16 +2,17 @@ import { useState, useEffect } from 'react';
 import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { motion, useMotionValue, useTransform, AnimatePresence } from 'framer-motion';
-import { Github, Download, ArrowRight, ArrowDown, Linkedin, Code2, Medal } from 'lucide-react';
+import { Github, Download, ArrowRight, ArrowDown, Linkedin, Code2, Medal, Folder } from 'lucide-react';
 import { TypeAnimation } from 'react-type-animation';
 import Scene3D from './Scene3D';
-import { PROFILE } from '../lib/profile';
+import { PROFILE, getResumePdfHref } from '../lib/profile';
 
 const LINKS = [
   { href: PROFILE.githubUrl, icon: Github, label: 'GitHub' },
   { href: PROFILE.linkedinUrl, icon: Linkedin, label: 'LinkedIn' },
   { href: PROFILE.leetcodeUrl, icon: Code2, label: 'LeetCode' },
-  { href: PROFILE.codolioUrl, icon: Medal, label: 'Codolio' }
+  { href: PROFILE.codolioUrl, icon: Medal, label: 'Codolio' },
+  { href: PROFILE.resumeDriveUrl, icon: Folder, label: 'Resume (Drive)' }
 ];
 
 const nameLetters = PROFILE.name.split('');
@@ -142,7 +143,7 @@ export default function Hero() {
               className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
               <MagneticButton
-                href={PROFILE.resumeUrl}
+                href={getResumePdfHref()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="relative px-7 py-4 rounded-2xl font-semibold overflow-hidden group inline-flex items-center justify-center gap-2"
