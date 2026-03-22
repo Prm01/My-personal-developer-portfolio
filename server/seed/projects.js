@@ -23,7 +23,7 @@ const projects = [
     description: 'Full-stack MERN app with role-based dashboards (Patient, Doctor, Admin). RESTful APIs for auth (JWT), booking, and payments. Deployed on Render.',
     techStack: ['React.js', 'Node.js', 'Express.js', 'MongoDB'],
     github: null,
-    live: null,
+    live: 'https://full-stack-project-1-vau7.onrender.com/',
     featured: true,
     order: 1
   },
@@ -32,9 +32,19 @@ const projects = [
     description: 'Responsive portfolio with 3D effects, animations, Grid layout, dark/light mode, and mobile-optimized design. Built with MERN stack.',
     techStack: ['React.js', 'Tailwind CSS', 'Framer Motion', 'Node.js'],
     github: null,
-    live: null,
+    live: 'https://my-personal-developer-portfolio-1.onrender.com/',
     featured: true,
     order: 2
+  },
+  {
+    title: 'Swiggy Clone (Live API)',
+    description:
+      'Food delivery UI inspired by Swiggy with restaurant discovery, menus, and cart flow using live REST APIs for real listings and item data.',
+    techStack: ['React.js', 'REST APIs', 'JavaScript', 'CSS3'],
+    github: null,
+    live: null,
+    featured: false,
+    order: 3
   }
 ];
 

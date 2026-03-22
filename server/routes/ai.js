@@ -7,7 +7,7 @@ const genAI = process.env.GEMINI_API_KEY
   ? new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
   : null;
 
-const PORTFOLIO_CONTEXT = `You are an AI assistant for Pramod Yadav's portfolio. Pramod is a B.Tech student in Mathematics and Computing at RGIPT. His skills: JavaScript, Python, C++, React, Node.js, Express, MongoDB, SQL, ML. Projects: AQI Prediction (ML), Doctor Appointment System (MERN), Portfolio Website. He has Google Prompt Design in Vertex AI certification, is Design Executive at GDSC RGIPT, Contributor at GirlScript SoC 2024, and Executive at GeeksForGeeks RGIPT. Be helpful, concise, and professional.`;
+const PORTFOLIO_CONTEXT = `You are an AI assistant for Pramod Yadav's portfolio. Pramod is a B.Tech student in Mathematics and Computing at RGIPT. His skills: JavaScript, Python, C++, React, Node.js, Express, MongoDB, SQL, ML. Projects: AQI Prediction (ML), Doctor Appointment System (MERN, live on Render), Portfolio Website (live on Render), Swiggy Clone with live food delivery APIs. He has Google Prompt Design in Vertex AI certification, is Design Executive at GDSC RGIPT, Contributor at GirlScript SoC 2024, and Executive at GeeksForGeeks RGIPT. Be helpful, concise, and professional.`;
 
 router.post('/chat', async (req, res) => {
   if (!genAI) {

@@ -40,7 +40,7 @@ export const FALLBACK_PROJECTS_PREMIUM = [
     ],
     impact: ['Role-based dashboards', 'JWT auth', 'Deployed on Render'],
     github: 'https://github.com/Prm01',
-    live: null,
+    live: 'https://full-stack-project-1-vau7.onrender.com/',
     image: '/projects/doctor.png',
     featured: true
   },
@@ -62,16 +62,22 @@ export const FALLBACK_PROJECTS_PREMIUM = [
     ],
     impact: ['Dark/Light mode', 'CSS Grid + Flexbox', 'Mobile-first UX'],
     github: 'https://github.com/Prm01',
-    live: null,
+    live: 'https://my-personal-developer-portfolio-1.onrender.com/',
     image: '/projects/portfolio.svg',
     featured: true
   },
   {
     _id: 'p4',
-    title: 'ESP Website',
+    title: 'Swiggy Clone (Live API)',
     description:
-      'A modern, responsive website experience with premium UI, performance-minded layout, and a clean content structure.',
-    techStack: ['React', 'Tailwind', 'Framer Motion'],
+      'Food delivery experience inspired by Swiggy: restaurant discovery, menu browsing, and cart flow powered by live REST APIs for real listings and item data.',
+    techStack: ['React.js', 'REST APIs', 'JavaScript', 'CSS3', 'Responsive Design'],
+    highlights: [
+      'Fetches restaurants, menus, and search results from live APIs with loading and error states.',
+      'Implements cart, filters, and a responsive layout tuned for mobile-first ordering UX.',
+      'Mirrors core Swiggy-style flows while keeping the bundle lean and the UI fast.'
+    ],
+    impact: ['Live API integration', 'Cart & search', 'Mobile-first UI'],
     github: 'https://github.com/Prm01',
     live: null,
     image: null
@@ -147,10 +153,10 @@ export const OSS_HIGHLIGHTS = [
   },
   {
     id: 'o2',
-    repo: 'ESP Website',
+    repo: 'Swiggy Clone (Live API)',
     description:
-      'Website enhancements with modern UI patterns and performance-minded styling.',
-    tech: ['React', 'Tailwind'],
+      'Food delivery UI with live restaurant and menu APIs, cart flow, and responsive styling.',
+    tech: ['React', 'REST APIs', 'CSS'],
     url: 'https://github.com/Prm01'
   },
   {
