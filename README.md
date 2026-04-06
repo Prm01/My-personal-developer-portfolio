@@ -2,7 +2,7 @@
 
 A premium, full-stack portfolio with 3D graphics, animations, and AI chatbot. Built with MERN stack, Three.js, GSAP-ready, and deployment-ready.
 
-## ✨ Features
+##  Features
 
 - **3D Hero** – Animated Three.js background (React Three Fiber)
 - **Typewriter** – Cycling tagline in Hero
@@ -17,7 +17,7 @@ A premium, full-stack portfolio with 3D graphics, animations, and AI chatbot. Bu
 - **SEO** – React Helmet meta tags
 - **Dark/Light Mode** – System preference + toggle
 
-## 🧠 Tech Stack
+##  Tech Stack
 
 | Layer | Tech |
 |-------|------|
@@ -28,7 +28,7 @@ A premium, full-stack portfolio with 3D graphics, animations, and AI chatbot. Bu
 | Database | MongoDB |
 | AI | Google Gemini API |
 
-## 📦 Setup
+##  Setup
 
 ### 1. Install
 
