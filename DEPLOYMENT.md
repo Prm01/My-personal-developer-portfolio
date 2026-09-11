@@ -70,6 +70,11 @@ Create a **Static Site**, not a Web Service:
 - **Environment Variable**: `VITE_API_URL` = your backend URL
 - **Start Command**: leave empty
 
+If the deploy log says `Running 'build'` or `build: command not found`, the
+service is configured as a Web Service with `build` as its Start Command. Change
+it to a Render **Static Site** and clear the Start Command; `build` belongs only
+in the Build Command as `npm run build`.
+
 The repository also includes `render.yaml`, which can create the Render backend
 Web Service and frontend Static Site together. Set the secret environment
 variables when prompted.
