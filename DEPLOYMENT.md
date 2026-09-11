@@ -37,6 +37,10 @@ Deploy the portfolio to **Vercel** (frontend) + **Render** or **Railway** (backe
    - `PORT` (Render sets this automatically)
 8. Deploy. Note the URL (e.g. `https://your-app.onrender.com`)
 
+The backend must be a **Web Service** with `server` as its Root Directory. Do not use
+the frontend build output or run `npm run start` from `client`; the client is a
+static site and does not have a Node server.
+
 ### Railway
 
 1. New project → Deploy from GitHub
@@ -55,6 +59,20 @@ Deploy the portfolio to **Vercel** (frontend) + **Render** or **Railway** (backe
 5. **Build Command**: `npm run build`
 6. **Output Directory**: `dist`
 7. **Environment Variable**: `VITE_API_URL` = your backend URL (e.g. `https://your-app.onrender.com`)
+
+### Hosting the frontend on Render instead
+
+Create a **Static Site**, not a Web Service:
+
+- **Root Directory**: leave blank (repository root)
+- **Build Command**: `npm install --prefix client && npm run build --prefix client`
+- **Publish Directory**: `client/dist`
+- **Environment Variable**: `VITE_API_URL` = your backend URL
+- **Start Command**: leave empty
+
+The repository also includes `render.yaml`, which can create the Render backend
+Web Service and frontend Static Site together. Set the secret environment
+variables when prompted.
 
 ### Update API base URL
 
