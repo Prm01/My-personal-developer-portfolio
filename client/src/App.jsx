@@ -12,17 +12,17 @@ import SEO from './components/SEO';
 import Footer from './components/Footer';
 import AIChat from './components/AIChat';
 
-// Lazy load sections for code splitting & faster initial load
-const About = lazy(() => import('./components/About'));
-const Skills = lazy(() => import('./components/Skills'));
-const Projects = lazy(() => import('./components/Projects'));
-const Hackathons = lazy(() => import('./components/Hackathons'));
-const OpenSource = lazy(() => import('./components/OpenSource'));
-const Resume = lazy(() => import('./components/Resume'));
-const Education = lazy(() => import('./components/Education'));
-const Timeline = lazy(() => import('./components/Timeline'));
+const About        = lazy(() => import('./components/About'));
+const Skills       = lazy(() => import('./components/Skills'));
+const Projects     = lazy(() => import('./components/Projects'));
+const Timeline     = lazy(() => import('./components/Timeline'));
+const Education    = lazy(() => import('./components/Education'));
+const Awards       = lazy(() => import('./components/Awards'));
+const Hackathons   = lazy(() => import('./components/Hackathons'));
+const OpenSource   = lazy(() => import('./components/OpenSource'));
+const Resume       = lazy(() => import('./components/Resume'));
 const Certifications = lazy(() => import('./components/Certifications'));
-const Contact = lazy(() => import('./components/Contact'));
+const Contact      = lazy(() => import('./components/Contact'));
 
 const SectionFallback = () => (
   <div className="section-pad">
@@ -35,7 +35,7 @@ function App() {
     if (typeof window !== 'undefined') {
       return window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
-    return false;
+    return true; // default dark
   });
   const [preloaderDone, setPreloaderDone] = useState(false);
 
@@ -59,41 +59,22 @@ function App() {
             <Floating3D />
             <MusicToggle />
             <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
-        <main>
-          <Hero />
-          <Suspense fallback={<SectionFallback />}>
-            <About />
-          </Suspense>
-          <Suspense fallback={<SectionFallback />}>
-            <Skills />
-          </Suspense>
-          <Suspense fallback={<SectionFallback />}>
-            <Projects />
-          </Suspense>
-          <Suspense fallback={<SectionFallback />}>
-            <Hackathons />
-          </Suspense>
-          <Suspense fallback={<SectionFallback />}>
-            <OpenSource />
-          </Suspense>
-          <Suspense fallback={<SectionFallback />}>
-            <Resume />
-          </Suspense>
-          <Suspense fallback={<SectionFallback />}>
-            <Education />
-          </Suspense>
-          <Suspense fallback={<SectionFallback />}>
-            <Timeline />
-          </Suspense>
-          <Suspense fallback={<SectionFallback />}>
-            <Certifications />
-          </Suspense>
-          <Suspense fallback={<SectionFallback />}>
-            <Contact />
-          </Suspense>
-        </main>
-        <Footer />
-        <AIChat />
+            <main>
+              <Hero />
+              <Suspense fallback={<SectionFallback />}><About /></Suspense>
+              <Suspense fallback={<SectionFallback />}><Skills /></Suspense>
+              <Suspense fallback={<SectionFallback />}><Projects /></Suspense>
+              <Suspense fallback={<SectionFallback />}><Timeline /></Suspense>
+              <Suspense fallback={<SectionFallback />}><Education /></Suspense>
+              <Suspense fallback={<SectionFallback />}><Awards /></Suspense>
+              <Suspense fallback={<SectionFallback />}><Hackathons /></Suspense>
+              <Suspense fallback={<SectionFallback />}><OpenSource /></Suspense>
+              <Suspense fallback={<SectionFallback />}><Resume /></Suspense>
+              <Suspense fallback={<SectionFallback />}><Certifications /></Suspense>
+              <Suspense fallback={<SectionFallback />}><Contact /></Suspense>
+            </main>
+            <Footer />
+            <AIChat />
           </motion.div>
         )}
       </AnimatePresence>

@@ -21,4 +21,13 @@ app.use('/api/projects', projectRoutes);
 
 app.get('/api/health', (_, res) => res.json({ status: 'ok' }));
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const server = app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`Port ${PORT} is in use. Kill it with: npx kill-port ${PORT}`);
+    process.exit(1);
+  } else {
+    throw err;
+  }
+});

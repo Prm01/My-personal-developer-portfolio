@@ -1,25 +1,19 @@
-export const FEATURED_PROJECT_IDS = []; // optional: set to project _id values from API
+export const FEATURED_PROJECT_IDS = ['p1', 'p2', 'p3'];
 
 export const FALLBACK_PROJECTS_PREMIUM = [
   {
     _id: 'p1',
-    title: 'Air Quality Index (AQI) Prediction',
+    title: 'AIR_Q – Urban Air Quality Intelligence',
     description:
-      'Machine Learning model to predict AQI using pollutant data (CO, Ozone, NO2, PM2.5) with clear evaluation and visualization.',
-    techStack: [
-      'Python',
-      'Pandas',
-      'NumPy',
-      'Scikit-learn',
-      'Matplotlib',
-      'Seaborn'
-    ],
+      'Multi-source pipeline (OpenAQ, CPCB, NASA FIRMS) powering an XGBoost model for 7-day AQI forecasting with SHAP-based source attribution and LLM-powered health advisories.',
+    techStack: ['Python', 'Streamlit', 'XGBoost', 'SHAP', 'scikit-learn', 'SQLite', 'Gemini'],
     highlights: [
-      'Developed a Random Forest regression model achieving high prediction accuracy for AQI values.',
-      'Performed data cleaning, feature selection, and correlation analysis of pollutants.',
-      'Visualized Actual vs Predicted AQI trends and implemented AQI category mapping (Good, Moderate, Unhealthy, etc.).'
+      'Built multi-source data pipeline ingesting OpenAQ, CPCB, and NASA FIRMS data.',
+      'XGBoost model for 7-day AQI forecasting with SHAP-based source attribution and anomaly detection.',
+      'LLM-powered health advisory (Hugging Face, Gemini, template fallback) across 10 cities.',
+      'What-if AQI simulator and deployed on Render.'
     ],
-    impact: ['Random Forest', 'AQI category mapping', 'Actual vs Predicted charts'],
+    impact: ['7-day AQI forecast', 'SHAP attribution', 'LLM health advisory'],
     github: 'https://github.com/Prm01',
     live: null,
     image: '/projects/aqi.png',
@@ -27,80 +21,95 @@ export const FALLBACK_PROJECTS_PREMIUM = [
   },
   {
     _id: 'p2',
+    title: 'LinkedIn Lead Chrome Extension',
+    description:
+      'Live on the Chrome Web Store — converts LinkedIn people-search results into CRM leads via REST API with a daily-cap counter, Playwright automation, and Apollo.io verified-email retrieval.',
+    techStack: ['JavaScript', 'Chrome Extension', 'Playwright', 'Apollo.io', 'REST API'],
+    highlights: [
+      'Live on Chrome Web Store; converts LinkedIn search results into CRM leads in real time.',
+      'Playwright + Apollo.io automated verified-email retrieval — 67% faster (30→10 min).',
+      'Token auth, retry logic, and duplicate-lead detection built in.'
+    ],
+    impact: ['67% faster lead processing', 'Chrome Web Store', 'Duplicate detection'],
+    github: 'https://github.com/Prm01',
+    live: null,
+    image: null,
+    featured: true
+  },
+  {
+    _id: 'p3',
     title: 'Doctor Appointment System',
     description:
-      'Full-stack MERN appointment booking with role-based dashboards for Patient, Doctor, and Admin — plus JWT auth and cloud deployment.',
-    techStack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'REST'],
+      'Full-stack healthcare booking platform with 3 role-based dashboards (Patient/Doctor/Admin), JWT-secured REST APIs, payment workflows, and cloud deployment on Render.',
+    techStack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Tailwind CSS'],
     highlights: [
-      'Built responsive frontend using React.js with role-based dashboards for Patient, Doctor, and Admin.',
-      'Designed RESTful backend APIs for authentication, booking, and payments.',
-      'Implemented secure JWT-based authentication and role-based access.',
-      'Built database schema for users, doctors, appointments, transactions.',
-      'Deployed backend on cloud using Render.'
+      'Three role-based dashboards: Patient, Doctor, and Admin with distinct workflows.',
+      'JWT-secured REST APIs for authentication, booking, and payment flows.',
+      'Deployed on Render with full CI/CD pipeline.'
     ],
     impact: ['Role-based dashboards', 'JWT auth', 'Deployed on Render'],
     github: 'https://github.com/Prm01',
     live: 'https://full-stack-project-1-vau7.onrender.com/',
     image: '/projects/doctor.png',
     featured: true
+  }
+];
+
+export const EXPERIENCE = [
+  {
+    id: 'e1',
+    role: 'Automation Intern',
+    org: 'Polluxa',
+    period: 'May 2026 – Jul 2026',
+    desc: 'Built a Chrome extension (content scripts, service workers, REST APIs) writing leads into a CRM in real time. Built Python/JavaScript Playwright automation cutting lead-processing time 67% (30→10 min). Integrated Apollo.io APIs with token auth, retries, and duplicate detection. Promoted from Product Intern to Automation Intern in 1 month. Contributed to a 20% increase in client acquisition.',
+    tags: ['Python', 'JavaScript', 'Playwright', 'REST API', 'Claude'],
+    highlight: 'Promoted in 1 month · 20% client acquisition increase'
   },
   {
-    _id: 'p3',
-    title: 'Portfolio Website',
-    description:
-      'Responsive developer portfolio with premium animations, dark/light mode, and modern layout techniques for a strong first impression.',
-    techStack: [
-      'React.js',
-      'HTML5',
-      'CSS3',
-      'JavaScript',
-      'Responsive Design'
-    ],
-    highlights: [
-      'Implemented advanced CSS features including Grid, Flexbox, animations, and dark/light mode.',
-      'Optimized for mobile devices, improving mobile engagement by 30%.'
-    ],
-    impact: ['Dark/Light mode', 'CSS Grid + Flexbox', 'Mobile-first UX'],
-    github: 'https://github.com/Prm01',
-    live: 'https://my-personal-developer-portfolio-1.onrender.com/',
-    image: '/projects/portfolio.svg',
-    featured: true
+    id: 'e2',
+    role: 'Design Executive / Coordinator',
+    org: 'GDSC RGIPT',
+    period: 'Aug 2024 – Aug 2026',
+    desc: 'Led a student volunteer team for event planning and execution. Designed event posters and creatives. Facilitated Google Cloud Arcade peer learning with 500+ badges completed by participants.',
+    tags: ['Canva', 'Adobe', 'Leadership', 'Google Cloud'],
+    highlight: '500+ Cloud Arcade badges · Event design lead'
+  }
+];
+
+export const EDUCATION = [
+  {
+    id: 'ed1',
+    degree: 'B.Tech – Mathematics & Computing',
+    institute: 'Rajiv Gandhi Institute of Petroleum Technology (RGIPT)',
+    location: 'Jais, Uttar Pradesh',
+    period: 'Aug 2023 – May 2027',
+    tags: ['Mathematics', 'Computing', 'Algorithms', 'ML']
   },
   {
-    _id: 'p4',
-    title: 'Swiggy Clone (Live API)',
-    description:
-      'Food delivery experience inspired by Swiggy: restaurant discovery, menu browsing, and cart flow powered by live REST APIs for real listings and item data.',
-    techStack: ['React.js', 'REST APIs', 'JavaScript', 'CSS3', 'Responsive Design'],
-    highlights: [
-      'Fetches restaurants, menus, and search results from live APIs with loading and error states.',
-      'Implements cart, filters, and a responsive layout tuned for mobile-first ordering UX.',
-      'Mirrors core Swiggy-style flows while keeping the bundle lean and the UI fast.'
-    ],
-    impact: ['Live API integration', 'Cart & search', 'Mobile-first UI'],
-    github: 'https://github.com/Prm01',
-    live: null,
-    image: null
+    id: 'ed2',
+    degree: 'Senior Secondary (Class XII) – PCM',
+    institute: 'City Montessori Inter College',
+    location: 'Lucknow, Uttar Pradesh',
+    period: '2021 – 2023',
+    tags: ['Physics', 'Chemistry', 'Mathematics']
+  }
+];
+
+export const AWARDS = [
+  {
+    id: 'a1',
+    title: 'JEE Main & Advanced',
+    desc: 'Ranked in top 2% nationally among 1M+ candidates.'
   },
   {
-    _id: 'p5',
-    title: 'Weather App',
-    description:
-      'Weather forecast experience with a minimalist UI, quick search, and API-driven states.',
-    techStack: ['React', 'APIs', 'Tailwind'],
-    github: 'https://github.com/Prm01',
-    live: null,
-    image: null
+    id: 'a2',
+    title: '500+ DSA Problems Solved',
+    desc: 'Across LeetCode, CodeChef, Codeforces, InterviewBit, and GeeksForGeeks.'
   },
   {
-    _id: 'p6',
-    title: 'GitHub Profile Viewer',
-    description:
-      'A fast GitHub profile explorer with repo insights, clean loading states, and a smooth search-driven UX.',
-    techStack: ['React', 'GitHub API', 'Tailwind'],
-    github: 'https://github.com/Prm01',
-    live: null,
-    image: null
+    id: 'a3',
+    title: 'Merit-cum-Scholarship',
+    desc: 'Awarded to top 10% of students at RGIPT based on academic performance.'
   }
 ];
 
@@ -135,8 +144,8 @@ export const HACKATHONS = [
     badge: 'Selected for Round 2 — National Level',
     role: 'Full Stack Developer',
     description:
-      'Built an AI-powered chatbot for loan assistance that automates customer queries and supports loan-related decision-making across the journey.',
-    tech: ['MERN Stack', 'AI/ML', 'APIs', 'AI Chatbot', 'Finance', 'Hackathon'],
+      'Built an AI-powered chatbot for loan assistance that automates customer queries and supports loan-related decision-making.',
+    tech: ['MERN Stack', 'AI/ML', 'APIs', 'AI Chatbot', 'Finance'],
     icon: 'code',
     dateLabel: 'Hackathon'
   }
@@ -168,4 +177,3 @@ export const OSS_HIGHLIGHTS = [
     url: 'https://github.com/Prm01?tab=repositories'
   }
 ];
-

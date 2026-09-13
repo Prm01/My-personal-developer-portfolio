@@ -2,14 +2,11 @@ export const PROFILE = {
   name: 'Pramod Yadav',
   githubUsername: 'Prm01',
   githubUrl: 'https://github.com/Prm01',
-  linkedinUrl: 'https://www.linkedin.com/in/pramod-yadav-7810b5299/',
+  linkedinUrl: 'https://linkedin.com/in/pramod-yadav-7810b5299',
+  email: 'pramodyadav2948@gmail.com',
   leetcodeUrl: 'https://leetcode.com/u/PramodYadav1/',
   codolioUrl: 'https://codolio.com/profile/xcodex',
   resumeUrl: '/resume.pdf',
-  /**
-   * Shared folder (Anyone with the link can view) — opens in Drive.
-   * Prefer open?id= — works more reliably than /drive/folders/ alone.
-   */
   resumeDriveUrl:
     'https://drive.google.com/open?id=1dephhzBTIKX-E0BAzrMot2fsc0T82vrU'
 };

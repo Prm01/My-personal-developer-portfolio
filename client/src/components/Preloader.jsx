@@ -1,82 +1,134 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const MIN_DISPLAY_MS = 1800;
+const LETTERS = ['P', 'R', 'A', 'M', 'O', 'D'];
+const MIN_MS = 2000;
 
-/**
- * Full-screen preloader. Fades out when progress completes and min time elapsed.
- */
 export default function Preloader({ onComplete }) {
   const [progress, setProgress] = useState(0);
-  const [complete, setComplete] = useState(false);
+  const [done, setDone] = useState(false);
 
   useEffect(() => {
     const start = Date.now();
-    const interval = setInterval(() => {
-      setProgress((p) => Math.min(p + Math.random() * 10 + 5, 100));
-    }, 100);
+    const iv = setInterval(() => {
+      setProgress(p => {
+        const next = p + Math.random() * 12 + 4;
+        return next >= 100 ? 100 : next;
+      });
+    }, 80);
 
-    const timeout = setTimeout(() => {
-      clearInterval(interval);
+    const to = setTimeout(() => {
+      clearInterval(iv);
       setProgress(100);
-      const remaining = MIN_DISPLAY_MS - (Date.now() - start);
+      const wait = MIN_MS - (Date.now() - start);
       setTimeout(() => {
-        setComplete(true);
-        setTimeout(() => onComplete?.(), 350);
-      }, Math.max(0, remaining));
-    }, MIN_DISPLAY_MS);
+        setDone(true);
+        setTimeout(() => onComplete?.(), 600);
+      }, Math.max(0, wait));
+    }, MIN_MS);
 
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timeout);
-    };
+    return () => { clearInterval(iv); clearTimeout(to); };
   }, [onComplete]);
+
+  const pct = Math.min(Math.round(progress), 100);
+  const r = 44;
+  const circ = 2 * Math.PI * r;
+  const offset = circ - (pct / 100) * circ;
 
   return (
     <AnimatePresence>
-      {!complete && (
+      {!done && (
         <motion.div
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.35 }}
-          className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-slate-950"
+          exit={{ opacity: 0, scale: 1.04 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-slate-950 overflow-hidden"
         >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-12"
-          >
-            <span className="text-2xl md:text-3xl font-display font-bold bg-gradient-to-r from-violet-400 via-fuchsia-400 to-rose-400 bg-clip-text text-transparent">
-              Pramod Yadav
-            </span>
-          </motion.div>
+          {/* Radial gradient bg */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.12)_0%,transparent_70%)]" />
 
-          <motion.div
+          {/* Floating orbs */}
+          {[
+            { w: 300, h: 300, top: '10%', left: '5%', dur: 7 },
+            { w: 200, h: 200, bottom: '15%', right: '8%', dur: 9 },
+          ].map((o, i) => (
+            <motion.div
+              key={i}
+              animate={{ y: [0, -20, 0], opacity: [0.06, 0.12, 0.06] }}
+              transition={{ duration: o.dur, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute rounded-full bg-gradient-to-br from-violet-500/30 to-fuchsia-500/10 blur-3xl pointer-events-none"
+              style={{ width: o.w, height: o.h, top: o.top, left: o.left, bottom: o.bottom, right: o.right }}
+            />
+          ))}
+
+          {/* Progress ring */}
+          <div className="relative mb-8">
+            <svg width="120" height="120" className="-rotate-90">
+              <circle cx="60" cy="60" r={r} fill="none" stroke="rgba(139,92,246,0.12)" strokeWidth="4" />
+              <motion.circle
+                cx="60" cy="60" r={r}
+                fill="none"
+                stroke="url(#preloadGrad)"
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeDasharray={circ}
+                animate={{ strokeDashoffset: offset }}
+                transition={{ duration: 0.15 }}
+              />
+              <defs>
+                <linearGradient id="preloadGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#8b5cf6" />
+                  <stop offset="50%" stopColor="#c084fc" />
+                  <stop offset="100%" stopColor="#f43f5e" />
+                </linearGradient>
+              </defs>
+            </svg>
+
+            {/* Center percentage */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <motion.span
+                key={pct}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="text-lg font-display font-bold text-white"
+              >
+                {pct}
+              </motion.span>
+            </div>
+          </div>
+
+          {/* Staggered name letters */}
+          <div className="flex gap-1 mb-3">
+            {LETTERS.map((l, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                transition={{ delay: 0.1 + i * 0.07, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="text-3xl md:text-4xl font-display font-black bg-gradient-to-r from-violet-400 via-fuchsia-400 to-rose-400 bg-clip-text text-transparent"
+              >
+                {l}
+              </motion.span>
+            ))}
+          </div>
+
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="flex gap-2 mb-8"
+            transition={{ delay: 0.6 }}
+            className="text-slate-500 text-xs tracking-[0.3em] uppercase"
           >
-            {[0, 1, 2, 3, 4].map((i) => (
-              <motion.div
-                key={i}
-                className="w-2 h-2 rounded-full bg-violet-500"
-                animate={{ y: [0, -8, 0], opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.1 }}
-              />
-            ))}
-          </motion.div>
+            Full-Stack · Automation · AI
+          </motion.p>
 
-          <div className="w-48 h-1 rounded-full bg-slate-800 overflow-hidden">
+          {/* Bottom progress bar */}
+          <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-slate-800">
             <motion.div
-              className="h-full bg-gradient-to-r from-violet-500 to-fuchsia-500"
-              initial={{ width: 0 }}
-              animate={{ width: `${Math.min(progress, 100)}%` }}
+              className="h-full bg-gradient-to-r from-violet-500 via-fuchsia-500 to-rose-500"
+              animate={{ width: `${pct}%` }}
               transition={{ duration: 0.15 }}
             />
           </div>
-          <p className="text-slate-500 text-sm mt-4">{Math.min(Math.round(progress), 100)}%</p>
         </motion.div>
       )}
     </AnimatePresence>
