@@ -33,14 +33,17 @@ const SectionFallback = () => (
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window !== 'undefined') {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const saved = localStorage.getItem('theme');
+      if (saved) return saved === 'dark';
+      return false; // default white mode
     }
-    return true; // default dark
+    return false;
   });
   const [preloaderDone, setPreloaderDone] = useState(false);
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode);
+    localStorage.setItem('theme', darkMode ? 'dark' : 'light');
   }, [darkMode]);
 
   return (
