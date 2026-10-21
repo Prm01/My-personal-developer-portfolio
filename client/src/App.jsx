@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { HelmetProvider } from 'react-helmet-async';
+import Lenis from 'lenis';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -14,13 +14,15 @@ import Footer from './components/Footer';
 import SEO from './components/SEO';
 import AIChat from './components/AIChat';
 import NotFound from './components/NotFound';
+import ScrollProgress from './components/ScrollProgress';
+import CustomCursor from './components/CustomCursor';
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('theme');
       if (saved) return saved === 'dark';
-      return true; // default dark theme as specified in requirements
+      return true; // default dark theme
     }
     return true;
   });
@@ -33,12 +35,37 @@ function App() {
     return false;
   });
 
+  // Lenis smooth scrolling initialization
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const lenis = new Lenis({
+      duration: 1.1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      touchMultiplier: 1.5
+    });
+
+    let animationFrameId;
+    function raf(time) {
+      lenis.raf(time);
+      animationFrameId = requestAnimationFrame(raf);
+    }
+    animationFrameId = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      lenis.destroy();
+    };
+  }, []);
+
   useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode);
     localStorage.setItem('theme', darkMode ? 'dark' : 'light');
   }, [darkMode]);
 
-  // Handle route change / 404 navigation
+  // Route popstate listener for 404
   useEffect(() => {
     const handlePopState = () => {
       const path = window.location.pathname;
@@ -66,37 +93,43 @@ function App() {
       {/* Skip to main content link for keyboard WCAG accessibility */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-violet-600 focus:text-white focus:rounded-lg focus:shadow-lg focus:outline-none"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-gradient-to-r focus:from-blue-600 focus:to-purple-600 focus:text-white focus:rounded-lg focus:shadow-lg focus:outline-none"
       >
         Skip to main content
       </a>
 
-      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#090d16] text-slate-900 dark:text-slate-100 transition-colors duration-300">
+      {/* Reading scroll progress indicator */}
+      <ScrollProgress />
+
+      {/* Custom neon cursor */}
+      <CustomCursor />
+
+      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#070b14] text-slate-900 dark:text-slate-100 transition-colors duration-300">
         <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
 
         <main id="main-content" className="flex-1">
-          {/* 1. Hero */}
+          {/* 1. Hero (3D) */}
           <Hero />
 
-          {/* 2. About */}
+          {/* 2. About (3-4 lines + animated number counters) */}
           <About />
 
-          {/* 3. Featured Projects */}
+          {/* 3. Featured Projects (3D tilt cards, filter tabs) */}
           <Projects />
 
-          {/* 4. Experience */}
+          {/* 4. Experience (Polluxa 3 impact bullets + test tool) */}
           <Experience />
 
-          {/* 5. Skills */}
+          {/* 5. Skills (3D rotating skill sphere + categorized panels) */}
           <Skills />
 
-          {/* 6. Open Source */}
+          {/* 6. Open Source ("Contributed on GSoC", PR links, GitHub graph) */}
           <OpenSource />
 
-          {/* 7. Achievements */}
+          {/* 7. Coding Profiles & Achievements (CodeChef, Codeforces, GeeksforGeeks, JEE, Scholarship, GDSC) */}
           <Achievements />
 
-          {/* 8. Contact */}
+          {/* 8. Contact (Working form, email 23mc3037@rgipt.ac.in, social icons) */}
           <Contact />
         </main>
 

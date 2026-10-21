@@ -2,20 +2,22 @@ import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 /**
- * Custom animated cursor - smooth trailing effect, reactive to hovers.
- * Desktop only; hidden on touch devices.
+ * Custom animated neon cursor with glow trailing effect.
+ * Hidden on touch devices and when reduced motion is preferred.
  */
 export default function CustomCursor() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [smoothPos, setSmoothPos] = useState({ x: 0, y: 0 });
+  const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
+  const [smoothPos, setSmoothPos] = useState({ x: -100, y: -100 });
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const rafRef = useRef();
-  const posRef = useRef({ x: 0, y: 0 });
+  const posRef = useRef({ x: -100, y: -100 });
+  const rafRef = useRef(null);
 
   useEffect(() => {
+    // Disable on mobile/touch or reduced-motion
     const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    if (isTouch) return;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (isTouch || prefersReducedMotion) return;
 
     const handleMouseMove = (e) => {
       setMousePos({ x: e.clientX, y: e.clientY });
@@ -25,8 +27,8 @@ export default function CustomCursor() {
     const handleMouseLeave = () => setIsVisible(false);
 
     const handleMouseOver = (e) => {
-      const interactive = e.target.closest('a, button, [role="button"], input, textarea');
-      setIsHovering(!!interactive);
+      const interactive = e.target.closest('a, button, [role="button"], input, textarea, select');
+      setIsHovering(Boolean(interactive));
     };
 
     window.addEventListener('mousemove', handleMouseMove);
@@ -41,15 +43,15 @@ export default function CustomCursor() {
     };
   }, [isVisible]);
 
-  // Smooth trailing animation
+  // Smooth lerp trailing animation
   useEffect(() => {
     if (!isVisible) return;
 
     const lerp = (start, end, factor) => start + (end - start) * factor;
 
     const update = () => {
-      posRef.current.x = lerp(posRef.current.x, mousePos.x, 0.15);
-      posRef.current.y = lerp(posRef.current.y, mousePos.y, 0.15);
+      posRef.current.x = lerp(posRef.current.x, mousePos.x, 0.2);
+      posRef.current.y = lerp(posRef.current.y, mousePos.y, 0.2);
       setSmoothPos({ ...posRef.current });
       rafRef.current = requestAnimationFrame(update);
     };
@@ -57,42 +59,32 @@ export default function CustomCursor() {
     return () => cancelAnimationFrame(rafRef.current);
   }, [mousePos, isVisible]);
 
-  useEffect(() => {
-    if (isVisible) document.body.style.cursor = 'none';
-    return () => { document.body.style.cursor = ''; };
-  }, [isVisible]);
-
   if (!isVisible) return null;
 
   return (
     <>
-      {/* Outer ring - trails behind */}
+      {/* Outer Glow Ring - trails smoothly */}
       <motion.div
-        className="fixed z-[9998] pointer-events-none w-10 h-10 rounded-full border-2 border-violet-400/40 dark:border-violet-500/30"
+        className="fixed z-[9998] pointer-events-none rounded-full border border-blue-400/50 dark:border-purple-400/50 shadow-[0_0_15px_rgba(56,189,248,0.35)]"
         style={{
           left: smoothPos.x,
           top: smoothPos.y,
-          transform: 'translate(-50%, -50%)'
+          transform: 'translate(-50%, -50%)',
+          width: isHovering ? 48 : 32,
+          height: isHovering ? 48 : 32
         }}
-        animate={{
-          scale: isHovering ? 1.8 : 1,
-          opacity: isHovering ? 0.4 : 0.8
-        }}
-        transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+        transition={{ type: 'spring', stiffness: 350, damping: 25 }}
       />
-      {/* Inner dot - follows more directly */}
+      {/* Inner Neon Dot */}
       <motion.div
-        className="fixed z-[9999] pointer-events-none w-2 h-2 rounded-full bg-violet-500 dark:bg-violet-400"
+        className="fixed z-[9999] pointer-events-none rounded-full bg-gradient-to-r from-blue-400 to-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.8)]"
         style={{
           left: mousePos.x,
           top: mousePos.y,
-          transform: 'translate(-50%, -50%)'
+          transform: 'translate(-50%, -50%)',
+          width: isHovering ? 8 : 5,
+          height: isHovering ? 8 : 5
         }}
-        animate={{
-          scale: isHovering ? 2.5 : 1,
-          opacity: isHovering ? 0.9 : 1
-        }}
-        transition={{ type: 'spring', stiffness: 500, damping: 28 }}
       />
     </>
   );

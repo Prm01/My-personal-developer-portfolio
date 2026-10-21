@@ -47,7 +47,7 @@ export default function AIChat() {
     <>
       <button
         onClick={() => setOpen(!open)}
-        className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-2xl bg-violet-600 hover:bg-violet-500 text-white shadow-lg shadow-violet-600/30 flex items-center justify-center transition-all duration-200 active:scale-95 focus-visible:ring-2 focus-visible:ring-violet-400"
+        className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white shadow-lg shadow-blue-500/25 flex items-center justify-center transition-all duration-200 active:scale-95 focus-visible:ring-2 focus-visible:ring-blue-400"
         aria-label="Toggle AI Assistant"
       >
         <Sparkles size={24} aria-hidden="true" />
@@ -60,12 +60,12 @@ export default function AIChat() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-24 right-4 sm:right-6 z-40 w-[calc(100vw-2rem)] sm:w-96 max-h-[75vh] flex flex-col rounded-2xl card-glass border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden"
+            className="fixed bottom-24 right-4 sm:right-6 z-40 w-[calc(100vw-2rem)] sm:w-96 max-h-[75vh] flex flex-col rounded-2xl card-glass border border-blue-500/30 dark:border-purple-500/30 shadow-2xl overflow-hidden"
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-800 bg-slate-100/70 dark:bg-slate-900/80">
+            <div className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-900/85">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center text-white">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center text-white">
                   <MessageCircle size={17} aria-hidden="true" />
                 </div>
                 <div>
@@ -73,7 +73,7 @@ export default function AIChat() {
                     Portfolio Assistant
                   </span>
                   <span className="text-[11px] text-slate-500 dark:text-slate-400">
-                    Ask about Pramod&apos;s projects &amp; skills
+                    Ask about Pramod&apos;s projects, GSoC &amp; skills
                   </span>
                 </div>
               </div>
@@ -94,7 +94,7 @@ export default function AIChat() {
                     Welcome!
                   </p>
                   <p className="text-xs">
-                    Inquire about Rahat, BhoomiAI, Polluxa internship experience, or tech stack competencies.
+                    Ask about Rahat, BhoomiAI, GSoC contributions, Polluxa internship, or technical stack competencies.
                   </p>
                 </div>
               )}
@@ -113,7 +113,7 @@ export default function AIChat() {
                   <div
                     className={`max-w-[85%] px-3.5 py-2.5 rounded-xl ${
                       m.role === 'user'
-                        ? 'bg-violet-600 text-white rounded-br-none'
+                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-br-none shadow-sm'
                         : 'bg-slate-100 dark:bg-slate-800/80 text-slate-800 dark:text-slate-200 rounded-bl-none border border-slate-200 dark:border-slate-700'
                     }`}
                   >
@@ -125,7 +125,7 @@ export default function AIChat() {
               {loading && (
                 <div className="flex justify-start">
                   <div className="px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800/80 text-slate-500 text-xs flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-violet-600 animate-pulse" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
                     Analyzing portfolio knowledge...
                   </div>
                 </div>
@@ -146,13 +146,13 @@ export default function AIChat() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask about Pramod..."
-                className="flex-1 px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-400 text-xs focus-visible:ring-2 focus-visible:ring-violet-500"
+                className="flex-1 px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-400 text-xs focus-visible:ring-2 focus-visible:ring-blue-500"
                 disabled={loading}
               />
               <button
                 type="submit"
                 disabled={loading || !input.trim()}
-                className="p-2 rounded-lg bg-violet-600 hover:bg-violet-500 text-white disabled:opacity-50 transition-colors"
+                className="p-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white disabled:opacity-50 transition-colors"
                 aria-label="Send query"
               >
                 <Send size={15} />

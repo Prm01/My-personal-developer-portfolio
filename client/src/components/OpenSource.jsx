@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Github, GitPullRequest, ExternalLink, Sparkles, Activity, Star, GitFork, Users } from 'lucide-react';
+import { Github, GitPullRequest, ExternalLink, Sparkles, GitFork, Users } from 'lucide-react';
 import { OPEN_SOURCE_DATA } from '../data/premiumSections';
 import { PROFILE } from '../lib/profile';
 
@@ -33,14 +33,39 @@ export default function OpenSource() {
         >
           <span className="section-label">05 — Community &amp; Open Source</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white">
-            Open Source{' '}
-            <span className="text-violet-600 dark:text-violet-400">
-              Contributions
+            Open Source &amp;{' '}
+            <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
+              {OPEN_SOURCE_DATA.headline}
             </span>
           </h2>
           <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-xl">
-            Building in the open with clean commits, structured pull request reviews, and proactive community collaboration.
+            Contributing to real-world software with clean commits, structured PR reviews, and proactive community collaboration.
           </p>
+        </motion.div>
+
+        {/* GSoC Banner Note */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.55, delay: 0.1 }}
+          className="p-6 sm:p-7 rounded-2xl border border-purple-500/30 bg-purple-500/5 dark:bg-purple-950/20 backdrop-blur-xl mb-10 relative overflow-hidden"
+        >
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white flex items-center justify-center shrink-0 shadow-md">
+              <Sparkles size={20} aria-hidden="true" />
+            </div>
+            <div>
+              <div className="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-purple-600/20 text-purple-700 dark:text-purple-300 border border-purple-500/30 mb-1">
+                {OPEN_SOURCE_DATA.gsocNote.badge}
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white font-display">
+                {OPEN_SOURCE_DATA.gsocNote.title}
+              </h3>
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                {OPEN_SOURCE_DATA.gsocNote.text}
+              </p>
+            </div>
+          </div>
         </motion.div>
 
         {/* Highlighted Contributions: Neutralinojs & Learning Unlimited */}
@@ -51,19 +76,19 @@ export default function OpenSource() {
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="p-6 sm:p-7 rounded-2xl card-glass card-glass-hover border border-slate-200/90 dark:border-slate-800/80 flex flex-col justify-between"
+              className="p-6 sm:p-7 rounded-2xl card-glass card-glass-hover border border-blue-500/20 dark:border-purple-500/20 flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-start justify-between gap-4 mb-4">
                   <div>
-                    <span className="text-xs font-semibold uppercase tracking-wider text-violet-600 dark:text-violet-400">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-purple-400">
                       {item.type}
                     </span>
                     <h3 className="text-xl font-bold text-slate-900 dark:text-white font-display mt-0.5">
                       {item.name}
                     </h3>
                   </div>
-                  <div className="w-10 h-10 rounded-xl bg-violet-600/10 dark:bg-violet-950/40 border border-violet-500/20 flex items-center justify-center text-violet-600 dark:text-violet-400 shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-blue-500/10 dark:bg-purple-950/40 border border-blue-500/20 dark:border-purple-500/20 flex items-center justify-center text-blue-600 dark:text-purple-400 shrink-0">
                     <Github size={20} aria-hidden="true" />
                   </div>
                 </div>
@@ -111,37 +136,12 @@ export default function OpenSource() {
           ))}
         </div>
 
-        {/* GSoC 2026 Note Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55, delay: 0.25 }}
-          className="p-6 sm:p-7 rounded-2xl border border-violet-500/30 bg-violet-500/5 dark:bg-violet-950/20 backdrop-blur-xl mb-10 relative overflow-hidden"
-        >
-          <div className="flex items-start gap-4">
-            <div className="w-10 h-10 rounded-xl bg-violet-600 text-white flex items-center justify-center shrink-0 shadow-md">
-              <Sparkles size={20} aria-hidden="true" />
-            </div>
-            <div>
-              <div className="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-violet-600/20 text-violet-700 dark:text-violet-300 border border-violet-500/30 mb-1">
-                GSoC 2026 Candidacy
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white font-display">
-                {OPEN_SOURCE_DATA.gsocNote.title}
-              </h3>
-              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                {OPEN_SOURCE_DATA.gsocNote.text}
-              </p>
-            </div>
-          </div>
-        </motion.div>
-
         {/* GitHub Contribution Graph & Activity */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55, delay: 0.35 }}
-          className="p-6 sm:p-7 rounded-2xl card-glass border border-slate-200/90 dark:border-slate-800/80"
+          transition={{ duration: 0.55, delay: 0.3 }}
+          className="p-6 sm:p-7 rounded-2xl card-glass border border-blue-500/20 dark:border-purple-500/20"
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
             <div>
@@ -149,18 +149,18 @@ export default function OpenSource() {
                 GitHub Contribution Rhythm
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                Live commit rhythm and repositories on <a href={PROFILE.githubUrl} target="_blank" rel="noopener noreferrer" className="text-violet-600 dark:text-violet-400 font-semibold underline">github.com/{PROFILE.githubUsername}</a>
+                Live commit rhythm and repositories on <a href={PROFILE.githubUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500 dark:text-purple-400 font-semibold underline">github.com/{PROFILE.githubUsername}</a>
               </p>
             </div>
 
             {/* Quick Stat Chips */}
             <div className="flex items-center gap-3 text-xs font-semibold text-slate-600 dark:text-slate-300">
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60">
-                <GitFork size={13} className="text-violet-500" aria-hidden="true" />
+                <GitFork size={13} className="text-blue-500" aria-hidden="true" />
                 <span>{formatNumber(profile?.public_repos || 25)} Repos</span>
               </div>
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60">
-                <Users size={13} className="text-violet-500" aria-hidden="true" />
+                <Users size={13} className="text-purple-500" aria-hidden="true" />
                 <span>{formatNumber(profile?.followers || 12)} Followers</span>
               </div>
             </div>
@@ -169,7 +169,7 @@ export default function OpenSource() {
           {/* Contribution Heatmap Card */}
           <div className="overflow-x-auto p-4 rounded-xl bg-slate-950 border border-slate-800">
             <img
-              src={`https://ghchart.rshah.org/8b5cf6/${PROFILE.githubUsername}`}
+              src={`https://ghchart.rshah.org/38bdf8/${PROFILE.githubUsername}`}
               alt={`${PROFILE.name}'s GitHub Contribution Chart`}
               className="w-full min-w-[650px] filter saturate-150 contrast-125"
               loading="lazy"
@@ -182,7 +182,7 @@ export default function OpenSource() {
               href={PROFILE.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-violet-600 dark:text-violet-400 font-semibold hover:underline"
+              className="inline-flex items-center gap-1.5 text-blue-500 dark:text-purple-400 font-semibold hover:underline"
             >
               <span>Explore all repositories</span>
               <ExternalLink size={12} aria-hidden="true" />

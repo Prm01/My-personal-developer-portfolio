@@ -10,23 +10,18 @@ export default {
         mono: ['JetBrains Mono', 'monospace']
       },
       colors: {
-        accent: {
-          50: '#f5f3ff',
-          100: '#ede9fe',
-          200: '#ddd6fe',
-          300: '#c4b5fd',
-          400: '#a78bfa',
-          500: '#8b5cf6',
-          600: '#7c3aed',
-          700: '#6d28d9',
-          800: '#5b21b6',
-          900: '#4c1d95',
-          DEFAULT: '#8b5cf6'
+        neon: {
+          blue: '#38bdf8',
+          electric: '#3b82f6',
+          indigo: '#6366f1',
+          purple: '#a855f7',
+          violet: '#8b5cf6'
         }
       },
       boxShadow: {
-        'glow': '0 0 35px -5px rgba(139, 92, 246, 0.35)',
-        'glow-sm': '0 0 20px -3px rgba(139, 92, 246, 0.25)',
+        'neon-blue': '0 0 25px -4px rgba(56, 189, 248, 0.45)',
+        'neon-purple': '0 0 30px -4px rgba(168, 85, 247, 0.45)',
+        'neon-glow': '0 0 30px -4px rgba(59, 130, 246, 0.35), 0 0 40px -6px rgba(168, 85, 247, 0.3)',
         'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)'
       }
     }

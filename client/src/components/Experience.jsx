@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Briefcase, Calendar, CheckCircle2, TrendingUp, Zap } from 'lucide-react';
+import { Briefcase, Calendar, TrendingUp, Zap, CheckCircle2 } from 'lucide-react';
 import { EXPERIENCE_DATA } from '../data/premiumSections';
 
 export default function Experience() {
@@ -19,12 +19,12 @@ export default function Experience() {
           <span className="section-label">03 — Experience</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white">
             Engineering{' '}
-            <span className="text-violet-600 dark:text-violet-400">
+            <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
               Experience
             </span>
           </h2>
           <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-300">
-            Measurable operational improvements through automation, custom tooling, and robust API integrations.
+            Measurable operational improvements through automation workflows, custom developer tooling, and robust API integrations.
           </p>
         </motion.div>
 
@@ -36,18 +36,18 @@ export default function Experience() {
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, delay: i * 0.1 }}
-              className="p-6 sm:p-8 rounded-2xl card-glass card-glass-hover border border-slate-200/90 dark:border-slate-800/80 relative"
+              className="p-6 sm:p-8 rounded-2xl card-glass card-glass-hover border border-blue-500/20 dark:border-purple-500/20 relative"
             >
               {/* Header Row */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200/60 dark:border-slate-800/60">
                 <div className="flex items-start sm:items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-xl bg-violet-600/10 dark:bg-violet-950/40 border border-violet-500/20 flex items-center justify-center text-violet-600 dark:text-violet-400 shrink-0">
+                  <div className="w-12 h-12 rounded-xl bg-blue-500/10 dark:bg-purple-950/40 border border-blue-500/20 dark:border-purple-500/20 flex items-center justify-center text-blue-600 dark:text-purple-400 shrink-0">
                     <Briefcase size={22} aria-hidden="true" />
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-slate-900 dark:text-white font-display">
                       {exp.role}{' '}
-                      <span className="text-violet-600 dark:text-violet-400 font-medium">
+                      <span className="text-blue-600 dark:text-purple-400 font-medium">
                         @ {exp.org}
                       </span>
                     </h3>
@@ -57,7 +57,7 @@ export default function Experience() {
                   </div>
                 </div>
 
-                <div className="inline-flex items-center gap-1.5 self-start sm:self-center px-3 py-1 rounded-full text-xs font-semibold bg-violet-500/10 text-violet-700 dark:text-violet-300 border border-violet-500/20">
+                <div className="inline-flex items-center gap-1.5 self-start sm:self-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 dark:bg-purple-500/15 text-blue-700 dark:text-purple-300 border border-blue-500/20 dark:border-purple-500/30">
                   <Calendar size={13} aria-hidden="true" />
                   <span>{exp.period}</span>
                 </div>
@@ -73,7 +73,7 @@ export default function Experience() {
                     <li key={idx} className="flex items-start gap-2.5 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                       <TrendingUp
                         size={16}
-                        className="text-violet-600 dark:text-violet-400 shrink-0 mt-1"
+                        className="text-blue-500 dark:text-purple-400 shrink-0 mt-1"
                         aria-hidden="true"
                       />
                       <span>{bullet}</span>
@@ -89,7 +89,7 @@ export default function Experience() {
                     key={tag}
                     className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800/70 text-slate-700 dark:text-slate-300 border border-slate-200/50 dark:border-slate-700/50"
                   >
-                    <Zap size={11} className="text-violet-500" aria-hidden="true" />
+                    <Zap size={11} className="text-blue-500 dark:text-purple-400" aria-hidden="true" />
                     <span>{tag}</span>
                   </span>
                 ))}

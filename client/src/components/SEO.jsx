@@ -6,13 +6,14 @@ const PERSON_SCHEMA = {
   '@type': 'Person',
   name: PROFILE.name,
   jobTitle: 'Full Stack & AI Developer',
-  description: 'B.Tech Mathematics & Computing at RGIPT (2027). Building distributed systems, agentic AI pipelines, and high-performance applications.',
+  description: 'B.Tech Mathematics & Computing at RGIPT (2027). Contributed on GSoC. Building distributed systems, agentic AI pipelines, and high-performance applications.',
   url: 'https://my-personal-developer-portfolio.onrender.com',
   email: PROFILE.email,
   sameAs: [
     PROFILE.githubUrl,
     PROFILE.linkedinUrl,
-    PROFILE.leetcodeUrl
+    PROFILE.codeforcesUrl,
+    PROFILE.codechefUrl
   ],
   alumniOf: {
     '@type': 'CollegeOrUniversity',
@@ -29,14 +30,15 @@ const PERSON_SCHEMA = {
     'TrOCR',
     'Node.js',
     'Docker',
+    'Competitive Programming',
     'Mathematics & Computing'
   ]
 };
 
 export default function SEO({
-  title = 'Pramod Yadav | Full Stack & AI Developer (RGIPT 2027)',
-  description = 'Pramod Yadav — B.Tech Mathematics & Computing at RGIPT. Full Stack & AI Developer. Production systems: Rahat (heat/flood early warning with AWS Bedrock), BhoomiAI (TrOCR + LangChain), and MERN platforms.',
-  keywords = 'Pramod Yadav, Full Stack Developer, AI Developer, RGIPT, Mathematics and Computing, Rahat, BhoomiAI, FastAPI, AWS Bedrock, TrOCR, LangChain, GSoC 2026, React, Node.js',
+  title = 'Pramod Yadav | Full Stack & AI Developer | Contributed on GSoC (RGIPT 2027)',
+  description = 'Pramod Yadav — B.Tech Mathematics & Computing at RGIPT. Full Stack & AI Developer. Contributed on GSoC. Production systems: Rahat (heat/flood warning with AWS Bedrock), BhoomiAI (TrOCR + LangChain), and MERN platforms.',
+  keywords = 'Pramod Yadav, Full Stack Developer, AI Developer, RGIPT, Mathematics and Computing, Rahat, BhoomiAI, FastAPI, AWS Bedrock, TrOCR, LangChain, GSoC, Contributed on GSoC, CodeChef, Codeforces, GeeksforGeeks, React, Node.js',
   image = '/og-image.png'
 }) {
   const url = typeof window !== 'undefined' ? window.location.href : 'https://my-personal-developer-portfolio.onrender.com';

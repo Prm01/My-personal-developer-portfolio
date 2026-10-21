@@ -1,19 +1,23 @@
 export const STATS = [
   {
     id: 's1',
-    value: '500+',
+    numericValue: 500,
+    suffix: '+',
     label: 'DSA Problems Solved',
-    sub: 'LeetCode · Codeforces · GfG · CodeChef'
+    sub: 'CodeChef · Codeforces · GeeksforGeeks'
   },
   {
     id: 's2',
-    value: 'Top 2%',
+    numericValue: 2,
+    prefix: 'Top ',
+    suffix: '%',
     label: 'JEE Advanced Qualified',
-    sub: 'National rank among 1M+ aspirants'
+    sub: 'National rank among 1.2M+ candidates'
   },
   {
     id: 's3',
-    value: '3 Major',
+    numericValue: 3,
+    suffix: ' Major',
     label: 'Production & AI Projects',
     sub: 'Deployed full-stack & agentic systems'
   }
@@ -131,13 +135,13 @@ export const EXPERIENCE_DATA = [
     org: 'Polluxa',
     period: 'May 2026 – Jul 2026',
     location: 'Remote',
-    summary: 'Automated high-volume lead pipelines and resolved core infrastructure issues.',
+    summary: 'Automated high-volume lead pipelines, built CRM test automation tools, and resolved core infrastructure issues.',
     bullets: [
-      'Reduced lead-processing turnaround time from 30 minutes to 10 minutes per lead (67% speed improvement) via automated Python/JS Playwright workflows and Chrome extensions.',
+      'Reduced lead-processing turnaround time from 30 minutes to 10 minutes per lead (67% faster processing) via automated Python/JS Playwright workflows and Chrome extensions.',
       'Drove a +20% increase in qualified client acquisition by integrating Apollo.io verified-email retrieval with REST APIs, token authentication, and deduplication logic.',
-      'Audited and resolved 20 of 25+ critical automation and pipeline issues, substantially improving system reliability and operational throughput.'
+      'Built a dedicated CRM test automation tool and resolved 20 of 25+ critical automation and pipeline issues to achieve robust production stability.'
     ],
-    tags: ['Python', 'JavaScript', 'Playwright', 'Chrome Extensions', 'REST APIs', 'Apollo.io']
+    tags: ['Python', 'JavaScript', 'Playwright', 'Chrome Extensions', 'REST APIs', 'Apollo.io', 'CRM Test Automation']
   }
 ];
 
@@ -156,13 +160,13 @@ export const SKILL_GROUPS = [
   },
   {
     id: 'cloud',
-    category: 'Cloud/DevOps',
+    category: 'Cloud & DevOps',
     iconName: 'Cloud',
     skills: ['AWS Bedrock', 'AWS Rekognition', 'AWS S3', 'AWS RDS', 'CloudFront', 'Docker', 'Git & GitHub', 'GitHub Actions', 'CI/CD', 'Render', 'Vercel']
   },
   {
     id: 'ai',
-    category: 'AI/ML',
+    category: 'AI-ML',
     iconName: 'Cpu',
     skills: ['TrOCR', 'LangChain', 'Model Context Protocol (MCP)', 'Python', 'Computer Vision', 'Hugging Face', 'Gemini API', 'scikit-learn']
   },
@@ -175,6 +179,7 @@ export const SKILL_GROUPS = [
 ];
 
 export const OPEN_SOURCE_DATA = {
+  headline: 'Contributed on GSoC',
   contributions: [
     {
       id: 'neutralinojs',
@@ -196,16 +201,44 @@ export const OPEN_SOURCE_DATA = {
     }
   ],
   gsocNote: {
-    title: 'Google Summer of Code (GSoC 2026)',
-    text: 'Actively preparing for GSoC 2026 with a dedicated focus on open-source developer tooling, system automation, and agentic AI workflows. Committed to steady contribution cadences, transparent PR reviews, and community collaboration.'
+    badge: 'Contributed on GSoC',
+    title: 'Contributed on GSoC (Google Summer of Code)',
+    text: 'Contributed on GSoC with a dedicated focus on open-source developer tooling, system automation, and agentic AI workflows. Committed to steady contribution cadences, transparent PR reviews, and community collaboration.'
   }
 };
+
+export const CODING_PROFILES = [
+  {
+    id: 'codechef',
+    platform: 'CodeChef',
+    handle: 'pramod_yadav',
+    url: 'https://www.codechef.com/users/pramod_yadav',
+    description: 'Active competitive programmer solving algorithmic challenges in division contests.',
+    accent: '#b45309'
+  },
+  {
+    id: 'codeforces',
+    platform: 'Codeforces',
+    handle: 'Prm01',
+    url: 'https://codeforces.com/profile/Prm01',
+    description: 'Regular participant in rated rounds focusing on graph theory, trees, and dynamic programming.',
+    accent: '#2563eb'
+  },
+  {
+    id: 'geeksforgeeks',
+    platform: 'GeeksforGeeks',
+    handle: 'pramodyadav2948',
+    url: 'https://www.geeksforgeeks.org/user/pramodyadav2948/',
+    description: 'Extensive problem solving in data structures, algorithms, and core computing fundamentals.',
+    accent: '#16a34a'
+  }
+];
 
 export const ACHIEVEMENTS_DATA = [
   {
     id: 'jee',
     title: 'JEE Main & Advanced Qualified (Top 2%)',
-    description: 'Ranked in the top 2% nationally among over 1.2 million aspirants in India\'s most rigorous engineering entrance examinations.',
+    description: 'Ranked in the top 2% nationally among over 1.2 million aspirants in India\'s premier engineering entrance examinations.',
     badge: 'National Rank'
   },
   {
@@ -216,8 +249,8 @@ export const ACHIEVEMENTS_DATA = [
   },
   {
     id: 'gdsc',
-    title: 'GDSC Design Executive',
-    description: 'Executive member at Google Developer Student Clubs RGIPT; organized campus tech events and facilitated cloud learning with 500+ badges completed.',
+    title: 'Design Executive at GDSC RGIPT',
+    description: 'Led visual design initiatives and technical student activities; facilitated peer learning programs with 500+ cloud badges earned.',
     badge: 'Leadership'
   }
 ];

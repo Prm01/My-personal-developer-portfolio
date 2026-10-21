@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Home, ArrowLeft } from 'lucide-react';
+import { Home } from 'lucide-react';
 
 export default function NotFound({ onHome }) {
   const handleHomeClick = () => {
@@ -11,9 +11,9 @@ export default function NotFound({ onHome }) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-slate-50 dark:bg-[#090d16] text-slate-900 dark:text-white">
-      <div className="max-w-md w-full p-8 rounded-3xl card-glass border border-slate-200 dark:border-slate-800 text-center shadow-2xl">
-        <span className="text-6xl font-extrabold text-violet-600 dark:text-violet-400 font-display block mb-2">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-slate-50 dark:bg-[#070b14] text-slate-900 dark:text-white">
+      <div className="max-w-md w-full p-8 rounded-3xl card-glass border border-blue-500/30 dark:border-purple-500/30 text-center shadow-2xl">
+        <span className="text-6xl font-extrabold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent font-display block mb-2">
           404
         </span>
         <h1 className="text-2xl font-bold font-display mb-3">

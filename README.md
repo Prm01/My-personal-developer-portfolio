@@ -1,34 +1,34 @@
-# Pramod Yadav - Full Stack & AI Developer Portfolio
+# Pramod Yadav - Premium 3D Full Stack & AI Developer Portfolio
 
-Modern, high-performance developer portfolio for **Pramod Yadav**, B.Tech Mathematics & Computing at Rajiv Gandhi Institute of Petroleum Technology (RGIPT, 2027), targeting Summer 2026 engineering internships and GSoC 2026 recruiters.
+Interactive 3D developer portfolio for **Pramod Yadav**, B.Tech Mathematics & Computing at Rajiv Gandhi Institute of Petroleum Technology (RGIPT, 2027). Contributed on GSoC. Built for engineering internship recruiters and open-source maintainers.
 
 ---
 
-## 🚀 Key Highlights & Architectural Features
+## 🌟 Key Highlights & 3D Visual Architecture
 
-- **Design System:** Sleek dark theme default with unified electric violet accent (`#8b5cf6`), glass-style cards (`backdrop-blur-xl`), and dark/light mode toggle.
-- **Performance & Accessibility:** Engineered for **Lighthouse 95+** and **WCAG 2.1 AA** compliance with high-contrast text, keyboard-focusable controls, skip links, semantic landmarks, and lightweight bundle chunking.
-- **Animations:** Fluid Framer Motion scroll animations, layout transitions, and interactive project filters.
-- **Section Sequence (in exact recruiter-focused order):**
-  1. **Hero:** Typing animation (`Full Stack & AI Developer`), value statement, and instant CTA buttons for Resume (PDF), GitHub, LinkedIn, and Contact.
-  2. **About:** 3-4 line concise bio highlighting Mathematics & Computing background at RGIPT, plus quick stats (500+ DSA problems, JEE Advanced qualified top 2%, 3 major projects).
-  3. **Featured Projects:** Metric-driven cards with screenshots, one-line problem statements, 3 outcome bullets, tech chips, live demos, and GitHub buttons:
-     - **Rahat:** Heat and flood early warning system for Delhi's 290 municipal wards (FastAPI, PostgreSQL, AWS Bedrock/Rekognition/S3/RDS/CloudFront, MCP, Web Push, 35 e2e tests).
-     - **BhoomiAI:** Land record digitization and agentic validation (TrOCR, LangChain agentic verification, 92% field accuracy, 15 min to under 1 min per record).
-     - **Doctor Appointment System:** Full-stack MERN platform with 3 discrete role dashboards (Patient/Doctor/Admin) and Lighthouse accessibility elevated from 79 to 100.
-     - **Finance Dashboard UI:** Dynamic portfolio analytics with responsive charting and 95+ mobile performance.
-     - *Filter tabs:* All / Full Stack / AI / Backend.
-  4. **Experience:** Automation Intern at Polluxa (May–Jul 2026) with 3 impact bullets (30→10 min per lead, +20% acquisition, fixed 20 of 25+ issues).
-  5. **Skills:** Grouped technical arsenal (Frontend, Backend, Cloud/DevOps, AI/ML, Languages) with clean iconography.
-  6. **Open Source:** Contributions to Neutralinojs (`neutralinojs-cli`) and Learning Unlimited (`ESP-Website`), links to PRs, GSoC 2026 candidacy note, and live GitHub contribution rhythm.
-  7. **Achievements:** JEE Main & Advanced (top 2%), RGIPT Merit-cum-Means Scholarship, GDSC Design Executive.
-  8. **Contact:** Working direct message form (Formspree/EmailJS), primary email `23mc3037@rgipt.ac.in`, one-click copy, and social profiles.
-- **Additional Additions:**
-  - Complete SEO meta tags & Open Graph preview image (`/og-image.png`).
-  - Dark-mode SVG favicon (`/favicon.svg`).
-  - Dedicated 404 Not Found view.
-  - Sticky navbar with active section scroll highlighting.
-  - Recruiter-friendly PDF Resume download button.
+- **Interactive 3D Hero:** Full-screen 3D scene built with `@react-three/fiber` & `@react-three/drei` featuring an orbiting wireframe globe, glowing 3D code-brackets (`{ }` and `</>`), floating tech cubes (Python, React, AWS, Docker), and mouse parallax tracking with starfield particle background.
+- **Interactive 3D Skill Sphere:** Fibonacci sphere distributing 24+ core technologies in 3D orbit with billboarding labels and hover inspection, backed by categorized skill groups.
+- **3D Tilt Project Cards:** Specular cursor spotlight and spring-driven 3D tilt on hover with neon blue/purple glow borders.
+- **Scroll & Motion Experience:** Smooth scrolling via **Lenis**, Framer Motion scroll-reveal transitions, reading progress bar, animated stat counters, and custom neon glow cursor.
+- **Theme & Style:** Dark theme default with neon blue/purple gradient accents (`#38bdf8` to `#a855f7`), glass-style cards (`backdrop-blur-xl`), and dark/light toggle.
+- **Performance & Standards:** Lazy-loaded 3D canvases, pixel ratio caps, mobile optimization, WCAG 2.1 AA accessible contrast ratios, and Lighthouse 90+ target.
+
+---
+
+## 📋 Sections in Order
+
+1. **Hero (3D):** Full-screen interactive 3D scene with typing animation (*"Full Stack & AI Developer"*, *"Backend Engineer"*, *"Open Source Contributor"*), one-line value statement, and instant CTA buttons (*View Projects*, *Download Resume*, *Contact*).
+2. **About:** 3–4 line passionate bio highlighting Mathematics & Computing background at RGIPT, plus animated counters for 500+ DSA problems solved, JEE Advanced qualification (Top 2%), and 3 major production projects.
+3. **Featured Projects (Filter Tabs: All / Full Stack / AI / Backend):**
+   - **Rahat:** Heat and flood early warning system for Delhi's 290 municipal wards (*FastAPI, PostgreSQL, AWS Bedrock, AWS Rekognition, AWS S3, RDS, CloudFront, MCP, Web Push, 35 e2e tests*).
+   - **BhoomiAI:** Land record digitization and agentic validation platform (*TrOCR, LangChain agentic verification, 92% field accuracy, 15 min to under 1 min per record*).
+   - **Doctor Appointment System:** Full-stack MERN platform with 3 discrete role dashboards (*Patient, Doctor, Admin*) and Lighthouse accessibility elevated from 79 to 100.
+   - **Finance Dashboard UI:** High-performance portfolio analytics interface with responsive charting and 95+ mobile Lighthouse benchmark.
+4. **Experience:** Automation Intern at Polluxa (May–Jul 2026): 30 to 10 min per lead (67% faster turnaround), +20% client acquisition, Apollo.io API integration, CRM test automation tool, and resolved 20 of 25+ issues.
+5. **Skills:** Interactive 3D rotating skill sphere paired with grouped technical panels (*Frontend*, *Backend*, *Cloud & DevOps*, *AI-ML*, *Languages*).
+6. **Open Source:** *"Contributed on GSoC"* candidacy and contributions to Neutralinojs (`neutralinojs-cli`) and Learning Unlimited (`ESP-Website`) with links to PRs and live GitHub commit heatmap.
+7. **Coding Profiles & Achievements:** Competitive programming profiles (*CodeChef, Codeforces, GeeksforGeeks*), 500+ DSA problems solved, JEE Main & Advanced (top 2%), RGIPT Merit-cum-Means Scholarship, Design Executive at GDSC RGIPT.
+8. **Contact:** Working direct message form (Formspree/EmailJS), primary email `23mc3037@rgipt.ac.in`, GitHub, LinkedIn, and closing statement: *"Let's build something impactful together."*
 
 ---
 
@@ -36,51 +36,22 @@ Modern, high-performance developer portfolio for **Pramod Yadav**, B.Tech Mathem
 
 | Layer | Technologies |
 |---|---|
-| **Frontend** | React 18, Vite 5, Tailwind CSS, Framer Motion, Lucide Icons |
+| **Frontend** | React 18, Vite 5, Tailwind CSS, Framer Motion, Lenis, Lucide Icons |
+| **3D Graphics** | Three.js, React Three Fiber (`@react-three/fiber`), Drei (`@react-three/drei`) |
 | **SEO & Meta** | React Helmet Async, Schema.org Person JSON-LD, OpenGraph |
-| **Backend** | Node.js, Express.js |
-| **Database** | MongoDB (Mongoose) |
-| **AI Integration** | Google Gemini API / OpenRouter |
+| **Backend & AI** | Node.js, Express.js, MongoDB, Google Gemini API / OpenRouter |
 
 ---
 
-## 📦 Setup & Development
-
-### 1. Install Dependencies
+## 📦 Setup & Production Build
 
 ```bash
+# Install all dependencies
 npm run install:all
-```
 
-### 2. Environment Configuration
-
-Create `server/.env` (from `server/.env.example`):
-
-```env
-PORT=5000
-MONGODB_URI=mongodb://localhost:27017/portfolio
-GEMINI_API_KEY=your_gemini_api_key
-```
-
-### 3. Run Development Server
-
-```bash
+# Development server
 npm run dev
-```
 
-- Client runs at: `http://localhost:2000`
-- Server runs at: `http://localhost:5000`
-
-### 4. Build for Production
-
-```bash
+# Production build
 npm run build
 ```
-
----
-
-## 🌐 Deployment (Render)
-
-Configured via `render.yaml`:
-- **Static Site:** Publishes `client/dist`
-- **Web Service:** Deploys `server` Node.js API with health checks

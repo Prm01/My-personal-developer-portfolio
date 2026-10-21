@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Github, Download, Linkedin, Mail, ArrowDown, ExternalLink } from 'lucide-react';
+import { ArrowDown, Download, Mail, ExternalLink, Sparkles, FolderGit2 } from 'lucide-react';
 import { TypeAnimation } from 'react-type-animation';
 import { PROFILE, getResumePdfHref } from '../lib/profile';
+
+const Hero3D = lazy(() => import('./Hero3D'));
 
 export default function Hero() {
   const [avatarUrl, setAvatarUrl] = useState(null);
@@ -17,27 +19,39 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-[92vh] flex items-center justify-center pt-24 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center pt-24 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-slate-50 dark:bg-[#070b14]"
     >
-      {/* Background ambient glow - single accent color */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-violet-600/10 dark:bg-violet-600/15 blur-[120px] rounded-full" />
-        <div className="absolute inset-0 grid-pattern opacity-40 dark:opacity-30" />
-      </div>
+      {/* 3D Interactive Scene Background */}
+      <Suspense fallback={
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-950/20 via-transparent to-purple-950/20 pointer-events-none" />
+      }>
+        <Hero3D />
+      </Suspense>
 
+      {/* Subtle ambient lighting layer */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-50/70 dark:via-[#070b14]/75 to-slate-50 dark:to-[#070b14] pointer-events-none" />
+
+      {/* Hero Content Overlay */}
       <div className="relative z-10 w-full max-w-5xl mx-auto">
-        <div className="grid lg:grid-cols-[1.25fr_0.75fr] gap-12 lg:gap-8 items-center">
+        <div className="grid lg:grid-cols-[1.3fr_0.7fr] gap-12 lg:gap-8 items-center">
           {/* Main Info Column */}
           <div className="text-center lg:text-left">
-            {/* Status Pill */}
+            {/* Status Pills */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 dark:bg-violet-950/40 text-violet-700 dark:text-violet-300 text-xs sm:text-sm font-semibold mb-6 shadow-sm"
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 mb-6"
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
-              <span>B.Tech Mathematics &amp; Computing @ RGIPT (2027)</span>
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 text-xs sm:text-sm font-semibold shadow-sm backdrop-blur-md">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
+                <span>B.Tech Mathematics &amp; Computing @ RGIPT (2027)</span>
+              </span>
+
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 text-xs sm:text-sm font-semibold shadow-sm backdrop-blur-md">
+                <Sparkles size={13} className="text-purple-400" />
+                <span>Contributed on GSoC</span>
+              </span>
             </motion.div>
 
             {/* Headline */}
@@ -48,33 +62,31 @@ export default function Hero() {
               className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white"
             >
               Hi, I&apos;m{' '}
-              <span className="text-violet-600 dark:text-violet-400">
+              <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
                 Pramod Yadav
               </span>
             </motion.h1>
 
-            {/* Typing animation */}
+            {/* Typing animation: Full Stack & AI Developer, Backend Engineer, Open Source Contributor */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.55, delay: 0.2 }}
-              className="mt-3 text-xl sm:text-2xl md:text-3xl font-semibold text-slate-700 dark:text-slate-300 min-h-[38px] flex items-center justify-center lg:justify-start"
+              className="mt-3 text-xl sm:text-2xl md:text-3xl font-semibold text-slate-700 dark:text-slate-200 min-h-[38px] flex items-center justify-center lg:justify-start"
             >
               <TypeAnimation
                 sequence={[
                   'Full Stack & AI Developer',
-                  2000,
-                  'B.Tech Mathematics & Computing',
                   1800,
-                  'Open Source & GSoC Aspirant',
+                  'Backend Engineer',
                   1800,
-                  'Full Stack & AI Developer',
-                  2500
+                  'Open Source Contributor',
+                  1800
                 ]}
                 wrapper="span"
                 speed={50}
                 repeat={Infinity}
-                className="text-violet-600 dark:text-violet-400 font-bold"
+                className="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 bg-clip-text text-transparent font-bold"
               />
             </motion.div>
 
@@ -88,51 +100,34 @@ export default function Hero() {
               Engineering scalable distributed systems, agentic AI pipelines, and high-performance full-stack applications with measurable production impact.
             </motion.p>
 
-            {/* Action Buttons: Resume, GitHub, LinkedIn, Contact */}
+            {/* Action Buttons: View Projects, Download Resume, Contact */}
             <motion.div
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.4 }}
               className="mt-8 flex flex-wrap gap-3.5 justify-center lg:justify-start items-center"
             >
-              {/* Resume download */}
+              <a
+                href="#projects"
+                className="btn-accent"
+                aria-label="View Featured Projects"
+              >
+                <FolderGit2 size={18} aria-hidden="true" />
+                <span>View Projects</span>
+              </a>
+
               <a
                 href={getResumePdfHref()}
                 download="Pramod_Yadav_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-accent"
+                className="btn-secondary"
                 aria-label="Download Pramod Yadav Resume PDF"
               >
                 <Download size={18} aria-hidden="true" />
-                <span>Resume (PDF)</span>
+                <span>Download Resume</span>
               </a>
 
-              {/* GitHub */}
-              <a
-                href={PROFILE.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-secondary"
-                aria-label="Pramod Yadav GitHub Profile"
-              >
-                <Github size={18} aria-hidden="true" />
-                <span>GitHub</span>
-              </a>
-
-              {/* LinkedIn */}
-              <a
-                href={PROFILE.linkedinUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-secondary"
-                aria-label="Pramod Yadav LinkedIn Profile"
-              >
-                <Linkedin size={18} aria-hidden="true" />
-                <span>LinkedIn</span>
-              </a>
-
-              {/* Contact */}
               <a
                 href="#contact"
                 className="btn-secondary"
@@ -152,12 +147,12 @@ export default function Hero() {
             className="flex justify-center"
           >
             <div className="relative group">
-              {/* Outer accent glow */}
-              <div className="absolute -inset-1.5 rounded-3xl bg-violet-600/30 dark:bg-violet-500/25 blur-xl group-hover:bg-violet-600/40 transition-all duration-300" />
+              {/* Outer neon glow */}
+              <div className="absolute -inset-1.5 rounded-3xl bg-gradient-to-r from-blue-600 to-purple-600 opacity-30 blur-xl group-hover:opacity-50 transition-all duration-300" />
               
               {/* Glass profile container */}
-              <div className="relative p-5 sm:p-6 rounded-3xl card-glass border border-slate-200/80 dark:border-slate-800 flex flex-col items-center text-center max-w-[280px] sm:max-w-[320px]">
-                <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-2xl overflow-hidden border-2 border-violet-500/30 bg-slate-900 shadow-inner mb-4">
+              <div className="relative p-5 sm:p-6 rounded-3xl card-glass border border-blue-500/30 dark:border-purple-500/30 flex flex-col items-center text-center max-w-[280px] sm:max-w-[320px] shadow-2xl">
+                <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-2xl overflow-hidden border-2 border-blue-400/40 dark:border-purple-400/40 bg-slate-900 shadow-inner mb-4">
                   <img
                     src={avatarUrl || `https://github.com/${PROFILE.githubUsername}.png`}
                     alt="Pramod Yadav profile portrait"
@@ -176,11 +171,11 @@ export default function Hero() {
                   <h2 className="text-lg font-bold text-slate-900 dark:text-white">
                     Pramod Yadav
                   </h2>
-                  <p className="text-xs font-semibold text-violet-600 dark:text-violet-400">
+                  <p className="text-xs font-semibold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
                     Math &amp; Computing · RGIPT &apos;27
                   </p>
                   <p className="text-xs text-slate-500 dark:text-slate-400 pt-1">
-                    Targeting Summer 2026 Internships &amp; GSoC 2026
+                    Contributed on GSoC · Full Stack &amp; AI
                   </p>
                 </div>
               </div>
@@ -197,7 +192,7 @@ export default function Hero() {
         >
           <a
             href="#about"
-            className="inline-flex flex-col items-center gap-1.5 text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
+            className="inline-flex flex-col items-center gap-1.5 text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-blue-500 dark:hover:text-purple-400 transition-colors"
             aria-label="Scroll to About section"
           >
             <span>DISCOVER</span>

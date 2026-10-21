@@ -40,7 +40,7 @@ def main() -> None:
         new_x="LMARGIN",
         new_y="NEXT",
     )
-    pdf.cell(0, line_h, "LeetCode: leetcode.com/u/PramodYadav1", link="https://leetcode.com/u/PramodYadav1/", new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, line_h, "Codeforces: codeforces.com/profile/Prm01", link="https://codeforces.com/profile/Prm01", new_x="LMARGIN", new_y="NEXT")
     pdf.set_text_color(0, 0, 0)
     pdf.ln(6)
 
@@ -53,8 +53,8 @@ def main() -> None:
     pdf.multi_cell(
         0,
         5,
-        "Full-stack developer focused on the MERN stack, machine learning, and AI. "
-        "Experience building responsive web apps, REST APIs, and ML workflows. "
+        "Full-stack and AI developer focused on distributed systems, machine learning, and automation. "
+        "Contributed on GSoC. 500+ DSA problems solved across CodeChef, Codeforces, and GeeksforGeeks. "
         "Active in campus tech communities (GDSC, GeeksForGeeks RGIPT).",
     )
     pdf.ln(2)
@@ -76,17 +76,17 @@ def main() -> None:
         0,
         5,
         "Languages: JavaScript, Python, C++, SQL | "
-        "Web: React, Node.js, Express, MongoDB, REST APIs, HTML/CSS | "
-        "Other: Machine Learning, Git, Linux",
+        "Web: React, Node.js, Express, FastAPI, MongoDB, PostgreSQL, REST APIs, Tailwind CSS | "
+        "AI/Cloud: AWS Bedrock, TrOCR, LangChain, Docker, Git, Linux",
     )
     pdf.ln(2)
 
     section("SELECTED PROJECTS")
     bullets = [
-        "Air Quality Index (AQI) Prediction - ML with Random Forest, visualization, category mapping",
-        "Doctor Appointment System - MERN, JWT auth, role-based dashboards, deployed on Render",
-        "Portfolio Website - React, animations, dark/light mode, responsive layout",
-        "Swiggy Clone - Live REST APIs, cart flow, mobile-first UI",
+        "Rahat - Heat & flood early warning for Delhi's 290 wards (FastAPI, PostgreSQL, AWS Bedrock, 35 e2e tests)",
+        "BhoomiAI - Land record digitization & validation (TrOCR, LangChain agentic verification, 92% field accuracy)",
+        "Doctor Appointment System - MERN, JWT auth, 3 role dashboards, Lighthouse accessibility 100",
+        "Finance Dashboard UI - High-performance interactive portfolio analytics with 95+ Lighthouse",
     ]
     for b in bullets:
         pdf.set_x(pdf.l_margin + 4)
@@ -95,9 +95,10 @@ def main() -> None:
 
     section("EXPERIENCE AND LEADERSHIP")
     items = [
+        "Automation Intern, Polluxa (May - Jul 2026) - 67% faster lead turnaround, +20% acquisition, fixed 20 of 25+ issues",
+        "Open Source Contributor - Contributed on GSoC, Learning Unlimited (ESP-Website), Neutralinojs",
         "Design Executive, Google Developer Student Clubs - RGIPT (2023 - Present)",
         "Executive Member, GeeksForGeeks RGIPT Student Chapter (2023 - Present)",
-        "Volunteer, Arpan - RGIPT Social Council (2023 - Present)",
     ]
     for it in items:
         pdf.set_x(pdf.l_margin + 4)

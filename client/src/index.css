@@ -3,15 +3,12 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --accent: 139, 92, 246;
-  }
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto; /* Managed by Lenis */
     color-scheme: dark light;
   }
   body {
-    @apply antialiased font-sans text-slate-800 dark:text-slate-200 bg-slate-50 dark:bg-[#090d16] transition-colors duration-300 selection:bg-violet-500/30 selection:text-violet-900 dark:selection:text-violet-100;
+    @apply antialiased font-sans text-slate-800 dark:text-slate-100 bg-slate-50 dark:bg-[#070b14] transition-colors duration-300 selection:bg-blue-500/30 selection:text-blue-900 dark:selection:text-blue-200 overflow-x-hidden;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-display tracking-tight;
@@ -19,7 +16,7 @@
   
   /* Accessible focus indicators for keyboard navigation (WCAG 2.1 AA) */
   :focus-visible {
-    @apply outline-none ring-2 ring-violet-500 ring-offset-2 ring-offset-white dark:ring-offset-slate-950;
+    @apply outline-none ring-2 ring-blue-500 ring-offset-2 ring-offset-white dark:ring-offset-slate-950;
   }
 
   /* Reduced motion */
@@ -39,15 +36,15 @@
   }
 
   .section-label {
-    @apply uppercase tracking-[0.2em] text-xs font-bold text-violet-600 dark:text-violet-400 mb-3 block;
+    @apply uppercase tracking-[0.2em] text-xs font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent mb-3 block;
   }
 
-  .accent-text {
-    @apply text-violet-600 dark:text-violet-400;
+  .neon-gradient-text {
+    @apply bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent;
   }
 
-  .accent-gradient-text {
-    @apply bg-gradient-to-r from-violet-500 to-indigo-500 dark:from-violet-400 dark:to-indigo-300 bg-clip-text text-transparent;
+  .neon-border {
+    @apply border border-blue-500/30 dark:border-purple-500/30 hover:border-blue-400/60 dark:hover:border-purple-400/60;
   }
 
   /* Glass card styling */
@@ -56,29 +53,35 @@
   }
 
   .card-glass-hover {
-    @apply hover:border-violet-500/50 dark:hover:border-violet-500/40 hover:shadow-lg hover:shadow-violet-500/10 dark:hover:shadow-violet-500/5 hover:-translate-y-1;
+    @apply hover:border-blue-500/50 dark:hover:border-purple-500/50 hover:shadow-lg hover:shadow-blue-500/10 dark:hover:shadow-purple-500/10 hover:-translate-y-1;
   }
 
-  /* Primary Accent Button */
+  /* Primary Neon Accent Button */
   .btn-accent {
-    @apply inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm bg-violet-600 hover:bg-violet-500 text-white shadow-md shadow-violet-600/25 hover:shadow-lg hover:shadow-violet-600/35 transition-all duration-200 active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white shadow-md shadow-blue-600/25 hover:shadow-lg hover:shadow-purple-600/35 transition-all duration-200 active:scale-[0.98];
   }
 
   /* Secondary Glass Button */
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/50 backdrop-blur-md text-slate-700 dark:text-slate-200 hover:border-violet-500/50 dark:hover:border-violet-500/50 hover:text-violet-600 dark:hover:text-violet-300 hover:bg-violet-50/50 dark:hover:bg-violet-950/20 transition-all duration-200 active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/50 backdrop-blur-md text-slate-700 dark:text-slate-200 hover:border-blue-500/50 dark:hover:border-purple-500/50 hover:text-blue-600 dark:hover:text-purple-300 hover:bg-blue-50/50 dark:hover:bg-purple-950/20 transition-all duration-200 active:scale-[0.98];
   }
 
-  /* Subtle background grid pattern */
+  /* 3D Tilt Card Container */
+  .tilt-container {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  /* Background grid patterns */
   .grid-pattern {
-    background-size: 32px 32px;
+    background-size: 36px 36px;
     background-image: 
-      linear-gradient(to right, rgba(139, 92, 246, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(139, 92, 246, 0.05) 1px, transparent 1px);
+      linear-gradient(to right, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(168, 85, 247, 0.05) 1px, transparent 1px);
   }
 
   .grid-dots {
-    background-image: radial-gradient(rgba(139, 92, 246, 0.12) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(59, 130, 246, 0.15) 1px, transparent 1px);
     background-size: 24px 24px;
   }
 }
