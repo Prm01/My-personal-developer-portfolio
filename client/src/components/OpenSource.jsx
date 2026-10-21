@@ -35,20 +35,20 @@ export default function OpenSource() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white">
             Open Source &amp;{' '}
             <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
-              {OPEN_SOURCE_DATA.headline}
+              Community Impact
             </span>
           </h2>
           <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-xl">
-            Contributing to real-world software with clean commits, structured PR reviews, and proactive community collaboration.
+            Open Source: contributed to two organizations, Learning Unlimited and Neutralinojs, with clean commits, structured PR reviews, and proactive community collaboration.
           </p>
         </motion.div>
 
-        {/* GSoC Banner Note */}
+        {/* Open Source Milestone Spotlight */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.55, delay: 0.1 }}
-          className="p-6 sm:p-7 rounded-2xl border border-purple-500/30 bg-purple-500/5 dark:bg-purple-950/20 backdrop-blur-xl mb-10 relative overflow-hidden"
+          className="p-6 sm:p-7 rounded-2xl border border-purple-500/30 bg-purple-500/5 dark:bg-purple-950/20 backdrop-blur-xl mb-10 relative overflow-hidden shadow-lg"
         >
           <div className="flex items-start gap-4">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white flex items-center justify-center shrink-0 shadow-md">
@@ -56,13 +56,13 @@ export default function OpenSource() {
             </div>
             <div>
               <div className="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-purple-600/20 text-purple-700 dark:text-purple-300 border border-purple-500/30 mb-1">
-                {OPEN_SOURCE_DATA.gsocNote.badge}
+                {OPEN_SOURCE_DATA.highlightNote.badge}
               </div>
               <h3 className="text-lg font-bold text-slate-900 dark:text-white font-display">
-                {OPEN_SOURCE_DATA.gsocNote.title}
+                {OPEN_SOURCE_DATA.highlightNote.title}
               </h3>
               <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                {OPEN_SOURCE_DATA.gsocNote.text}
+                {OPEN_SOURCE_DATA.highlightNote.text}
               </p>
             </div>
           </div>
@@ -76,7 +76,7 @@ export default function OpenSource() {
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="p-6 sm:p-7 rounded-2xl card-glass card-glass-hover border border-blue-500/20 dark:border-purple-500/20 flex flex-col justify-between"
+              className="p-6 sm:p-7 rounded-2xl card-glass card-glass-hover border border-blue-500/20 dark:border-purple-500/20 flex flex-col justify-between shadow-xl"
             >
               <div>
                 <div className="flex items-start justify-between gap-4 mb-4">
@@ -101,7 +101,7 @@ export default function OpenSource() {
                   {item.tech.map((t) => (
                     <span
                       key={t}
-                      className="px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 dark:bg-slate-800/70 text-slate-700 dark:text-slate-300 border border-slate-200/50 dark:border-slate-700/50"
+                      className="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800/70 text-slate-700 dark:text-slate-300 border border-slate-200/50 dark:border-slate-700/50"
                     >
                       {t}
                     </span>
@@ -109,24 +109,23 @@ export default function OpenSource() {
                 </div>
               </div>
 
-              {/* Action Links: PRs link & Repository */}
-              <div className="mt-6 pt-4 border-t border-slate-200/60 dark:border-slate-800/60 flex flex-wrap gap-3">
+              <div className="mt-6 pt-4 border-t border-slate-200/60 dark:border-slate-800/60 flex items-center gap-3">
                 <a
                   href={item.prUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-accent !py-2 !px-3.5 text-xs font-semibold"
-                  aria-label={`View Pull Requests for ${item.name}`}
+                  className="btn-accent flex-1 !py-2 text-xs font-semibold"
+                  aria-label={`View Pull Requests by Pramod for ${item.name}`}
                 >
                   <GitPullRequest size={14} aria-hidden="true" />
-                  <span>View PRs &amp; Commits</span>
+                  <span>View PRs</span>
                 </a>
                 <a
                   href={item.repoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-secondary !py-2 !px-3.5 text-xs font-semibold"
-                  aria-label={`View Repository for ${item.name}`}
+                  className="btn-secondary !py-2 text-xs font-semibold"
+                  aria-label={`Open repository for ${item.name} on GitHub`}
                 >
                   <ExternalLink size={14} aria-hidden="true" />
                   <span>Repository</span>
@@ -136,57 +135,57 @@ export default function OpenSource() {
           ))}
         </div>
 
-        {/* GitHub Contribution Graph & Activity */}
+        {/* Live GitHub Contribution Chart & Metrics */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55, delay: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
           className="p-6 sm:p-7 rounded-2xl card-glass border border-blue-500/20 dark:border-purple-500/20"
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-            <div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white font-display">
-                GitHub Contribution Rhythm
-              </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                Live commit rhythm and repositories on <a href={PROFILE.githubUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500 dark:text-purple-400 font-semibold underline">github.com/{PROFILE.githubUsername}</a>
-              </p>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center">
+                <Github size={20} aria-hidden="true" />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-slate-900 dark:text-white font-display">
+                  GitHub Contribution Activity
+                </h3>
+                <a
+                  href={PROFILE.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-blue-600 dark:text-purple-400 hover:underline flex items-center gap-1"
+                >
+                  <span>github.com/{PROFILE.githubUsername}</span>
+                  <ExternalLink size={11} aria-hidden="true" />
+                </a>
+              </div>
             </div>
 
-            {/* Quick Stat Chips */}
-            <div className="flex items-center gap-3 text-xs font-semibold text-slate-600 dark:text-slate-300">
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60">
-                <GitFork size={13} className="text-blue-500" aria-hidden="true" />
-                <span>{formatNumber(profile?.public_repos || 25)} Repos</span>
+            {/* Quick API Stats */}
+            {profile && (
+              <div className="flex items-center gap-4 text-xs font-semibold text-slate-600 dark:text-slate-300">
+                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                  <GitFork size={13} className="text-blue-500" aria-hidden="true" />
+                  <span>{formatNumber(profile.public_repos)} Public Repos</span>
+                </div>
+                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+                  <Users size={13} className="text-purple-400" aria-hidden="true" />
+                  <span>{formatNumber(profile.followers)} Followers</span>
+                </div>
               </div>
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60">
-                <Users size={13} className="text-purple-500" aria-hidden="true" />
-                <span>{formatNumber(profile?.followers || 12)} Followers</span>
-              </div>
-            </div>
+            )}
           </div>
 
-          {/* Contribution Heatmap Card */}
-          <div className="overflow-x-auto p-4 rounded-xl bg-slate-950 border border-slate-800">
+          {/* GitHub Activity Heatmap Image */}
+          <div className="overflow-x-auto rounded-xl p-3 bg-slate-900/60 border border-slate-800 flex justify-center">
             <img
               src={`https://ghchart.rshah.org/38bdf8/${PROFILE.githubUsername}`}
-              alt={`${PROFILE.name}'s GitHub Contribution Chart`}
-              className="w-full min-w-[650px] filter saturate-150 contrast-125"
+              alt={`Pramod Yadav (${PROFILE.githubUsername}) GitHub Contribution Heatmap`}
+              className="max-w-none sm:max-w-full h-auto"
               loading="lazy"
             />
-          </div>
-
-          <div className="mt-4 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 dark:text-slate-400 gap-2">
-            <span>Data synced directly with GitHub public commits</span>
-            <a
-              href={PROFILE.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-blue-500 dark:text-purple-400 font-semibold hover:underline"
-            >
-              <span>Explore all repositories</span>
-              <ExternalLink size={12} aria-hidden="true" />
-            </a>
           </div>
         </motion.div>
       </div>

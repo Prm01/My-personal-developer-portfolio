@@ -73,7 +73,7 @@ export default function AIChat() {
                     Portfolio Assistant
                   </span>
                   <span className="text-[11px] text-slate-500 dark:text-slate-400">
-                    Ask about Pramod&apos;s projects, GSoC &amp; skills
+                    Ask about Pramod&apos;s projects, open source &amp; skills
                   </span>
                 </div>
               </div>
@@ -94,7 +94,7 @@ export default function AIChat() {
                     Welcome!
                   </p>
                   <p className="text-xs">
-                    Ask about Rahat, BhoomiAI, GSoC contributions, Polluxa internship, or technical stack competencies.
+                    Ask about Rahat, BhoomiAI, open-source contributions, Polluxa internship, or technical stack competencies.
                   </p>
                 </div>
               )}

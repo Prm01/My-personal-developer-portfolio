@@ -23,7 +23,7 @@
   <!-- Outer frame -->
   <rect x="20" y="20" width="1160" height="590" rx="24" fill="none" stroke="#38bdf8" stroke-opacity="0.3" stroke-width="2" />
 
-  <!-- Status pill -->
+  <!-- Status pills -->
   <g transform="translate(80, 80)">
     <rect width="470" height="42" rx="21" fill="#1e293b" fill-opacity="0.9" stroke="#38bdf8" stroke-opacity="0.4" stroke-width="1.5" />
     <circle cx="24" cy="21" r="5" fill="#10b981" />
@@ -33,9 +33,9 @@
   </g>
 
   <g transform="translate(565, 80)">
-    <rect width="210" height="42" rx="21" fill="#1e293b" fill-opacity="0.9" stroke="#a855f7" stroke-opacity="0.5" stroke-width="1.5" />
+    <rect width="260" height="42" rx="21" fill="#1e293b" fill-opacity="0.9" stroke="#a855f7" stroke-opacity="0.5" stroke-width="1.5" />
     <text x="20" y="26" font-family="'Space Grotesk', system-ui, sans-serif" font-size="14" font-weight="bold" fill="#c084fc">
-      ★ Contributed on GSoC
+      ★ Open Source Contributor
     </text>
   </g>
 
@@ -54,7 +54,7 @@
     Engineering distributed systems, agentic AI pipelines &amp; scalable web applications.
   </text>
   <text x="80" y="380" font-family="'Inter', system-ui, sans-serif" font-size="18" fill="#94a3b8" font-weight="400">
-    Contributed on GSoC · CodeChef · Codeforces · GeeksforGeeks
+    Open Source: Learning Unlimited &amp; Neutralinojs · CodeChef · Codeforces · GeeksforGeeks
   </text>
 
   <!-- Key stats / metrics bar -->

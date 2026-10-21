@@ -16,6 +16,9 @@ import AIChat from './components/AIChat';
 import NotFound from './components/NotFound';
 import ScrollProgress from './components/ScrollProgress';
 import CustomCursor from './components/CustomCursor';
+import LoadingScreen from './components/LoadingScreen';
+import ScrollBackground3D from './components/ScrollBackground3D';
+import FloatingContact3D from './components/FloatingContact3D';
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -90,6 +93,10 @@ function App() {
   return (
     <HelmetProvider>
       <SEO />
+
+      {/* Initial 3D Logo Loading Screen */}
+      <LoadingScreen />
+
       {/* Skip to main content link for keyboard WCAG accessibility */}
       <a
         href="#main-content"
@@ -104,37 +111,43 @@ function App() {
       {/* Custom neon cursor */}
       <CustomCursor />
 
-      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#070b14] text-slate-900 dark:text-slate-100 transition-colors duration-300">
+      {/* Ambient 3D background layer with scroll color shifts */}
+      <ScrollBackground3D />
+
+      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#070b14] text-slate-900 dark:text-slate-100 transition-colors duration-300 relative z-10">
         <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
 
         <main id="main-content" className="flex-1">
-          {/* 1. Hero (3D) */}
+          {/* 1. Hero (3D Scene, Typing Text, CTA buttons) */}
           <Hero />
 
-          {/* 2. About (3-4 lines + animated number counters) */}
+          {/* 2. About (3-4 lines + 4 animated 3D stat counters) */}
           <About />
 
-          {/* 3. Featured Projects (3D tilt cards, filter tabs) */}
+          {/* 3. Featured Projects (3D tilt cards, floating popout screenshot, filter tabs) */}
           <Projects />
 
-          {/* 4. Experience (Polluxa 3 impact bullets + test tool) */}
+          {/* 4. Experience (Polluxa 3 impact bullets + RGIPT 3D timeline) */}
           <Experience />
 
           {/* 5. Skills (3D rotating skill sphere + categorized panels) */}
           <Skills />
 
-          {/* 6. Open Source ("Contributed on GSoC", PR links, GitHub graph) */}
+          {/* 6. Open Source ("Contributed to two organizations, Learning Unlimited and Neutralinojs", PR links, GitHub graph) */}
           <OpenSource />
 
           {/* 7. Coding Profiles & Achievements (CodeChef, Codeforces, GeeksforGeeks, JEE, Scholarship, GDSC) */}
           <Achievements />
 
-          {/* 8. Contact (Working form, email 23mc3037@rgipt.ac.in, social icons) */}
+          {/* 8. Contact (Working form, email 23mc3037@rgipt.ac.in, social icons, closing line) */}
           <Contact />
         </main>
 
-        {/* Footer */}
+        {/* Footer with 3D Easter Egg, quick links, back to top */}
         <Footer />
+
+        {/* Floating 3D Contact Launcher */}
+        <FloatingContact3D />
 
         {/* AI Portfolio Assistant */}
         <AIChat />

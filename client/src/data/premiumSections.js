@@ -20,6 +20,13 @@ export const STATS = [
     suffix: ' Major',
     label: 'Production & AI Projects',
     sub: 'Deployed full-stack & agentic systems'
+  },
+  {
+    id: 's4',
+    numericValue: 2,
+    suffix: ' Orgs',
+    label: 'Open Source Contributions',
+    sub: 'Learning Unlimited & Neutralinojs'
   }
 ];
 
@@ -128,22 +135,40 @@ export const PROJECTS = [
   }
 ];
 
-export const EXPERIENCE_DATA = [
+export const TIMELINE_DATA = [
   {
     id: 'polluxa',
+    type: 'Experience',
     role: 'Automation Intern',
     org: 'Polluxa',
     period: 'May 2026 – Jul 2026',
     location: 'Remote',
-    summary: 'Automated high-volume lead pipelines, built CRM test automation tools, and resolved core infrastructure issues.',
+    summary: 'High-volume lead pipeline automation, Apollo.io API integration, and CRM test automation tools.',
     bullets: [
       'Reduced lead-processing turnaround time from 30 minutes to 10 minutes per lead (67% faster processing) via automated Python/JS Playwright workflows and Chrome extensions.',
       'Drove a +20% increase in qualified client acquisition by integrating Apollo.io verified-email retrieval with REST APIs, token authentication, and deduplication logic.',
       'Built a dedicated CRM test automation tool and resolved 20 of 25+ critical automation and pipeline issues to achieve robust production stability.'
     ],
     tags: ['Python', 'JavaScript', 'Playwright', 'Chrome Extensions', 'REST APIs', 'Apollo.io', 'CRM Test Automation']
+  },
+  {
+    id: 'rgipt',
+    type: 'Education',
+    role: 'B.Tech in Mathematics & Computing',
+    org: 'Rajiv Gandhi Institute of Petroleum Technology (RGIPT)',
+    period: '2023 – 2027',
+    location: 'Jais, Amethi, UP',
+    summary: 'Rigorous engineering program uniting computational mathematics, distributed computing, algorithms, and AI systems.',
+    bullets: [
+      'Awarded RGIPT Merit-cum-Means Scholarship for outstanding academic achievement in Mathematics & Computing.',
+      'Deep academic grounding in discrete algorithms, linear algebra, numerical methods, systems programming, and modern machine learning.',
+      'Served as Design Executive at Google Developer Student Clubs (GDSC RGIPT); organized student technical events and peer labs.'
+    ],
+    tags: ['Mathematics', 'Computing', 'Algorithms', 'Distributed Systems', 'Data Structures', 'RGIPT']
   }
 ];
+
+export const EXPERIENCE_DATA = TIMELINE_DATA.filter((item) => item.type === 'Experience');
 
 export const SKILL_GROUPS = [
   {
@@ -179,7 +204,8 @@ export const SKILL_GROUPS = [
 ];
 
 export const OPEN_SOURCE_DATA = {
-  headline: 'Contributed on GSoC',
+  headline: 'contributed to two organizations, Learning Unlimited and Neutralinojs',
+  statement: 'Open Source: contributed to two organizations, Learning Unlimited and Neutralinojs',
   contributions: [
     {
       id: 'neutralinojs',
@@ -200,10 +226,10 @@ export const OPEN_SOURCE_DATA = {
       repoUrl: 'https://github.com/learning-unlimited/ESP-Website'
     }
   ],
-  gsocNote: {
-    badge: 'Contributed on GSoC',
-    title: 'Contributed on GSoC (Google Summer of Code)',
-    text: 'Contributed on GSoC with a dedicated focus on open-source developer tooling, system automation, and agentic AI workflows. Committed to steady contribution cadences, transparent PR reviews, and community collaboration.'
+  highlightNote: {
+    badge: 'Open Source Contributor',
+    title: 'Open Source: contributed to two organizations, Learning Unlimited and Neutralinojs',
+    text: 'Active open-source contributor with code merged in Neutralinojs (CLI developer tooling) and Learning Unlimited (educational logistics). Dedicated to transparent PR reviews, robust CLI stability, and community-driven collaboration.'
   }
 };
 

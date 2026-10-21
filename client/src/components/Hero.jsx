@@ -1,6 +1,6 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, Download, Mail, ExternalLink, Sparkles, FolderGit2 } from 'lucide-react';
+import { ArrowDown, Download, Mail, FolderGit2, GitBranch } from 'lucide-react';
 import { TypeAnimation } from 'react-type-animation';
 import { PROFILE, getResumePdfHref } from '../lib/profile';
 
@@ -49,8 +49,8 @@ export default function Hero() {
               </span>
 
               <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 text-xs sm:text-sm font-semibold shadow-sm backdrop-blur-md">
-                <Sparkles size={13} className="text-purple-400" />
-                <span>Contributed on GSoC</span>
+                <GitBranch size={13} className="text-purple-400" />
+                <span>Open Source: Learning Unlimited &amp; Neutralinojs</span>
               </span>
             </motion.div>
 
@@ -149,7 +149,7 @@ export default function Hero() {
             <div className="relative group">
               {/* Outer neon glow */}
               <div className="absolute -inset-1.5 rounded-3xl bg-gradient-to-r from-blue-600 to-purple-600 opacity-30 blur-xl group-hover:opacity-50 transition-all duration-300" />
-              
+
               {/* Glass profile container */}
               <div className="relative p-5 sm:p-6 rounded-3xl card-glass border border-blue-500/30 dark:border-purple-500/30 flex flex-col items-center text-center max-w-[280px] sm:max-w-[320px] shadow-2xl">
                 <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-2xl overflow-hidden border-2 border-blue-400/40 dark:border-purple-400/40 bg-slate-900 shadow-inner mb-4">
@@ -175,7 +175,7 @@ export default function Hero() {
                     Math &amp; Computing · RGIPT &apos;27
                   </p>
                   <p className="text-xs text-slate-500 dark:text-slate-400 pt-1">
-                    Contributed on GSoC · Full Stack &amp; AI
+                    Open Source Contributor · Full Stack &amp; AI
                   </p>
                 </div>
               </div>

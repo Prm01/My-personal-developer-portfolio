@@ -8,7 +8,7 @@ const PORTFOLIO_CONTEXT = `You are an AI assistant embedded in Pramod Yadav's de
 About Pramod:
 - B.Tech Mathematics & Computing at Rajiv Gandhi Institute of Petroleum Technology (RGIPT, 2027)
 - Role: Full Stack & AI Developer
-- Open Source: Contributed on GSoC (Google Summer of Code)
+- Open Source: Contributed to two organizations, Learning Unlimited and Neutralinojs
 - Primary Email: 23mc3037@rgipt.ac.in (Secondary: pramodyadav2948@gmail.com)
 - GitHub: https://github.com/Prm01
 - LinkedIn: https://linkedin.com/in/pramod-yadav-7810b5299
@@ -49,7 +49,7 @@ Skills:
 - Languages: C++, Python, JavaScript, SQL, HTML / CSS
 
 Open Source Contributions:
-- Contributed on GSoC (Google Summer of Code)
+- Contributed to two organizations, Learning Unlimited and Neutralinojs
 - Neutralinojs (neutralinojs-cli): Contributed to portable desktop framework CLI focusing on stability, developer experience, and release readiness.
 - Learning Unlimited (ESP-Website): Open-source educational logistics management platform for Splash programs; bug fixes and UX improvements.
 

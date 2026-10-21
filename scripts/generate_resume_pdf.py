@@ -54,7 +54,7 @@ def main() -> None:
         0,
         5,
         "Full-stack and AI developer focused on distributed systems, machine learning, and automation. "
-        "Contributed on GSoC. 500+ DSA problems solved across CodeChef, Codeforces, and GeeksforGeeks. "
+        "Open Source: contributed to two organizations, Learning Unlimited and Neutralinojs. 500+ DSA problems solved across CodeChef, Codeforces, and GeeksforGeeks. "
         "Active in campus tech communities (GDSC, GeeksForGeeks RGIPT).",
     )
     pdf.ln(2)
@@ -96,7 +96,7 @@ def main() -> None:
     section("EXPERIENCE AND LEADERSHIP")
     items = [
         "Automation Intern, Polluxa (May - Jul 2026) - 67% faster lead turnaround, +20% acquisition, fixed 20 of 25+ issues",
-        "Open Source Contributor - Contributed on GSoC, Learning Unlimited (ESP-Website), Neutralinojs",
+        "Open Source: contributed to two organizations, Learning Unlimited (ESP-Website) and Neutralinojs",
         "Design Executive, Google Developer Student Clubs - RGIPT (2023 - Present)",
         "Executive Member, GeeksForGeeks RGIPT Student Chapter (2023 - Present)",
     ]

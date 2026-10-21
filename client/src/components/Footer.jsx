@@ -1,5 +1,6 @@
 import { Github, Linkedin, Mail, Download, ArrowUp, Code2 } from 'lucide-react';
 import { PROFILE, getResumePdfHref } from '../lib/profile';
+import FooterEasterEgg from './FooterEasterEgg';
 
 const QUICK_LINKS = [
   { href: '#about', label: 'About' },
@@ -29,7 +30,7 @@ export default function Footer() {
               <span>Pramod <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Yadav</span></span>
             </a>
             <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              Full Stack &amp; AI Developer · B.Tech Mathematics &amp; Computing at RGIPT (2027). Contributed on GSoC. Building high-throughput systems and agentic AI.
+              Full Stack &amp; AI Developer · B.Tech Mathematics &amp; Computing at RGIPT (2027). Open Source Contributor (Learning Unlimited &amp; Neutralinojs). Building high-throughput systems and agentic AI.
             </p>
             <div className="mt-4">
               <a
@@ -101,11 +102,14 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* 3D Footer Easter Egg */}
+        <FooterEasterEgg />
+
         {/* Bottom copyright */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
           <p>© {new Date().getFullYear()} Pramod Yadav. All rights reserved.</p>
           <p>
-            RGIPT &apos;27 · Contributed on GSoC
+            RGIPT &apos;27 · Open Source Contributor
           </p>
         </div>
       </div>

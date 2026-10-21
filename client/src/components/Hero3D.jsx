@@ -3,8 +3,8 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, Text } from '@react-three/drei';
 import * as THREE from 'three';
 
-// Starfield particles background
-function StarField({ count = 120 }) {
+// Particle starfield background
+function StarField({ count = 140 }) {
   const pointsRef = useRef();
 
   const [positions, colors] = useMemo(() => {
@@ -18,9 +18,9 @@ function StarField({ count = 120 }) {
     ];
 
     for (let i = 0; i < count; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 16;
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 14;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 10 - 2;
+      pos[i * 3] = (Math.random() - 0.5) * 18;
+      pos[i * 3 + 1] = (Math.random() - 0.5) * 16;
+      pos[i * 3 + 2] = (Math.random() - 0.5) * 12 - 2;
 
       const c = palette[Math.floor(Math.random() * palette.length)];
       col[i * 3] = c.r;
@@ -33,7 +33,7 @@ function StarField({ count = 120 }) {
   useFrame((state) => {
     if (!pointsRef.current) return;
     pointsRef.current.rotation.y = state.clock.elapsedTime * 0.015;
-    pointsRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.01) * 0.05;
+    pointsRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.01) * 0.04;
   });
 
   return (
@@ -53,10 +53,10 @@ function StarField({ count = 120 }) {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.06}
+        size={0.065}
         vertexColors
         transparent
-        opacity={0.65}
+        opacity={0.7}
         sizeAttenuation
         depthWrite={false}
       />
@@ -64,55 +64,174 @@ function StarField({ count = 120 }) {
   );
 }
 
-// Central rotating wireframe globe with node network
-function WireframeGlobe() {
-  const meshRef = useRef();
+// Neural Network / Connected Nodes Cluster
+function NeuralNetworkGlobe() {
+  const groupRef = useRef();
   const innerRef = useRef();
+
+  // Create random node vertices for the neural cluster
+  const nodes = useMemo(() => {
+    const pts = [];
+    const count = 18;
+    for (let i = 0; i < count; i++) {
+      const u = Math.random();
+      const v = Math.random();
+      const theta = u * 2.0 * Math.PI;
+      const phi = Math.acos(2.0 * v - 1.0);
+      const r = 1.35 + Math.random() * 0.2;
+      const sinPhi = Math.sin(phi);
+      pts.push(new THREE.Vector3(r * sinPhi * Math.cos(theta), r * sinPhi * Math.sin(theta), r * Math.cos(phi)));
+    }
+    return pts;
+  }, []);
 
   useFrame((state) => {
     const t = state.clock.elapsedTime;
-    if (meshRef.current) {
-      meshRef.current.rotation.y = t * 0.06;
-      meshRef.current.rotation.x = Math.sin(t * 0.04) * 0.15;
+    if (groupRef.current) {
+      groupRef.current.rotation.y = t * 0.06;
+      groupRef.current.rotation.x = Math.sin(t * 0.04) * 0.12;
     }
     if (innerRef.current) {
-      innerRef.current.rotation.y = -t * 0.08;
-      innerRef.current.rotation.z = t * 0.04;
+      innerRef.current.rotation.y = -t * 0.09;
+      innerRef.current.rotation.z = t * 0.05;
     }
   });
 
   return (
-    <group position={[2.2, -0.2, -1]}>
+    <group position={[2.6, 0.2, -1.2]} ref={groupRef}>
       {/* Outer neon wireframe globe */}
-      <mesh ref={meshRef} scale={[1.8, 1.8, 1.8]}>
+      <mesh scale={[1.7, 1.7, 1.7]}>
         <icosahedronGeometry args={[1, 2]} />
         <meshStandardMaterial
           color="#38bdf8"
-          emissive="#2563eb"
-          emissiveIntensity={0.6}
+          emissive="#0284c7"
+          emissiveIntensity={0.65}
           wireframe
           transparent
           opacity={0.35}
         />
       </mesh>
 
-      {/* Inner rotating node core */}
-      <mesh ref={innerRef} scale={[1.2, 1.2, 1.2]}>
+      {/* Inner geometric core */}
+      <mesh ref={innerRef} scale={[1.1, 1.1, 1.1]}>
         <octahedronGeometry args={[1, 1]} />
         <meshStandardMaterial
           color="#c084fc"
           emissive="#7c3aed"
-          emissiveIntensity={0.7}
+          emissiveIntensity={0.8}
           wireframe
           transparent
-          opacity={0.25}
+          opacity={0.3}
         />
       </mesh>
+
+      {/* Glowing neural nodes */}
+      {nodes.map((pos, idx) => (
+        <mesh key={idx} position={pos.toArray()}>
+          <sphereGeometry args={[0.045, 8, 8]} />
+          <meshBasicMaterial color={idx % 2 === 0 ? '#38bdf8' : '#c084fc'} />
+        </mesh>
+      ))}
     </group>
   );
 }
 
-// Tech Cube Component (Python, React, AWS, Docker)
+// Stylized 3D Laptop / Cyber Terminal showing code
+function StylizedLaptop({ mouse }) {
+  const laptopRef = useRef();
+
+  useFrame((state) => {
+    if (!laptopRef.current) return;
+    const t = state.clock.elapsedTime;
+    laptopRef.current.rotation.y = THREE.MathUtils.lerp(
+      laptopRef.current.rotation.y,
+      -0.35 + mouse.x * 0.25,
+      0.05
+    );
+    laptopRef.current.rotation.x = THREE.MathUtils.lerp(
+      laptopRef.current.rotation.x,
+      0.15 - mouse.y * 0.2,
+      0.05
+    );
+    laptopRef.current.position.y = -1.1 + Math.sin(t * 1.5) * 0.08;
+  });
+
+  return (
+    <group ref={laptopRef} position={[2.4, -1.1, 0.4]} scale={[0.85, 0.85, 0.85]}>
+      {/* Laptop Base (chassis) */}
+      <mesh position={[0, -0.04, 0.6]} receiveShadow castShadow>
+        <boxGeometry args={[2.0, 0.08, 1.3]} />
+        <meshStandardMaterial color="#0f172a" roughness={0.3} metalness={0.8} />
+      </mesh>
+
+      {/* Trackpad */}
+      <mesh position={[0, 0.005, 0.95]}>
+        <boxGeometry args={[0.65, 0.002, 0.4]} />
+        <meshStandardMaterial color="#1e293b" roughness={0.4} metalness={0.6} />
+      </mesh>
+
+      {/* Keyboard Bed */}
+      <mesh position={[0, 0.005, 0.45]}>
+        <boxGeometry args={[1.7, 0.002, 0.55]} />
+        <meshStandardMaterial color="#090d16" roughness={0.8} />
+      </mesh>
+
+      {/* Glowing Accent line under keyboard */}
+      <mesh position={[0, 0.006, 0.16]}>
+        <boxGeometry args={[1.65, 0.002, 0.02]} />
+        <meshBasicMaterial color="#38bdf8" />
+      </mesh>
+
+      {/* Laptop Screen Lid (tilted ~105 degrees) */}
+      <group position={[0, 0, 0]} rotation={[-Math.PI / 8, 0, 0]}>
+        {/* Screen Frame */}
+        <mesh position={[0, 0.65, 0]}>
+          <boxGeometry args={[2.0, 1.3, 0.06]} />
+          <meshStandardMaterial color="#0f172a" roughness={0.3} metalness={0.8} />
+        </mesh>
+
+        {/* Display Panel */}
+        <mesh position={[0, 0.65, 0.032]}>
+          <planeGeometry args={[1.86, 1.16]} />
+          <meshStandardMaterial color="#050811" emissive="#0284c7" emissiveIntensity={0.15} />
+        </mesh>
+
+        {/* Top window dots */}
+        <mesh position={[-0.75, 1.15, 0.035]}>
+          <circleGeometry args={[0.025, 8]} />
+          <meshBasicMaterial color="#ef4444" />
+        </mesh>
+        <mesh position={[-0.67, 1.15, 0.035]}>
+          <circleGeometry args={[0.025, 8]} />
+          <meshBasicMaterial color="#f59e0b" />
+        </mesh>
+        <mesh position={[-0.59, 1.15, 0.035]}>
+          <circleGeometry args={[0.025, 8]} />
+          <meshBasicMaterial color="#10b981" />
+        </mesh>
+
+        {/* Terminal Text on Screen */}
+        <Text
+          position={[-0.82, 0.98, 0.036]}
+          fontSize={0.065}
+          color="#38bdf8"
+          anchorX="left"
+          anchorY="top"
+          fontFamily="monospace"
+        >
+          {`// Rahat & BhoomiAI Core
+const wardAlert = await rahat.dispatch({
+  zone: "Delhi Wards 290",
+  engine: "AWS Bedrock + TrOCR"
+});
+// 500+ DSA · RGIPT '27`}
+        </Text>
+      </group>
+    </group>
+  );
+}
+
+// Floating Tech Cube (Python, React, Node, AWS, Docker)
 function TechCube({ position, color, emissiveColor, label, labelSub, speed = 2, rotSpeed = 0.5 }) {
   const cubeRef = useRef();
 
@@ -123,24 +242,22 @@ function TechCube({ position, color, emissiveColor, label, labelSub, speed = 2, 
   });
 
   return (
-    <Float speed={speed} rotationIntensity={0.4} floatIntensity={0.6} position={position}>
+    <Float speed={speed} rotationIntensity={0.35} floatIntensity={0.55} position={position}>
       <group ref={cubeRef}>
-        {/* Glow cube mesh */}
         <mesh scale={[0.85, 0.85, 0.85]}>
           <boxGeometry args={[1, 1, 1]} />
           <meshStandardMaterial
             color={color}
             emissive={emissiveColor}
-            emissiveIntensity={0.5}
-            roughness={0.2}
-            metalness={0.8}
+            emissiveIntensity={0.55}
+            roughness={0.25}
+            metalness={0.75}
             wireframe
             transparent
-            opacity={0.7}
+            opacity={0.75}
           />
         </mesh>
 
-        {/* Text Label on Cube */}
         <Text
           position={[0, 0, 0.46]}
           fontSize={0.22}
@@ -191,9 +308,8 @@ function InteractiveScene({ mouse }) {
 
   useFrame((state) => {
     if (!groupRef.current) return;
-    // Smooth lerp based on mouse position
-    const targetX = -mouse.y * 0.25;
-    const targetY = mouse.x * 0.35 + state.clock.elapsedTime * 0.02;
+    const targetX = -mouse.y * 0.22;
+    const targetY = mouse.x * 0.32 + state.clock.elapsedTime * 0.02;
 
     groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, targetX, 0.05);
     groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, targetY, 0.05);
@@ -202,22 +318,25 @@ function InteractiveScene({ mouse }) {
   return (
     <group ref={groupRef}>
       {/* Lighting */}
-      <ambientLight intensity={0.6} />
+      <ambientLight intensity={0.65} />
       <directionalLight position={[5, 8, 5]} intensity={1.2} />
-      <pointLight position={[-5, 3, 2]} intensity={0.8} color="#38bdf8" />
-      <pointLight position={[5, -3, 2]} intensity={0.8} color="#a855f7" />
+      <pointLight position={[-5, 3, 2]} intensity={0.9} color="#38bdf8" />
+      <pointLight position={[5, -3, 2]} intensity={0.9} color="#a855f7" />
 
       {/* Background Starfield */}
-      <StarField count={100} />
+      <StarField count={120} />
 
-      {/* Central Wireframe Globe */}
-      <WireframeGlobe />
+      {/* Central Neural Network & Globe */}
+      <NeuralNetworkGlobe />
+
+      {/* Stylized 3D Cyber Laptop */}
+      <StylizedLaptop mouse={mouse} />
 
       {/* Floating Code Brackets */}
       <CodeBracket text="{ }" position={[-2.8, 1.6, -1.5]} color="#38bdf8" scale={1.2} speed={2} />
       <CodeBracket text="</>" position={[3.2, 1.8, -2]} color="#a855f7" scale={1.1} speed={1.7} />
 
-      {/* Floating Tech Cubes */}
+      {/* Floating Tech Cubes (React, Python, Node, AWS, Docker) */}
       <TechCube
         position={[-2.4, -0.9, -1]}
         color="#38bdf8"
@@ -228,7 +347,7 @@ function InteractiveScene({ mouse }) {
         rotSpeed={0.4}
       />
       <TechCube
-        position={[1.5, 2.0, -1.8]}
+        position={[1.2, 2.3, -1.8]}
         color="#3b82f6"
         emissiveColor="#1d4ed8"
         label="Python"
@@ -237,7 +356,7 @@ function InteractiveScene({ mouse }) {
         rotSpeed={0.5}
       />
       <TechCube
-        position={[-1.2, 2.2, -2.2]}
+        position={[-1.2, 2.3, -2.2]}
         color="#f59e0b"
         emissiveColor="#b45309"
         label="AWS"
@@ -246,13 +365,22 @@ function InteractiveScene({ mouse }) {
         rotSpeed={0.35}
       />
       <TechCube
-        position={[3.0, -1.5, -1.5]}
+        position={[3.2, -1.8, -1.5]}
         color="#06b6d4"
         emissiveColor="#0e7490"
         label="Docker"
         labelSub="DevOps"
         speed={2.4}
         rotSpeed={0.45}
+      />
+      <TechCube
+        position={[-3.1, 0.4, -1.8]}
+        color="#22c55e"
+        emissiveColor="#15803d"
+        label="Node"
+        labelSub="Express"
+        speed={1.8}
+        rotSpeed={0.4}
       />
     </group>
   );
