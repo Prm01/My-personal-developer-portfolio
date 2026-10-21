@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#0a0e17" />
+      <stop offset="100%" stopColor="#111827" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#8b5cf6" />
+      <stop offset="100%" stopColor="#6366f1" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bgGrad)" />
+  <rect width="800" height="450" fill="none" stroke="#8b5cf6" stroke-opacity="0.2" stroke-width="2" />
+
+  <!-- Top Bar -->
+  <rect x="25" y="25" width="750" height="50" rx="12" fill="#1e293b" fill-opacity="0.8" stroke="#334155" stroke-width="1" />
+  <circle cx="55" cy="50" r="10" fill="#8b5cf6" />
+  <text x="75" y="55" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#ffffff">BhoomiAI // Land Record Digitization &amp; Agentic Verification</text>
+  
+  <rect x="550" y="37" width="100" height="26" rx="13" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1" />
+  <text x="562" y="54" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#6ee7b7">92% ACCURACY</text>
+
+  <rect x="660" y="37" width="100" height="26" rx="13" fill="#8b5cf6" fill-opacity="0.2" stroke="#8b5cf6" stroke-width="1" />
+  <text x="672" y="54" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#c4b5fd">TrOCR + LangChain</text>
+
+  <!-- Left: Scanned Document with OCR Bounding Boxes -->
+  <g transform="translate(40, 95)">
+    <rect width="360" height="325" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1" />
+    <text x="20" y="32" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#94a3b8">HISTORICAL DEED SCAN (VERNACULAR)</text>
+    
+    <!-- Paper Sheet Preview -->
+    <rect x="20" y="45" width="320" height="260" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1" />
+    
+    <!-- Lines of text simulation -->
+    <rect x="40" y="65" width="280" height="8" rx="2" fill="#334155" opacity="0.6" />
+    <rect x="40" y="85" width="250" height="8" rx="2" fill="#334155" opacity="0.6" />
+    <rect x="40" y="105" width="270" height="8" rx="2" fill="#334155" opacity="0.6" />
+    
+    <!-- Highlighted OCR Box 1 -->
+    <rect x="36" y="130" width="170" height="32" rx="4" fill="#8b5cf6" fill-opacity="0.15" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="4 2" />
+    <text x="44" y="151" font-family="monospace" font-size="11" fill="#c4b5fd">Khasra No: 418/2A</text>
+    <rect x="180" y="125" width="40" height="14" rx="3" fill="#8b5cf6" />
+    <text x="184" y="135" font-family="system-ui, sans-serif" font-size="8" font-weight="bold" fill="#ffffff">98%</text>
+
+    <!-- Highlighted OCR Box 2 -->
+    <rect x="36" y="175" width="220" height="32" rx="4" fill="#8b5cf6" fill-opacity="0.15" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="4 2" />
+    <text x="44" y="196" font-family="monospace" font-size="11" fill="#c4b5fd">Area: 1.450 Hectare</text>
+    <rect x="230" y="170" width="40" height="14" rx="3" fill="#8b5cf6" />
+    <text x="234" y="180" font-family="system-ui, sans-serif" font-size="8" font-weight="bold" fill="#ffffff">95%</text>
+
+    <!-- Highlighted OCR Box 3 -->
+    <rect x="36" y="220" width="250" height="32" rx="4" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-width="1.5" />
+    <text x="44" y="241" font-family="monospace" font-size="11" fill="#6ee7b7">Owner: Ramanand S/O Shivram</text>
+
+    <!-- Scanning line effect -->
+    <line x1="20" y1="210" x2="340" y2="210" stroke="#8b5cf6" stroke-width="2" filter="url(#glow)" />
+  </g>
+
+  <!-- Right: Verification & Metrics -->
+  <g transform="translate(425, 95)">
+    <!-- Metric 1: Processing Speed -->
+    <rect width="350" height="98" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1" />
+    <text x="20" y="28" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#94a3b8">RECORD PROCESSING LATENCY</text>
+    <text x="20" y="65" font-family="system-ui, sans-serif" font-size="30" font-weight="bold" fill="#ffffff">15 min <tspan fill="#8b5cf6">➔ &lt; 1 min</tspan></text>
+    <text x="20" y="85" font-family="system-ui, sans-serif" font-size="11" fill="#10b981">✓ 93.3% latency reduction achieved</text>
+
+    <!-- Metric 2: LangChain Agentic Pipeline -->
+    <rect y="112" width="350" height="105" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1" />
+    <text x="20" y="138" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#94a3b8">LANGCHAIN VERIFICATION AGENT</text>
+    
+    <g transform="translate(20, 150)">
+      <circle cx="10" cy="12" r="8" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1.5" />
+      <text x="7" y="16" font-family="system-ui, sans-serif" font-size="10" fill="#6ee7b7">✓</text>
+      <text x="26" y="16" font-family="system-ui, sans-serif" font-size="11" fill="#ffffff">Cadastral Boundary Cross-Check</text>
+      
+      <circle cx="10" cy="38" r="8" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1.5" />
+      <text x="7" y="42" font-family="system-ui, sans-serif" font-size="10" fill="#6ee7b7">✓</text>
+      <text x="26" y="42" font-family="system-ui, sans-serif" font-size="11" fill="#ffffff">Title Registry Anomaly Detection</text>
+    </g>
+
+    <!-- Metric 3: Model Pipeline Stack -->
+    <rect y="230" width="350" height="95" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1" />
+    <text x="20" y="254" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#94a3b8">VISION &amp; LLM ARCHITECTURE</text>
+    <g transform="translate(20, 268)">
+      <rect x="0" y="0" width="60" height="24" rx="4" fill="#8b5cf6" fill-opacity="0.25" stroke="#8b5cf6" stroke-width="1" />
+      <text x="8" y="16" font-family="system-ui, sans-serif" font-size="11" fill="#c4b5fd">TrOCR</text>
+      
+      <rect x="70" y="0" width="80" height="24" rx="4" fill="#334155" />
+      <text x="78" y="16" font-family="system-ui, sans-serif" font-size="11" fill="#ffffff">LangChain</text>
+      
+      <rect x="160" y="0" width="60" height="24" rx="4" fill="#334155" />
+      <text x="168" y="16" font-family="system-ui, sans-serif" font-size="11" fill="#ffffff">FastAPI</text>
+
+      <rect x="230" y="0" width="70" height="24" rx="4" fill="#334155" />
+      <text x="238" y="16" font-family="system-ui, sans-serif" font-size="11" fill="#ffffff">React.js</text>
+    </g>
+    <text x="20" y="315" font-family="system-ui, sans-serif" font-size="10" fill="#94a3b8">High-fidelity OCR for low-resolution archival documents</text>
+  </g>
+</svg>

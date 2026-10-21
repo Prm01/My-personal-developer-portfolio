@@ -1,186 +1,312 @@
 import { useState, useRef } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { Mail, Send, CheckCircle2 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import { Mail, Send, CheckCircle2, Copy, Check, Github, Linkedin, Code, ExternalLink } from 'lucide-react';
 import { PROFILE } from '../lib/profile';
 
-// Set these in client/.env:
-//   VITE_EMAILJS_SERVICE_ID=service_xxx
-//   VITE_EMAILJS_TEMPLATE_ID=template_xxx
-//   VITE_EMAILJS_PUBLIC_KEY=your_public_key
-const EMAILJS_SERVICE  = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-const EMAILJS_TEMPLATE = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-const EMAILJS_KEY      = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-const USE_EMAILJS      = !!(EMAILJS_SERVICE && EMAILJS_TEMPLATE && EMAILJS_KEY);
-
-import { API_URL } from '../lib/api';
-
-async function sendViaEmailJS(form) {
-  const emailjs = await import('@emailjs/browser');
-  return emailjs.send(
-    EMAILJS_SERVICE,
-    EMAILJS_TEMPLATE,
-    { from_name: form.name, from_email: form.email, subject: form.subject, message: form.message },
-    EMAILJS_KEY
-  );
-}
-
-async function sendViaBackend(form) {
-  const res = await fetch(`${API_URL}/contact`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(form)
-  });
-  const data = await res.json();
-  if (!res.ok) throw new Error(data.error || 'Something went wrong');
-  return data;
-}
-
-const EMPTY = { name: '', email: '', subject: '', message: '' };
-
 export default function Contact() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.1 });
-  const [form, setForm] = useState(EMPTY);
-  const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState(null); // 'loading' | 'success' | 'error'
+  const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
+  const [status, setStatus] = useState('idle'); // 'idle' | 'sending' | 'success' | 'error'
   const [errMsg, setErrMsg] = useState('');
+  const [copied, setCopied] = useState(false);
 
-  const validate = () => {
-    const e = {};
-    if (!form.name.trim()) e.name = 'Name is required';
-    if (!form.email.trim()) e.email = 'Email is required';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Invalid email';
-    if (!form.message.trim()) e.message = 'Message is required';
-    setErrors(e);
-    return !Object.keys(e).length;
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(PROFILE.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validate()) return;
-    setStatus('loading');
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+      setErrMsg('Please complete all required fields.');
+      return;
+    }
+    setStatus('sending');
+    setErrMsg('');
+
     try {
-      if (USE_EMAILJS) {
-        await sendViaEmailJS(form);
+      // Try Formspree or EmailJS or Backend
+      const response = await fetch('https://formspree.io/f/mqkenbwd', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          subject: form.subject || 'Portfolio Inquiry',
+          message: form.message,
+          to: PROFILE.email
+        })
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setForm({ name: '', email: '', subject: '', message: '' });
       } else {
-        await sendViaBackend(form);
+        // Fallback: mailto link activation
+        window.location.href = `mailto:${PROFILE.email}?subject=${encodeURIComponent(form.subject || 'Portfolio Inquiry')}&body=${encodeURIComponent(`From: ${form.name} (${form.email})\n\n${form.message}`)}`;
+        setStatus('success');
       }
-      setStatus('success');
-      setForm(EMPTY);
     } catch (err) {
-      setErrMsg(err.message || 'Failed to send. Please try again.');
-      setStatus('error');
+      // Graceful fallback to mailto
+      window.location.href = `mailto:${PROFILE.email}?subject=${encodeURIComponent(form.subject || 'Portfolio Inquiry')}&body=${encodeURIComponent(`From: ${form.name} (${form.email})\n\n${form.message}`)}`;
+      setStatus('success');
     }
   };
 
-  const field = (key, type = 'text', placeholder, rows) => {
-    const base = 'w-full px-5 py-4 rounded-2xl border bg-white dark:bg-slate-800/50 focus:ring-2 focus:ring-violet-500 focus:border-transparent outline-none transition-all text-slate-900 dark:text-white placeholder:text-slate-400';
-    const border = errors[key]
-      ? 'border-rose-400 dark:border-rose-500'
-      : 'border-slate-200 dark:border-slate-700';
-    const props = {
-      placeholder,
-      value: form[key],
-      onChange: (ev) => { setForm({ ...form, [key]: ev.target.value }); setErrors({ ...errors, [key]: '' }); },
-      className: `${base} ${border}`
-    };
-    return (
-      <div>
-        {rows
-          ? <textarea {...props} rows={rows} />
-          : <input type={type} {...props} />}
-        {errors[key] && <p className="mt-1 text-xs text-rose-500">{errors[key]}</p>}
-      </div>
-    );
-  };
-
   return (
-    <section id="contact" ref={ref} className="section-pad bg-white dark:bg-slate-900/30">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5 }}
-        className="max-w-xl mx-auto"
-      >
-        <span className="section-label">07 — Connect</span>
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 font-display gradient-text">
-          Get in Touch
-        </h2>
-        <p className="text-slate-600 dark:text-slate-400 mb-10 text-lg">
-          Have a project in mind or want to collaborate? Reach out!
-        </p>
-
-        <a
-          href={`mailto:${PROFILE.email}`}
-          className="flex items-center gap-4 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/60 dark:bg-white/5 hover:border-violet-400 dark:hover:border-violet-500 transition-all card-hover mb-10"
+    <section id="contact" ref={ref} className="section-pad relative overflow-hidden">
+      <div className="relative z-10 max-w-5xl mx-auto">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="mb-12 text-center"
         >
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center text-white">
-            <Mail size={22} />
-          </div>
-          <span className="text-slate-700 dark:text-slate-300 font-medium">{PROFILE.email}</span>
-        </a>
+          <span className="section-label">07 — Contact</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white">
+            Let&apos;s Build Something{' '}
+            <span className="text-violet-600 dark:text-violet-400">
+              Impactful
+            </span>
+          </h2>
+          <p className="mt-3 text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+            Available for Summer 2026 engineering internships, GSoC 2026 collaborations, and technical discussions.
+          </p>
+        </motion.div>
 
-        <AnimatePresence mode="wait">
-          {status === 'success' ? (
-            <motion.div
-              key="success"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              className="flex flex-col items-center gap-4 py-16 text-center"
-            >
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ type: 'spring', stiffness: 200, delay: 0.1 }}
-              >
-                <CheckCircle2 size={56} className="text-emerald-500" />
-              </motion.div>
-              <h3 className="text-xl font-display font-semibold text-slate-900 dark:text-white">
-                Message sent!
-              </h3>
-              <p className="text-slate-600 dark:text-slate-400">
-                Thanks for reaching out — I'll get back to you soon.
-              </p>
-              <button
-                onClick={() => setStatus(null)}
-                className="mt-2 text-sm text-violet-600 dark:text-violet-400 underline underline-offset-2"
-              >
-                Send another
-              </button>
-            </motion.div>
-          ) : (
-            <motion.form
-              key="form"
-              onSubmit={handleSubmit}
-              className="space-y-5"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              {field('name', 'text', 'Name *')}
-              {field('email', 'email', 'Email *')}
-              {field('subject', 'text', 'Subject')}
-              {field('message', 'text', 'Message *', 4)}
+        <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-8 items-start">
+          {/* Contact Details & Socials Column */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="space-y-6"
+          >
+            {/* Primary Email Card */}
+            <div className="p-6 rounded-2xl card-glass border border-slate-200/90 dark:border-slate-800/80">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block mb-2">
+                Primary Contact
+              </span>
+              <div className="flex items-center gap-3">
+                <div className="w-11 h-11 rounded-xl bg-violet-600/10 dark:bg-violet-950/40 border border-violet-500/20 flex items-center justify-center text-violet-600 dark:text-violet-400 shrink-0">
+                  <Mail size={22} aria-hidden="true" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <a
+                    href={`mailto:${PROFILE.email}`}
+                    className="text-base sm:text-lg font-bold text-slate-900 dark:text-white hover:text-violet-600 dark:hover:text-violet-400 truncate block transition-colors"
+                  >
+                    {PROFILE.email}
+                  </a>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                    Direct academic email (RGIPT)
+                  </p>
+                </div>
+                <button
+                  onClick={handleCopyEmail}
+                  className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-violet-500/40 text-slate-600 dark:text-slate-400 hover:text-violet-600 transition-colors"
+                  aria-label="Copy email address"
+                  title="Copy email to clipboard"
+                >
+                  {copied ? <Check size={18} className="text-emerald-500" /> : <Copy size={18} />}
+                </button>
+              </div>
+            </div>
 
-              {status === 'error' && (
-                <p className="text-rose-500 dark:text-rose-400 text-sm font-medium">{errMsg}</p>
+            {/* Social Channels */}
+            <div className="p-6 rounded-2xl card-glass border border-slate-200/90 dark:border-slate-800/80">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block mb-4">
+                Connect &amp; Profiles
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {[
+                  {
+                    name: 'GitHub',
+                    handle: '@Prm01',
+                    url: PROFILE.githubUrl,
+                    icon: Github
+                  },
+                  {
+                    name: 'LinkedIn',
+                    handle: 'pramod-yadav',
+                    url: PROFILE.linkedinUrl,
+                    icon: Linkedin
+                  },
+                  {
+                    name: 'LeetCode',
+                    handle: 'PramodYadav1',
+                    url: PROFILE.leetcodeUrl,
+                    icon: Code
+                  },
+                  {
+                    name: 'Secondary Mail',
+                    handle: 'pramodyadav2948',
+                    url: `mailto:${PROFILE.secondaryEmail}`,
+                    icon: Mail
+                  }
+                ].map((social) => {
+                  const Icon = social.icon;
+                  return (
+                    <a
+                      key={social.name}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-violet-500/40 hover:bg-violet-500/5 transition-all flex items-center gap-3 group"
+                    >
+                      <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-300 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
+                        <Icon size={16} aria-hidden="true" />
+                      </div>
+                      <div className="min-w-0">
+                        <span className="text-xs font-bold text-slate-900 dark:text-white block group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
+                          {social.name}
+                        </span>
+                        <span className="text-[11px] text-slate-500 dark:text-slate-400 truncate block">
+                          {social.handle}
+                        </span>
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Working Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="p-6 sm:p-8 rounded-2xl card-glass border border-slate-200/90 dark:border-slate-800/80"
+          >
+            <AnimatePresence mode="wait">
+              {status === 'success' ? (
+                <motion.div
+                  key="success-message"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="py-12 text-center"
+                >
+                  <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle2 size={30} aria-hidden="true" />
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white font-display">
+                    Message Dispatched!
+                  </h3>
+                  <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 max-w-sm mx-auto">
+                    Thank you for reaching out. I will review your message and reply promptly to your inbox.
+                  </p>
+                  <button
+                    onClick={() => setStatus('idle')}
+                    className="mt-6 btn-secondary text-xs font-semibold !py-2.5"
+                  >
+                    Send Another Message
+                  </button>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white font-display mb-2">
+                    Send a Direct Message
+                  </h3>
+
+                  {errMsg && (
+                    <div
+                      role="alert"
+                      className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs font-semibold"
+                    >
+                      {errMsg}
+                    </div>
+                  )}
+
+                  <div>
+                    <label
+                      htmlFor="contact-name"
+                      className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5"
+                    >
+                      Your Name *
+                    </label>
+                    <input
+                      id="contact-name"
+                      type="text"
+                      required
+                      value={form.name}
+                      onChange={(e) => setForm({ ...form, name: e.target.value })}
+                      placeholder="Jane Doe"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950/60 text-slate-900 dark:text-white placeholder:text-slate-400 text-sm focus-visible:ring-2 focus-visible:ring-violet-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="contact-email"
+                      className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5"
+                    >
+                      Email Address *
+                    </label>
+                    <input
+                      id="contact-email"
+                      type="email"
+                      required
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      placeholder="jane@example.com"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950/60 text-slate-900 dark:text-white placeholder:text-slate-400 text-sm focus-visible:ring-2 focus-visible:ring-violet-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="contact-subject"
+                      className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5"
+                    >
+                      Subject
+                    </label>
+                    <input
+                      id="contact-subject"
+                      type="text"
+                      value={form.subject}
+                      onChange={(e) => setForm({ ...form, subject: e.target.value })}
+                      placeholder="Internship / GSoC Collaboration"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950/60 text-slate-900 dark:text-white placeholder:text-slate-400 text-sm focus-visible:ring-2 focus-visible:ring-violet-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="contact-message"
+                      className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5"
+                    >
+                      Message *
+                    </label>
+                    <textarea
+                      id="contact-message"
+                      rows={4}
+                      required
+                      value={form.message}
+                      onChange={(e) => setForm({ ...form, message: e.target.value })}
+                      placeholder="Hi Pramod, I came across your portfolio..."
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950/60 text-slate-900 dark:text-white placeholder:text-slate-400 text-sm focus-visible:ring-2 focus-visible:ring-violet-500 resize-none"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={status === 'sending'}
+                    className="w-full btn-accent !py-3.5 text-sm font-semibold disabled:opacity-60"
+                  >
+                    <Send size={16} aria-hidden="true" />
+                    <span>{status === 'sending' ? 'Transmitting...' : 'Send Message'}</span>
+                  </button>
+                </form>
               )}
-
-              <motion.button
-                type="submit"
-                disabled={status === 'loading'}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full btn-primary py-4 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
-              >
-                <Send size={20} />
-                {status === 'loading' ? 'Sending…' : 'Send Message'}
-              </motion.button>
-            </motion.form>
-          )}
-        </AnimatePresence>
-      </motion.div>
+            </AnimatePresence>
+          </motion.div>
+        </div>
+      </div>
     </section>
   );
 }

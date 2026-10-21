@@ -1,5 +1,5 @@
 /**
- * Seed script to populate initial projects.
+ * Seed script to populate initial projects in MongoDB.
  * Run: node server/seed/projects.js (with MONGODB_URI set)
  */
 import mongoose from 'mongoose';
@@ -10,40 +10,39 @@ dotenv.config();
 
 const projects = [
   {
-    title: 'Air Quality Index (AQI) Prediction',
-    description: 'ML-based prediction using Random Forest regression. Performed data cleaning, feature selection, AQI category mapping (Good, Moderate, etc.), and visualized trends.',
-    techStack: ['Python', 'Pandas', 'NumPy', 'Scikit-learn', 'Matplotlib', 'Seaborn'],
-    github: null,
-    live: null,
+    title: 'Rahat: Urban Flood & Heat Early Warning',
+    description: 'Heat and flood early warning system for Delhi\'s 290 municipal wards using FastAPI, PostgreSQL, and AWS Bedrock & Rekognition with 35 e2e tests.',
+    techStack: ['FastAPI', 'PostgreSQL', 'AWS Bedrock', 'AWS Rekognition', 'AWS S3', 'RDS', 'CloudFront', 'MCP', 'Web Push'],
+    github: 'https://github.com/Prm01/Rahat',
+    live: 'https://d17rx6mkixl5iz.cloudfront.net/',
     featured: true,
     order: 0
   },
   {
-    title: 'Doctor Appointment System',
-    description: 'Full-stack MERN app with role-based dashboards (Patient, Doctor, Admin). RESTful APIs for auth (JWT), booking, and payments. Deployed on Render.',
-    techStack: ['React.js', 'Node.js', 'Express.js', 'MongoDB'],
-    github: null,
-    live: 'https://full-stack-project-1-vau7.onrender.com/',
+    title: 'BhoomiAI: Land Record Digitization',
+    description: 'Automated land record digitization and validation using TrOCR and LangChain agentic verification pipelines with 92% field accuracy, slashing processing from 15 min to under 1 min.',
+    techStack: ['TrOCR', 'LangChain', 'Python', 'FastAPI', 'React', 'Computer Vision'],
+    github: 'https://github.com/Prm01',
+    live: 'https://smart-land-digitization.vercel.app/',
     featured: true,
     order: 1
   },
   {
-    title: 'Portfolio Website',
-    description: 'Responsive portfolio with 3D effects, animations, Grid layout, dark/light mode, and mobile-optimized design. Built with MERN stack.',
-    techStack: ['React.js', 'Tailwind CSS', 'Framer Motion', 'Node.js'],
-    github: null,
-    live: 'https://my-personal-developer-portfolio-1.onrender.com/',
+    title: 'Doctor Appointment System',
+    description: 'Full-stack MERN platform with 3 discrete role-based dashboards (Patient/Doctor/Admin), JWT REST APIs, and Lighthouse accessibility elevated from 79 to 100.',
+    techStack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Tailwind CSS'],
+    github: 'https://github.com/Prm01',
+    live: 'https://full-stack-project-1-vau7.onrender.com/',
     featured: true,
     order: 2
   },
   {
-    title: 'Swiggy Clone (Live API)',
-    description:
-      'Food delivery UI inspired by Swiggy with restaurant discovery, menus, and cart flow using live REST APIs for real listings and item data.',
-    techStack: ['React.js', 'REST APIs', 'JavaScript', 'CSS3'],
-    github: null,
-    live: null,
-    featured: false,
+    title: 'Finance Dashboard UI',
+    description: 'High-performance interactive financial analytics interface with dynamic charting, KPI summaries, and responsive glassmorphism UI achieving 95+ Lighthouse performance.',
+    techStack: ['React.js', 'Tailwind CSS', 'Vite', 'Lucide Icons'],
+    github: 'https://github.com/Prm01',
+    live: 'https://finance-dashboard-ui-1.onrender.com/',
+    featured: true,
     order: 3
   }
 ];

@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X, Send, Sparkles } from 'lucide-react';
-
 import { API_URL } from '../lib/api';
 
 export default function AIChat() {
@@ -33,11 +32,11 @@ export default function AIChat() {
       if (res.ok) {
         setMessages(prev => [...prev, { role: 'assistant', text: data.reply }]);
       } else {
-        setError(data.error || 'AI unavailable');
+        setError(data.error || 'AI service currently in offline mode');
         setMessages(prev => prev.filter(m => m.role !== 'user' || m.text !== userMsg));
       }
     } catch (err) {
-      setError('Could not connect to AI. Start the server and add GEMINI_API_KEY.');
+      setError('AI assistant offline. You can reach Pramod directly at 23mc3037@rgipt.ac.in');
       setMessages(prev => prev.filter(m => m.role !== 'user' || m.text !== userMsg));
     } finally {
       setLoading(false);
@@ -46,98 +45,117 @@ export default function AIChat() {
 
   return (
     <>
-      <motion.button
+      <button
         onClick={() => setOpen(!open)}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500 via-fuchsia-500 to-rose-500 text-white shadow-glow flex items-center justify-center transition-all"
-        aria-label="AI Chat"
+        className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-2xl bg-violet-600 hover:bg-violet-500 text-white shadow-lg shadow-violet-600/30 flex items-center justify-center transition-all duration-200 active:scale-95 focus-visible:ring-2 focus-visible:ring-violet-400"
+        aria-label="Toggle AI Assistant"
       >
-        <Sparkles size={26} />
-      </motion.button>
+        <Sparkles size={24} aria-hidden="true" />
+      </button>
 
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: 24, scale: 0.95 }}
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 24, scale: 0.95 }}
-            className="fixed bottom-28 right-6 z-50 w-[calc(100vw-3rem)] sm:w-96 max-h-[70vh] flex flex-col rounded-2xl card-glass border border-slate-200 dark:border-slate-700 shadow-2xl overflow-hidden"
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className="fixed bottom-24 right-4 sm:right-6 z-40 w-[calc(100vw-2rem)] sm:w-96 max-h-[75vh] flex flex-col rounded-2xl card-glass border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden"
           >
-            <div className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-700 bg-gradient-to-r from-violet-50 to-fuchsia-50/50 dark:from-violet-900/20 dark:to-fuchsia-900/10">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center text-white">
-                  <MessageCircle size={20} />
+            {/* Header */}
+            <div className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-800 bg-slate-100/70 dark:bg-slate-900/80">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center text-white">
+                  <MessageCircle size={17} aria-hidden="true" />
                 </div>
                 <div>
-                  <span className="font-display font-semibold block">AI Assistant</span>
-                  <span className="text-xs text-slate-500 dark:text-slate-400">Ask about Pramod</span>
+                  <span className="font-display font-bold text-sm text-slate-900 dark:text-white block">
+                    Portfolio Assistant
+                  </span>
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400">
+                    Ask about Pramod&apos;s projects &amp; skills
+                  </span>
                 </div>
               </div>
               <button
                 onClick={() => setOpen(false)}
-                className="p-2 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                className="p-1.5 rounded-lg text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white transition-colors"
+                aria-label="Close Assistant"
               >
-                <X size={20} />
+                <X size={18} />
               </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-[200px] max-h-[40vh]">
+            {/* Chat Body */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-3 min-h-[220px] max-h-[42vh] text-xs sm:text-sm">
               {messages.length === 0 && !error && (
-                <p className="text-slate-500 dark:text-slate-400 text-sm text-center py-6">
-                  Ask me about Pramod's skills, projects, or experience!
-                </p>
+                <div className="text-center py-6 text-slate-500 dark:text-slate-400">
+                  <p className="font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                    Welcome!
+                  </p>
+                  <p className="text-xs">
+                    Inquire about Rahat, BhoomiAI, Polluxa internship experience, or tech stack competencies.
+                  </p>
+                </div>
               )}
+
               {error && (
-                <p className="text-amber-700 dark:text-amber-400 text-sm bg-amber-50 dark:bg-amber-900/20 p-4 rounded-xl border border-amber-200 dark:border-amber-800/50">
+                <p className="text-amber-700 dark:text-amber-300 text-xs bg-amber-50 dark:bg-amber-950/40 p-3 rounded-xl border border-amber-200 dark:border-amber-800/60">
                   {error}
                 </p>
               )}
+
               {messages.map((m, i) => (
                 <div
                   key={i}
                   className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
-                    className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm ${
+                    className={`max-w-[85%] px-3.5 py-2.5 rounded-xl ${
                       m.role === 'user'
-                        ? 'bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white rounded-br-md'
-                        : 'bg-slate-100 dark:bg-slate-800/80 text-slate-800 dark:text-slate-200 rounded-bl-md border border-slate-200/60 dark:border-slate-700/60'
+                        ? 'bg-violet-600 text-white rounded-br-none'
+                        : 'bg-slate-100 dark:bg-slate-800/80 text-slate-800 dark:text-slate-200 rounded-bl-none border border-slate-200 dark:border-slate-700'
                     }`}
                   >
                     {m.text}
                   </div>
                 </div>
               ))}
+
               {loading && (
                 <div className="flex justify-start">
-                  <div className="px-4 py-3 rounded-2xl rounded-bl-md bg-slate-100 dark:bg-slate-800/80 text-slate-500 text-sm flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-violet-500 animate-pulse" />
-                    Thinking...
+                  <div className="px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800/80 text-slate-500 text-xs flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-violet-600 animate-pulse" />
+                    Analyzing portfolio knowledge...
                   </div>
                 </div>
               )}
               <div ref={bottomRef} />
             </div>
 
+            {/* Input Form */}
             <form
-              onSubmit={e => { e.preventDefault(); sendMessage(); }}
-              className="p-4 border-t border-slate-200 dark:border-slate-700 flex gap-3 bg-white/50 dark:bg-slate-900/30"
+              onSubmit={(e) => {
+                e.preventDefault();
+                sendMessage();
+              }}
+              className="p-3 border-t border-slate-200 dark:border-slate-800 flex gap-2 bg-slate-50 dark:bg-slate-900/60"
             >
               <input
                 type="text"
                 value={input}
-                onChange={e => setInput(e.target.value)}
+                onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask about Pramod..."
-                className="flex-1 px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-violet-500 outline-none text-sm"
+                className="flex-1 px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder:text-slate-400 text-xs focus-visible:ring-2 focus-visible:ring-violet-500"
                 disabled={loading}
               />
               <button
                 type="submit"
                 disabled={loading || !input.trim()}
-                className="p-3 rounded-xl bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white disabled:opacity-50 transition-opacity"
+                className="p-2 rounded-lg bg-violet-600 hover:bg-violet-500 text-white disabled:opacity-50 transition-colors"
+                aria-label="Send query"
               >
-                <Send size={18} />
+                <Send size={15} />
               </button>
             </form>
           </motion.div>

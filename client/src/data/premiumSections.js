@@ -1,179 +1,223 @@
-export const FEATURED_PROJECT_IDS = ['p1', 'p2', 'p3'];
+export const STATS = [
+  {
+    id: 's1',
+    value: '500+',
+    label: 'DSA Problems Solved',
+    sub: 'LeetCode · Codeforces · GfG · CodeChef'
+  },
+  {
+    id: 's2',
+    value: 'Top 2%',
+    label: 'JEE Advanced Qualified',
+    sub: 'National rank among 1M+ aspirants'
+  },
+  {
+    id: 's3',
+    value: '3 Major',
+    label: 'Production & AI Projects',
+    sub: 'Deployed full-stack & agentic systems'
+  }
+];
 
-export const FALLBACK_PROJECTS_PREMIUM = [
+export const PROJECTS = [
   {
-    _id: 'p1',
-    title: 'AIR_Q – Urban Air Quality Intelligence',
-    description:
-      'Multi-source pipeline (OpenAQ, CPCB, NASA FIRMS) powering an XGBoost model for 7-day AQI forecasting with SHAP-based source attribution and LLM-powered health advisories.',
-    techStack: ['Python', 'Streamlit', 'XGBoost', 'SHAP', 'scikit-learn', 'SQLite', 'Gemini'],
-    highlights: [
-      'Built multi-source data pipeline ingesting OpenAQ, CPCB, and NASA FIRMS data.',
-      'XGBoost model for 7-day AQI forecasting with SHAP-based source attribution and anomaly detection.',
-      'LLM-powered health advisory (Hugging Face, Gemini, template fallback) across 10 cities.',
-      'What-if AQI simulator and deployed on Render.'
+    id: 'rahat',
+    title: 'Rahat: Urban Flood & Heat Early Warning',
+    tagline: 'Heat and flood early warning system for Delhi\'s 290 municipal wards',
+    problem: 'Urban flood and extreme heat events endanger vulnerable populations across Delhi\'s 290 municipal wards without timely localized warnings.',
+    categories: ['Full Stack', 'AI', 'Backend'],
+    outcomes: [
+      'Built real-time heat and flood early warning pipeline covering Delhi\'s 290 wards using FastAPI and PostgreSQL.',
+      'Orchestrated cloud architecture with AWS Bedrock, Rekognition, S3, RDS, CloudFront, MCP server protocols, and Web Push notifications.',
+      'Ensured mission-critical stability and sub-second dispatch with 35 comprehensive end-to-end integration tests.'
     ],
-    impact: ['7-day AQI forecast', 'SHAP attribution', 'LLM health advisory'],
-    github: 'https://github.com/Prm01',
-    live: null,
-    image: '/projects/aqi.png',
+    techStack: [
+      'FastAPI',
+      'PostgreSQL',
+      'AWS Bedrock',
+      'AWS Rekognition',
+      'AWS S3',
+      'AWS RDS',
+      'CloudFront',
+      'MCP',
+      'Web Push',
+      '35 e2e tests'
+    ],
+    image: '/projects/rahat.svg',
+    live: 'https://d17rx6mkixl5iz.cloudfront.net/',
+    github: 'https://github.com/Prm01/Rahat',
     featured: true
   },
   {
-    _id: 'p2',
-    title: 'LinkedIn Lead Chrome Extension',
-    description:
-      'Live on the Chrome Web Store — converts LinkedIn people-search results into CRM leads via REST API with a daily-cap counter, Playwright automation, and Apollo.io verified-email retrieval.',
-    techStack: ['JavaScript', 'Chrome Extension', 'Playwright', 'Apollo.io', 'REST API'],
-    highlights: [
-      'Live on Chrome Web Store; converts LinkedIn search results into CRM leads in real time.',
-      'Playwright + Apollo.io automated verified-email retrieval — 67% faster (30→10 min).',
-      'Token auth, retry logic, and duplicate-lead detection built in.'
+    id: 'bhoomi',
+    title: 'BhoomiAI: Land Record Digitization',
+    tagline: 'Land record digitization and agentic validation platform',
+    problem: 'Manual land record digitization is slow, error-prone, and susceptible to title fraud and archival misinterpretation.',
+    categories: ['AI', 'Full Stack'],
+    outcomes: [
+      'Automated archival document digitization utilizing TrOCR models paired with LangChain agentic verification pipelines.',
+      'Achieved 92% field extraction accuracy across complex, degraded vernacular land record documents.',
+      'Slashed document processing turnaround time from 15 minutes to under 1 minute per record (>93% latency reduction).'
     ],
-    impact: ['67% faster lead processing', 'Chrome Web Store', 'Duplicate detection'],
+    techStack: [
+      'TrOCR',
+      'LangChain',
+      'Agentic AI',
+      'Python',
+      'FastAPI',
+      'React',
+      'Computer Vision'
+    ],
+    image: '/projects/bhoomi.svg',
+    live: 'https://smart-land-digitization.vercel.app/',
     github: 'https://github.com/Prm01',
-    live: null,
-    image: null,
     featured: true
   },
   {
-    _id: 'p3',
+    id: 'doctor',
     title: 'Doctor Appointment System',
-    description:
-      'Full-stack healthcare booking platform with 3 role-based dashboards (Patient/Doctor/Admin), JWT-secured REST APIs, payment workflows, and cloud deployment on Render.',
-    techStack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Tailwind CSS'],
-    highlights: [
-      'Three role-based dashboards: Patient, Doctor, and Admin with distinct workflows.',
-      'JWT-secured REST APIs for authentication, booking, and payment flows.',
-      'Deployed on Render with full CI/CD pipeline.'
+    tagline: 'Full-stack healthcare booking platform with role dashboards',
+    problem: 'Healthcare scheduling bottlenecks and inaccessible interfaces limit timely patient care and doctor availability management.',
+    categories: ['Full Stack', 'Backend'],
+    outcomes: [
+      'Architected full-stack MERN booking platform featuring 3 role-based dashboards (Patient, Doctor, Admin) with JWT security.',
+      'Elevated Lighthouse accessibility audit score from 79 to a perfect 100 with WCAG compliant UI patterns.',
+      'Implemented secure REST APIs, payment workflows, and automated cloud deployment on Render with CI/CD.'
     ],
-    impact: ['Role-based dashboards', 'JWT auth', 'Deployed on Render'],
-    github: 'https://github.com/Prm01',
-    live: 'https://full-stack-project-1-vau7.onrender.com/',
+    techStack: [
+      'React.js',
+      'Node.js',
+      'Express.js',
+      'MongoDB',
+      'JWT',
+      'Tailwind CSS',
+      'Render'
+    ],
     image: '/projects/doctor.png',
+    live: 'https://full-stack-project-1-vau7.onrender.com/',
+    github: 'https://github.com/Prm01',
+    featured: true
+  },
+  {
+    id: 'finance',
+    title: 'Finance Dashboard UI',
+    tagline: 'High-performance portfolio and analytics dashboard',
+    problem: 'Financial users need dense, real-time portfolio analytics and cash flow visualizations without layout shifts or render lag.',
+    categories: ['Full Stack'],
+    outcomes: [
+      'Engineered interactive financial analytics interface with responsive charting, KPI summaries, and transaction logging.',
+      'Optimized component rendering and memoized state for zero-lag interactions and glassmorphism UI styling.',
+      'Deployed to production on Render with responsive cross-device layouts and 95+ mobile and desktop performance benchmarks.'
+    ],
+    techStack: [
+      'React.js',
+      'Tailwind CSS',
+      'Vite',
+      'Lucide Icons',
+      'Responsive Design',
+      'Render'
+    ],
+    image: '/projects/finance.svg',
+    live: 'https://finance-dashboard-ui-1.onrender.com/',
+    github: 'https://github.com/Prm01',
     featured: true
   }
 ];
 
-export const EXPERIENCE = [
+export const EXPERIENCE_DATA = [
   {
-    id: 'e1',
+    id: 'polluxa',
     role: 'Automation Intern',
     org: 'Polluxa',
     period: 'May 2026 – Jul 2026',
-    desc: 'Built a Chrome extension (content scripts, service workers, REST APIs) writing leads into a CRM in real time. Built Python/JavaScript Playwright automation cutting lead-processing time 67% (30→10 min). Integrated Apollo.io APIs with token auth, retries, and duplicate detection. Promoted from Product Intern to Automation Intern in 1 month. Contributed to a 20% increase in client acquisition.',
-    tags: ['Python', 'JavaScript', 'Playwright', 'REST API', 'Claude'],
-    highlight: 'Promoted in 1 month · 20% client acquisition increase'
-  },
-  {
-    id: 'e2',
-    role: 'Design Executive / Coordinator',
-    org: 'GDSC RGIPT',
-    period: 'Aug 2024 – Aug 2026',
-    desc: 'Led a student volunteer team for event planning and execution. Designed event posters and creatives. Facilitated Google Cloud Arcade peer learning with 500+ badges completed by participants.',
-    tags: ['Canva', 'Adobe', 'Leadership', 'Google Cloud'],
-    highlight: '500+ Cloud Arcade badges · Event design lead'
+    location: 'Remote',
+    summary: 'Automated high-volume lead pipelines and resolved core infrastructure issues.',
+    bullets: [
+      'Reduced lead-processing turnaround time from 30 minutes to 10 minutes per lead (67% speed improvement) via automated Python/JS Playwright workflows and Chrome extensions.',
+      'Drove a +20% increase in qualified client acquisition by integrating Apollo.io verified-email retrieval with REST APIs, token authentication, and deduplication logic.',
+      'Audited and resolved 20 of 25+ critical automation and pipeline issues, substantially improving system reliability and operational throughput.'
+    ],
+    tags: ['Python', 'JavaScript', 'Playwright', 'Chrome Extensions', 'REST APIs', 'Apollo.io']
   }
 ];
 
-export const EDUCATION = [
+export const SKILL_GROUPS = [
   {
-    id: 'ed1',
-    degree: 'B.Tech – Mathematics & Computing',
-    institute: 'Rajiv Gandhi Institute of Petroleum Technology (RGIPT)',
-    location: 'Jais, Uttar Pradesh',
-    period: 'Aug 2023 – May 2027',
-    tags: ['Mathematics', 'Computing', 'Algorithms', 'ML']
+    id: 'frontend',
+    category: 'Frontend',
+    iconName: 'Layout',
+    skills: ['React.js', 'Vite', 'Tailwind CSS', 'JavaScript (ES6+)', 'HTML5', 'CSS3', 'Responsive Design']
   },
   {
-    id: 'ed2',
-    degree: 'Senior Secondary (Class XII) – PCM',
-    institute: 'City Montessori Inter College',
-    location: 'Lucknow, Uttar Pradesh',
-    period: '2021 – 2023',
-    tags: ['Physics', 'Chemistry', 'Mathematics']
+    id: 'backend',
+    category: 'Backend',
+    iconName: 'Server',
+    skills: ['Node.js', 'Express.js', 'FastAPI', 'REST APIs', 'PostgreSQL', 'MongoDB', 'JWT Auth']
+  },
+  {
+    id: 'cloud',
+    category: 'Cloud/DevOps',
+    iconName: 'Cloud',
+    skills: ['AWS Bedrock', 'AWS Rekognition', 'AWS S3', 'AWS RDS', 'CloudFront', 'Docker', 'Git & GitHub', 'GitHub Actions', 'CI/CD', 'Render', 'Vercel']
+  },
+  {
+    id: 'ai',
+    category: 'AI/ML',
+    iconName: 'Cpu',
+    skills: ['TrOCR', 'LangChain', 'Model Context Protocol (MCP)', 'Python', 'Computer Vision', 'Hugging Face', 'Gemini API', 'scikit-learn']
+  },
+  {
+    id: 'languages',
+    category: 'Languages',
+    iconName: 'Code2',
+    skills: ['C++', 'Python', 'JavaScript', 'SQL', 'HTML / CSS']
   }
 ];
 
-export const AWARDS = [
-  {
-    id: 'a1',
-    title: 'JEE Main & Advanced',
-    desc: 'Ranked in top 2% nationally among 1M+ candidates.'
-  },
-  {
-    id: 'a2',
-    title: '500+ DSA Problems Solved',
-    desc: 'Across LeetCode, CodeChef, Codeforces, InterviewBit, and GeeksForGeeks.'
-  },
-  {
-    id: 'a3',
-    title: 'Merit-cum-Scholarship',
-    desc: 'Awarded to top 10% of students at RGIPT based on academic performance.'
+export const OPEN_SOURCE_DATA = {
+  contributions: [
+    {
+      id: 'neutralinojs',
+      name: 'Neutralinojs (neutralinojs-cli)',
+      type: 'Desktop Application Framework',
+      description: 'Contributed to the portable cross-platform desktop application framework CLI, focusing on CLI stability, toolchain reliability, developer experience (DX), and release readiness.',
+      tech: ['Node.js', 'CLI', 'Tooling', 'Open Source'],
+      prUrl: 'https://github.com/search?q=org%3Aneutralinojs+author%3APrm01&type=pullrequests',
+      repoUrl: 'https://github.com/neutralinojs/neutralinojs-cli'
+    },
+    {
+      id: 'learning-unlimited',
+      name: 'Learning Unlimited (ESP-Website)',
+      type: 'Educational Logistics Platform',
+      description: 'Contributed to the open-source educational software powering Splash programs nationwide. Solved platform issues, improved interface workflows, and collaborated on PR reviews.',
+      tech: ['Python', 'Web Framework', 'Logistics', 'Open Source'],
+      prUrl: 'https://github.com/search?q=org%3Alearning-unlimited+author%3APrm01&type=pullrequests',
+      repoUrl: 'https://github.com/learning-unlimited/ESP-Website'
+    }
+  ],
+  gsocNote: {
+    title: 'Google Summer of Code (GSoC 2026)',
+    text: 'Actively preparing for GSoC 2026 with a dedicated focus on open-source developer tooling, system automation, and agentic AI workflows. Committed to steady contribution cadences, transparent PR reviews, and community collaboration.'
   }
-];
+};
 
-export const HACKATHONS = [
+export const ACHIEVEMENTS_DATA = [
   {
-    id: 'h1',
-    name: 'Indo–Russia Hackathon',
-    result: 'Hackathon in progress',
-    badge: 'Ongoing',
-    role: 'Full Stack Developer',
-    description:
-      'Currently working on an AI-powered loan sales and approval system designed for real-world constraints and fast iteration.',
-    tech: ['MERN Stack', 'Machine Learning'],
-    icon: 'trophy',
-    dateLabel: 'Hackathon'
+    id: 'jee',
+    title: 'JEE Main & Advanced Qualified (Top 2%)',
+    description: 'Ranked in the top 2% nationally among over 1.2 million aspirants in India\'s most rigorous engineering entrance examinations.',
+    badge: 'National Rank'
   },
   {
-    id: 'h2',
-    name: 'Krish AI Hackathon',
-    result: 'Government Problem Statement',
-    role: 'AI/ML Developer',
-    description:
-      'Built an AI-powered solution for real-world challenges based on a government problem statement.',
-    tech: ['Python', 'Machine Learning', 'APIs'],
-    icon: 'award',
-    dateLabel: 'Hackathon'
+    id: 'scholarship',
+    title: 'RGIPT Merit-cum-Means Scholarship',
+    description: 'Awarded to top academic performers in B.Tech Mathematics & Computing at Rajiv Gandhi Institute of Petroleum Technology.',
+    badge: 'Academic Merit'
   },
   {
-    id: 'h3',
-    name: 'EY Techathon 6.0',
-    result: 'Selected for Round 2',
-    badge: 'Selected for Round 2 — National Level',
-    role: 'Full Stack Developer',
-    description:
-      'Built an AI-powered chatbot for loan assistance that automates customer queries and supports loan-related decision-making.',
-    tech: ['MERN Stack', 'AI/ML', 'APIs', 'AI Chatbot', 'Finance'],
-    icon: 'code',
-    dateLabel: 'Hackathon'
-  }
-];
-
-export const OSS_HIGHLIGHTS = [
-  {
-    id: 'o1',
-    repo: 'neutrallinojs-cli',
-    description:
-      'CLI improvements and contributions focused on reliability, DX, and release readiness.',
-    tech: ['Node.js', 'CLI'],
-    url: 'https://github.com/search?q=neutrallinojs-cli&type=repositories'
-  },
-  {
-    id: 'o2',
-    repo: 'Swiggy Clone (Live API)',
-    description:
-      'Food delivery UI with live restaurant and menu APIs, cart flow, and responsive styling.',
-    tech: ['React', 'REST APIs', 'CSS'],
-    url: 'https://github.com/Prm01'
-  },
-  {
-    id: 'o3',
-    repo: 'Other meaningful repos',
-    description:
-      'Smaller contributions, fixes, and iterations across projects — focused on reliability and developer experience.',
-    tech: ['Open Source', 'Collaboration', 'DX'],
-    url: 'https://github.com/Prm01?tab=repositories'
+    id: 'gdsc',
+    title: 'GDSC Design Executive',
+    description: 'Executive member at Google Developer Student Clubs RGIPT; organized campus tech events and facilitated cloud learning with 500+ badges completed.',
+    badge: 'Leadership'
   }
 ];

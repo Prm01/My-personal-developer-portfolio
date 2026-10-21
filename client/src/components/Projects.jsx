@@ -1,287 +1,187 @@
-import { useEffect, useMemo, useState } from 'react';
-import { motion } from 'framer-motion';
-import { Filter } from 'lucide-react';
+import { useState, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import { ExternalLink, Github, Filter, CheckCircle2, AlertCircle } from 'lucide-react';
+import { PROJECTS } from '../data/premiumSections';
 
-import SectionShell from './ui/SectionShell';
-import TiltCard from './ui/TiltCard';
-import Badge from './ui/Badge';
-import { PrimaryLink, SecondaryLink } from './ui/Buttons';
+const FILTER_TABS = ['All', 'Full Stack', 'AI', 'Backend'];
 
-import { API_URL } from '../lib/api';
-import {
-  FALLBACK_PROJECTS_PREMIUM,
-  FEATURED_PROJECT_IDS
-} from '../data/premiumSections';
-
-function Thumb({ src, title, heightClass = 'h-44' }) {
-  if (src) {
-    return (
-      <img
-        src={src}
-        alt={`${title} thumbnail`}
-        className={`${heightClass} w-full object-cover`}
-        loading="lazy"
-      />
-    );
-  }
-
+function ProjectCard({ project, index }) {
   return (
-    <div
-      className={`${heightClass} w-full bg-gradient-to-br from-violet-500/20 via-fuchsia-500/10 to-rose-500/10 relative`}
+    <motion.article
+      layout
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.45, delay: index * 0.08 }}
+      className="rounded-2xl card-glass card-glass-hover overflow-hidden flex flex-col h-full border border-slate-200/90 dark:border-slate-800/80"
     >
-      <div className="absolute inset-0 grid-pattern opacity-50" />
-      <div className="absolute -top-16 -right-16 h-48 w-48 rounded-full bg-gradient-to-br from-violet-500/35 to-transparent blur-2xl" />
-      <div className="absolute -bottom-16 -left-16 h-48 w-48 rounded-full bg-gradient-to-tr from-rose-500/25 to-transparent blur-2xl" />
-    </div>
-  );
-}
-
-function ProjectActions({ github, live }) {
-  return (
-    <div className="mt-5 flex flex-wrap gap-3">
-      {live ? <PrimaryLink href={live}>Live</PrimaryLink> : null}
-      {github ? (
-        <SecondaryLink href={github} icon="github">
-          GitHub
-        </SecondaryLink>
-      ) : null}
-    </div>
-  );
-}
-
-function ImpactChips({ impact }) {
-  const list = Array.isArray(impact) ? impact.filter(Boolean).slice(0, 3) : [];
-  if (!list.length) return null;
-  return (
-    <div className="mt-4 flex flex-wrap gap-2">
-      {list.map((x) => (
-        <span
-          key={x}
-          className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold bg-gradient-to-r from-violet-500/15 via-fuchsia-500/10 to-rose-500/10 border border-white/10 text-slate-700 dark:text-slate-200"
-        >
-          {x}
-        </span>
-      ))}
-    </div>
-  );
-}
-
-function Highlights({ highlights }) {
-  const list = Array.isArray(highlights)
-    ? highlights.filter(Boolean).slice(0, 3)
-    : [];
-  if (!list.length) return null;
-  return (
-    <ul className="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-400">
-      {list.map((h, idx) => (
-        <li key={idx} className="flex gap-3 leading-relaxed">
-          <span
-            className="mt-2 h-1.5 w-1.5 rounded-full bg-gradient-to-r from-violet-500 via-fuchsia-500 to-rose-500 shrink-0"
-            aria-hidden
-          />
-          <span>{h}</span>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-function FeaturedProjectCard({ project, index }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 22 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      className="h-full"
-    >
-      <TiltCard className="h-full">
-        <div className="overflow-hidden rounded-2xl">
-          <Thumb src={project.image} title={project.title} heightClass="h-36 md:h-40" />
-        </div>
-        <div className="p-5 md:p-6">
-          <div className="flex items-start justify-between gap-4">
-            <h3 className="text-xl md:text-2xl font-display font-semibold text-slate-900 dark:text-white">
-              {project.title}
-            </h3>
-            <span className="shrink-0 rounded-full px-3 py-1 text-xs font-semibold bg-gradient-to-r from-violet-500/20 via-fuchsia-500/20 to-rose-500/20 border border-white/10 text-slate-700 dark:text-slate-200">
-              Featured
+      {/* Screenshot / Preview */}
+      <div className="relative aspect-video w-full overflow-hidden bg-slate-900 border-b border-slate-200 dark:border-slate-800/80">
+        <img
+          src={project.image}
+          alt={`${project.title} preview screenshot`}
+          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+          loading="lazy"
+          width="800"
+          height="450"
+        />
+        <div className="absolute top-3 right-3 flex gap-1.5">
+          {project.categories.map((cat) => (
+            <span
+              key={cat}
+              className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-950/80 backdrop-blur-md text-violet-300 border border-violet-500/30"
+            >
+              {cat}
             </span>
-          </div>
+          ))}
+        </div>
+      </div>
 
-          <p className="mt-3 text-sm md:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
-            {project.description}
+      {/* Card Content */}
+      <div className="p-6 flex flex-col flex-1">
+        {/* Title */}
+        <h3 className="text-xl font-bold text-slate-900 dark:text-white font-display">
+          {project.title}
+        </h3>
+
+        {/* One-line Problem */}
+        <div className="mt-3 p-3 rounded-xl bg-slate-100/80 dark:bg-slate-950/40 border border-slate-200/60 dark:border-slate-800/60 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+          <span className="font-semibold text-violet-600 dark:text-violet-400 block mb-0.5">
+            Problem:
+          </span>
+          {project.problem}
+        </div>
+
+        {/* 3 Bullet Outcomes */}
+        <div className="mt-4 flex-1">
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
+            Impact &amp; Engineering Outcomes:
           </p>
+          <ul className="space-y-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+            {project.outcomes.map((outcome, idx) => (
+              <li key={idx} className="flex items-start gap-2 leading-relaxed">
+                <CheckCircle2
+                  size={15}
+                  className="text-violet-600 dark:text-violet-400 shrink-0 mt-0.5"
+                  aria-hidden="true"
+                />
+                <span>{outcome}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-          <Highlights highlights={project.highlights} />
-
-          <div className="mt-4 flex flex-wrap gap-2">
-            {(project.techStack || []).slice(0, 8).map((t) => (
-              <Badge key={t}>{t}</Badge>
+        {/* Tech Chips */}
+        <div className="mt-5 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+          <div className="flex flex-wrap gap-1.5">
+            {project.techStack.map((tech) => (
+              <span
+                key={tech}
+                className="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800/70 text-slate-700 dark:text-slate-300 border border-slate-200/50 dark:border-slate-700/50"
+              >
+                {tech}
+              </span>
             ))}
           </div>
-
-          <ImpactChips impact={project.impact} />
-
-          <ProjectActions github={project.github} live={project.live} />
         </div>
-      </TiltCard>
-    </motion.div>
+
+        {/* Live and GitHub Action Buttons */}
+        <div className="mt-6 pt-2 flex flex-wrap gap-2.5">
+          {project.live && (
+            <a
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-accent flex-1 !py-2.5 text-xs font-semibold"
+              aria-label={`View Live Deployment of ${project.title}`}
+            >
+              <ExternalLink size={14} aria-hidden="true" />
+              <span>Live Demo</span>
+            </a>
+          )}
+          {project.github && (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary flex-1 !py-2.5 text-xs font-semibold"
+              aria-label={`View GitHub Repository for ${project.title}`}
+            >
+              <Github size={14} aria-hidden="true" />
+              <span>GitHub</span>
+            </a>
+          )}
+        </div>
+      </div>
+    </motion.article>
   );
-}
-
-function OtherProjectCard({ project, index }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 18 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.25 }}
-      transition={{ duration: 0.55, delay: index * 0.03, ease: [0.22, 1, 0.36, 1] }}
-      className="h-full"
-    >
-      <TiltCard className="h-full">
-        <div className="overflow-hidden rounded-2xl">
-          <Thumb src={project.image} title={project.title} heightClass="h-32" />
-        </div>
-        <div className="p-6">
-          <h3 className="text-lg font-display font-semibold text-slate-900 dark:text-white">
-            {project.title}
-          </h3>
-          <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3">
-            {project.description}
-          </p>
-          <ImpactChips impact={project.impact} />
-          <div className="mt-4 flex flex-wrap gap-2">
-            {(project.techStack || []).slice(0, 6).map((t) => (
-              <Badge key={t}>{t}</Badge>
-            ))}
-          </div>
-          <ProjectActions github={project.github} live={project.live} />
-        </div>
-      </TiltCard>
-    </motion.div>
-  );
-}
-
-function pickTopProjects(list) {
-  const projects = Array.isArray(list) ? list : [];
-  const curated = projects.filter(Boolean).slice(0, 6);
-  return curated.length ? curated : FALLBACK_PROJECTS_PREMIUM;
-}
-
-function isFeatured(project) {
-  if (project?.featured) return true;
-  if (FEATURED_PROJECT_IDS?.length && project?._id) {
-    return FEATURED_PROJECT_IDS.includes(project._id);
-  }
-  return false;
 }
 
 export default function Projects() {
-  const [projects, setProjects] = useState(FALLBACK_PROJECTS_PREMIUM);
-  const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState('All');
+  const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
+  const [activeTab, setActiveTab] = useState('All');
 
-  useEffect(() => {
-    fetch(`${API_URL}/projects`)
-      .then((res) => (res.ok ? res.json() : Promise.reject()))
-      .then((data) => setProjects(pickTopProjects(data)))
-      .catch(() => setProjects(FALLBACK_PROJECTS_PREMIUM))
-      .finally(() => setLoading(false));
-  }, []);
-
-  const techOptions = useMemo(() => {
-    const set = new Set(['All']);
-    projects.forEach((p) => (p.techStack || []).forEach((t) => set.add(t)));
-    return Array.from(set);
-  }, [projects]);
-
-  const curated = useMemo(() => pickTopProjects(projects), [projects]);
-
-  const filtered = useMemo(() => {
-    if (filter === 'All') return curated;
-    return curated.filter((p) => (p.techStack || []).some((t) => t === filter));
-  }, [curated, filter]);
-
-  const featured = filtered.filter(isFeatured).slice(0, 3);
-  const others = filtered.filter((p) => !isFeatured(p)).slice(0, 6 - featured.length);
+  const filteredProjects = useMemo(() => {
+    if (activeTab === 'All') return PROJECTS;
+    return PROJECTS.filter((p) => p.categories.includes(activeTab));
+  }, [activeTab]);
 
   return (
-    <SectionShell
-      id="projects"
-      label="03 — Work"
-      title="Projects that ship value"
-      subtitle="A curated set of work I’m proud of — built with clean systems, thoughtful UX, and production-minded engineering."
-      className="bg-white dark:bg-slate-900/30"
-    >
-      <div className="flex flex-wrap items-center gap-2 mb-10">
-        <Filter size={18} className="text-slate-500 dark:text-slate-400" />
-        {techOptions.map((tech) => (
-          <motion.button
-            key={tech}
-            onClick={() => setFilter(tech)}
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.98 }}
-            className={`px-4 py-2 rounded-xl text-sm font-semibold transition-colors ${
-              filter === tech
-                ? 'bg-gradient-to-r from-violet-500 via-fuchsia-500 to-rose-500 text-white shadow-lg'
-                : 'bg-white/60 dark:bg-white/5 border border-slate-200/60 dark:border-slate-800/60 text-slate-700 dark:text-slate-300 hover:border-violet-300/70 dark:hover:border-violet-500/30'
-            }`}
-          >
-            {tech}
-          </motion.button>
-        ))}
-      </div>
-
-      {loading ? (
-        <div className="grid gap-6 lg:grid-cols-2">
-          {[1, 2].map((i) => (
-            <div
-              key={i}
-              className="h-[420px] rounded-2xl bg-slate-200/60 dark:bg-slate-800/40 animate-pulse"
-            />
-          ))}
-        </div>
-      ) : (
-        <>
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {featured.map((p, i) => (
-              <FeaturedProjectCard
-                key={p._id || p.title}
-                project={p}
-                index={i}
-              />
-            ))}
+    <section id="projects" ref={ref} className="section-pad relative overflow-hidden">
+      <div className="relative z-10 max-w-6xl mx-auto">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10"
+        >
+          <div>
+            <span className="section-label">02 — Featured Projects</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white">
+              Production Systems &amp;{' '}
+              <span className="text-violet-600 dark:text-violet-400">
+                AI Architectures
+              </span>
+            </h2>
+            <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-xl">
+              High-concurrency full-stack platforms and agentic pipelines built with measurable latency reductions, rigorous testing, and resilient deployments.
+            </p>
           </div>
 
-          {others.length ? (
-            <>
-              <div className="mt-14 mb-6 flex items-end justify-between gap-6">
-                <div>
-                  <p className="text-sm font-semibold text-slate-600 dark:text-slate-400">
-                    Other Projects
-                  </p>
-                  <p className="mt-1 text-xs text-slate-500 dark:text-slate-500">
-                    Smaller builds, experiments, and focused implementations.
-                  </p>
-                </div>
-                <div className="hidden sm:block text-xs text-slate-500 dark:text-slate-500">
-                  Hover for depth • Scroll for motion
-                </div>
-              </div>
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {others.map((p, i) => (
-                  <OtherProjectCard
-                    key={p._id || p.title}
-                    project={p}
-                    index={i}
-                  />
-                ))}
-              </div>
-            </>
-          ) : null}
-        </>
-      )}
-    </SectionShell>
+          {/* Filter Tabs: All / Full Stack / AI / Backend */}
+          <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-xl card-glass border border-slate-200 dark:border-slate-800 self-start md:self-end">
+            <Filter size={15} className="ml-2 text-slate-400 hidden sm:block" aria-hidden="true" />
+            {FILTER_TABS.map((tab) => {
+              const isActive = activeTab === tab;
+              return (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 ${
+                    isActive
+                      ? 'bg-violet-600 text-white shadow-sm'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  }`}
+                  aria-pressed={isActive}
+                >
+                  {tab}
+                </button>
+              );
+            })}
+          </div>
+        </motion.div>
+
+        {/* Projects Grid */}
+        <motion.div layout className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project, index) => (
+              <ProjectCard key={project.id} project={project} index={index} />
+            ))}
+          </AnimatePresence>
+        </motion.div>
+      </div>
+    </section>
   );
 }

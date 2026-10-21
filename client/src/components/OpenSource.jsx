@@ -1,234 +1,195 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Github, Star, GitFork, Activity, Users } from 'lucide-react';
-import { useEffect, useMemo, useState } from 'react';
-
-import SectionShell from './ui/SectionShell';
-import TiltCard from './ui/TiltCard';
-import Badge from './ui/Badge';
-import { SecondaryLink } from './ui/Buttons';
+import { useInView } from 'react-intersection-observer';
+import { Github, GitPullRequest, ExternalLink, Sparkles, Activity, Star, GitFork, Users } from 'lucide-react';
+import { OPEN_SOURCE_DATA } from '../data/premiumSections';
 import { PROFILE } from '../lib/profile';
-import { OSS_HIGHLIGHTS } from '../data/premiumSections';
 
-function StatPill({ icon: Icon, label, value }) {
-  return (
-    <div className="flex items-center gap-3 rounded-2xl bg-white/60 dark:bg-white/5 border border-slate-200/60 dark:border-slate-800/60 px-4 py-3">
-      <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-violet-500/20 via-fuchsia-500/10 to-rose-500/10 flex items-center justify-center">
-        <Icon size={18} className="text-violet-600 dark:text-violet-300" />
-      </div>
-      <div>
-        <p className="text-xs font-semibold text-slate-500 dark:text-slate-500">
-          {label}
-        </p>
-        <p className="text-sm font-bold text-slate-900 dark:text-white">
-          {value}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-function ContributionCard({ item, index }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 18 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.25 }}
-      transition={{ duration: 0.55, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
-      className="h-full"
-    >
-      <TiltCard className="h-full p-6">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <h3 className="text-lg font-display font-semibold text-slate-900 dark:text-white">
-              {item.repo}
-            </h3>
-            <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              {item.description}
-            </p>
-          </div>
-          <div className="shrink-0 h-10 w-10 rounded-2xl bg-gradient-to-br from-violet-500/20 via-fuchsia-500/10 to-rose-500/10 flex items-center justify-center">
-            <Github size={18} className="text-slate-700 dark:text-slate-200" />
-          </div>
-        </div>
-
-        <div className="mt-4 flex flex-wrap gap-2">
-          {(item.tech || []).map((t) => (
-            <Badge key={t}>{t}</Badge>
-          ))}
-        </div>
-
-        {item.url ? (
-          <div className="mt-5">
-            <SecondaryLink href={item.url} icon="github">
-              View repo
-            </SecondaryLink>
-          </div>
-        ) : null}
-      </TiltCard>
-    </motion.div>
-  );
-}
-
-function formatNum(n) {
+function formatNumber(n) {
   if (typeof n !== 'number') return '—';
   return Intl.NumberFormat('en', { notation: 'compact' }).format(n);
 }
 
-function GitHubMedia({ username }) {
-  const u = encodeURIComponent(username || '');
+export default function OpenSource() {
+  const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
   const [profile, setProfile] = useState(null);
-  const [contribs, setContribs] = useState(null);
 
   useEffect(() => {
-    if (!username) return;
-    fetch(`https://api.github.com/users/${username}`)
+    fetch(`https://api.github.com/users/${PROFILE.githubUsername}`)
       .then((r) => (r.ok ? r.json() : Promise.reject()))
-      .then((d) => setProfile(d))
+      .then((data) => setProfile(data))
       .catch(() => setProfile(null));
-
-    fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`)
-      .then((r) => (r.ok ? r.json() : Promise.reject()))
-      .then((d) => setContribs(d?.total?.lastYear ?? null))
-      .catch(() => setContribs(null));
-  }, [username]);
-
-  const repoCount = useMemo(() => profile?.public_repos ?? null, [profile]);
-  const followers = useMemo(() => profile?.followers ?? null, [profile]);
-  const starsLabel = 'Live';
-
-  const stats = `https://github-readme-stats.vercel.app/api?username=${u}&show_icons=true&theme=transparent&hide_border=true&title_color=8b5cf6&text_color=cbd5e1&icon_color=c084fc&ring_color=f43f5e`;
-  const streak = `https://streak-stats.demolab.com?user=${u}&theme=transparent&hide_border=true&ring=8b5cf6&fire=f43f5e&currStreakLabel=c084fc&sideLabels=cbd5e1&dates=94a3b8`;
-  const heatmap = `https://ghchart.rshah.org/8b5cf6/${u}`;
+  }, []);
 
   return (
-    <div className="grid gap-6 lg:grid-cols-2">
-      <TiltCard className="p-5 md:p-6">
-        <p className="text-sm font-semibold text-slate-700 dark:text-slate-200">
-          GitHub stats
-        </p>
-        <p className="mt-1 text-xs text-slate-500 dark:text-slate-500">
-          Live cards powered by public GitHub endpoints.
-        </p>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          <StatPill icon={GitFork} label="Total repos" value={formatNum(repoCount)} />
-          <StatPill icon={Users} label="Followers" value={formatNum(followers)} />
-          <StatPill icon={Activity} label="Contributions (last year)" value={formatNum(contribs)} />
-          <StatPill icon={Star} label="Stars" value={starsLabel} />
-          <StatPill icon={Github} label="Profile" value={`@${username}`} />
-        </div>
-        <div className="mt-5 overflow-hidden rounded-2xl border border-slate-200/60 dark:border-slate-800/60 bg-black/10">
-          <img
-            src={stats}
-            alt="GitHub stats card"
-            className="w-full"
-            loading="lazy"
-          />
-        </div>
-      </TiltCard>
+    <section id="open-source" ref={ref} className="section-pad relative overflow-hidden">
+      <div className="relative z-10 max-w-5xl mx-auto">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="mb-12"
+        >
+          <span className="section-label">05 — Community &amp; Open Source</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white">
+            Open Source{' '}
+            <span className="text-violet-600 dark:text-violet-400">
+              Contributions
+            </span>
+          </h2>
+          <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-xl">
+            Building in the open with clean commits, structured pull request reviews, and proactive community collaboration.
+          </p>
+        </motion.div>
 
-      <TiltCard className="p-5 md:p-6">
-        <p className="text-sm font-semibold text-slate-700 dark:text-slate-200">
-          Contribution rhythm
-        </p>
-        <p className="mt-1 text-xs text-slate-500 dark:text-slate-500">
-          Consistency, iteration, and shipping frequency.
-        </p>
-        <div className="mt-5 overflow-hidden rounded-2xl border border-slate-200/60 dark:border-slate-800/60 bg-black/10">
-          <img
-            src={streak}
-            alt="GitHub streak card"
-            className="w-full"
-            loading="lazy"
-          />
-        </div>
-        <div className="mt-5 overflow-hidden rounded-2xl border border-slate-200/60 dark:border-slate-800/60 bg-black/10 p-3">
-          <img
-            src={heatmap}
-            alt="GitHub contributions heatmap"
-            className="w-full"
-            loading="lazy"
-          />
-        </div>
-      </TiltCard>
-    </div>
-  );
-}
+        {/* Highlighted Contributions: Neutralinojs & Learning Unlimited */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+          {OPEN_SOURCE_DATA.contributions.map((item, index) => (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, y: 24 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="p-6 sm:p-7 rounded-2xl card-glass card-glass-hover border border-slate-200/90 dark:border-slate-800/80 flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-start justify-between gap-4 mb-4">
+                  <div>
+                    <span className="text-xs font-semibold uppercase tracking-wider text-violet-600 dark:text-violet-400">
+                      {item.type}
+                    </span>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-white font-display mt-0.5">
+                      {item.name}
+                    </h3>
+                  </div>
+                  <div className="w-10 h-10 rounded-xl bg-violet-600/10 dark:bg-violet-950/40 border border-violet-500/20 flex items-center justify-center text-violet-600 dark:text-violet-400 shrink-0">
+                    <Github size={20} aria-hidden="true" />
+                  </div>
+                </div>
 
-function OpenSourceJourney() {
-  return (
-    <TiltCard className="p-7 md:p-8">
-      <div className="max-w-3xl">
-        <p className="text-xs font-semibold tracking-wide text-slate-500 dark:text-slate-500">
-          Open Source Journey
-        </p>
-        <h3 className="mt-2 text-2xl md:text-3xl font-display font-semibold text-slate-900 dark:text-white">
-          I contribute to learn in public — and to earn trust.
-        </h3>
-        <p className="mt-4 text-sm md:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
-          My best work happens where feedback loops are real: issues, PR reviews,
-          and collaboration. Open source gives me a high-signal environment to
-          sharpen engineering habits — clean commits, readable changes, and
-          shipping improvements that help others.
-        </p>
-        <p className="mt-3 text-sm md:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
-          I’m especially interested in programs like <span className="text-slate-900 dark:text-white font-semibold">GSoC</span> because they
-          reward consistency, communication, and long-horizon delivery — the same
-          traits required for real product work.
-        </p>
-        <div className="mt-6 flex flex-wrap gap-2">
-          <Badge>PR Reviews</Badge>
-          <Badge>Documentation</Badge>
-          <Badge>DX Improvements</Badge>
-          <Badge>Collaboration</Badge>
-        </div>
-      </div>
-    </TiltCard>
-  );
-}
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  {item.description}
+                </p>
 
-export default function OpenSource() {
-  return (
-    <SectionShell
-      id="open-source"
-      label="05 — Community"
-      title="Open Source & Contributions"
-      subtitle="Signals over noise: contributions that show consistency, collaboration, and a bias for shipping improvements."
-      className="bg-white dark:bg-slate-900/30"
-    >
-      <GitHubMedia username={PROFILE.githubUsername} />
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {item.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 dark:bg-slate-800/70 text-slate-700 dark:text-slate-300 border border-slate-200/50 dark:border-slate-700/50"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
 
-      <div className="mt-14">
-        <div className="mb-6 flex items-end justify-between gap-6">
-          <div>
-            <p className="text-sm font-semibold text-slate-600 dark:text-slate-400">
-              Highlight contributions
-            </p>
-            <p className="mt-1 text-xs text-slate-500 dark:text-slate-500">
-              The repos where I’ve meaningfully contributed or collaborated.
-            </p>
-          </div>
-          <a
-            href={`https://github.com/${PROFILE.githubUsername}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-2 text-xs font-semibold text-violet-600 dark:text-violet-300 hover:underline"
-          >
-            <Github size={14} />
-            View GitHub
-          </a>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {OSS_HIGHLIGHTS.map((r, i) => (
-            <ContributionCard key={r.id} item={r} index={i} />
+              {/* Action Links: PRs link & Repository */}
+              <div className="mt-6 pt-4 border-t border-slate-200/60 dark:border-slate-800/60 flex flex-wrap gap-3">
+                <a
+                  href={item.prUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-accent !py-2 !px-3.5 text-xs font-semibold"
+                  aria-label={`View Pull Requests for ${item.name}`}
+                >
+                  <GitPullRequest size={14} aria-hidden="true" />
+                  <span>View PRs &amp; Commits</span>
+                </a>
+                <a
+                  href={item.repoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary !py-2 !px-3.5 text-xs font-semibold"
+                  aria-label={`View Repository for ${item.name}`}
+                >
+                  <ExternalLink size={14} aria-hidden="true" />
+                  <span>Repository</span>
+                </a>
+              </div>
+            </motion.div>
           ))}
         </div>
-      </div>
 
-      <div className="mt-14">
-        <OpenSourceJourney />
+        {/* GSoC 2026 Note Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.55, delay: 0.25 }}
+          className="p-6 sm:p-7 rounded-2xl border border-violet-500/30 bg-violet-500/5 dark:bg-violet-950/20 backdrop-blur-xl mb-10 relative overflow-hidden"
+        >
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 rounded-xl bg-violet-600 text-white flex items-center justify-center shrink-0 shadow-md">
+              <Sparkles size={20} aria-hidden="true" />
+            </div>
+            <div>
+              <div className="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-violet-600/20 text-violet-700 dark:text-violet-300 border border-violet-500/30 mb-1">
+                GSoC 2026 Candidacy
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white font-display">
+                {OPEN_SOURCE_DATA.gsocNote.title}
+              </h3>
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                {OPEN_SOURCE_DATA.gsocNote.text}
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* GitHub Contribution Graph & Activity */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.55, delay: 0.35 }}
+          className="p-6 sm:p-7 rounded-2xl card-glass border border-slate-200/90 dark:border-slate-800/80"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white font-display">
+                GitHub Contribution Rhythm
+              </h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                Live commit rhythm and repositories on <a href={PROFILE.githubUrl} target="_blank" rel="noopener noreferrer" className="text-violet-600 dark:text-violet-400 font-semibold underline">github.com/{PROFILE.githubUsername}</a>
+              </p>
+            </div>
+
+            {/* Quick Stat Chips */}
+            <div className="flex items-center gap-3 text-xs font-semibold text-slate-600 dark:text-slate-300">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60">
+                <GitFork size={13} className="text-violet-500" aria-hidden="true" />
+                <span>{formatNumber(profile?.public_repos || 25)} Repos</span>
+              </div>
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60">
+                <Users size={13} className="text-violet-500" aria-hidden="true" />
+                <span>{formatNumber(profile?.followers || 12)} Followers</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Contribution Heatmap Card */}
+          <div className="overflow-x-auto p-4 rounded-xl bg-slate-950 border border-slate-800">
+            <img
+              src={`https://ghchart.rshah.org/8b5cf6/${PROFILE.githubUsername}`}
+              alt={`${PROFILE.name}'s GitHub Contribution Chart`}
+              className="w-full min-w-[650px] filter saturate-150 contrast-125"
+              loading="lazy"
+            />
+          </div>
+
+          <div className="mt-4 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 dark:text-slate-400 gap-2">
+            <span>Data synced directly with GitHub public commits</span>
+            <a
+              href={PROFILE.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-violet-600 dark:text-violet-400 font-semibold hover:underline"
+            >
+              <span>Explore all repositories</span>
+              <ExternalLink size={12} aria-hidden="true" />
+            </a>
+          </div>
+        </motion.div>
       </div>
-    </SectionShell>
+    </section>
   );
 }
-

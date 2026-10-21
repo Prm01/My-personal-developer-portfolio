@@ -10,58 +10,24 @@ export default {
         mono: ['JetBrains Mono', 'monospace']
       },
       colors: {
-        cream: '#faf8f5',
-        ink: '#0c0a09',
         accent: {
-          violet: '#8b5cf6',
-          fuchsia: '#c084fc',
-          rose: '#f43f5e',
-          amber: '#f59e0b'
+          50: '#f5f3ff',
+          100: '#ede9fe',
+          200: '#ddd6fe',
+          300: '#c4b5fd',
+          400: '#a78bfa',
+          500: '#8b5cf6',
+          600: '#7c3aed',
+          700: '#6d28d9',
+          800: '#5b21b6',
+          900: '#4c1d95',
+          DEFAULT: '#8b5cf6'
         }
-      },
-      perspective: {
-        '1000': '1000px',
-        '1200': '1200px',
-        '2000': '2000px'
-      },
-      animation: {
-        'float': 'float 6s ease-in-out infinite',
-        'gradient': 'gradient 8s ease infinite',
-        'shimmer': 'shimmer 2s linear infinite',
-        'glow': 'glow 3s ease-in-out infinite',
-        'float-slow': 'float 8s ease-in-out infinite',
-        'spin-slow': 'spin 20s linear infinite'
-      },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-12px)' }
-        },
-        gradient: {
-          '0%, 100%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' }
-        },
-        shimmer: {
-          '0%': { backgroundPosition: '-200% 0' },
-          '100%': { backgroundPosition: '200% 0' }
-        },
-        glow: {
-          '0%, 100%': { opacity: '0.5' },
-          '50%': { opacity: '1' }
-        },
-        'grid-pulse': {
-          '0%, 100%': { opacity: '0.4' },
-          '50%': { opacity: '0.8' }
-        }
-      },
-      backgroundSize: {
-        '300%': '300%',
-        '400%': '400%'
       },
       boxShadow: {
-        'glow': '0 0 40px -10px rgba(139, 92, 246, 0.5)',
-        'glow-rose': '0 0 40px -10px rgba(244, 63, 94, 0.4)',
-        'inner-glow': 'inset 0 0 60px -20px rgba(139, 92, 246, 0.15)'
+        'glow': '0 0 35px -5px rgba(139, 92, 246, 0.35)',
+        'glow-sm': '0 0 20px -3px rgba(139, 92, 246, 0.25)',
+        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)'
       }
     }
   },

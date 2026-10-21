@@ -1,43 +1,8 @@
-import { useState, useEffect, Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { motion, useMotionValue, useTransform } from 'framer-motion';
-import { Github, Download, ArrowRight, ArrowDown, Linkedin, Mail } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Github, Download, Linkedin, Mail, ArrowDown, ExternalLink } from 'lucide-react';
 import { TypeAnimation } from 'react-type-animation';
-import Scene3D from './Scene3D';
 import { PROFILE, getResumePdfHref } from '../lib/profile';
-
-const nameLetters = PROFILE.name.split('');
-
-function MagneticButton({ children, className, href, download, target, rel, onClick }) {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const moveX = useTransform(x, [-0.5, 0.5], [-8, 8]);
-  const moveY = useTransform(y, [-0.5, 0.5], [-8, 8]);
-
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    x.set((e.clientX - rect.left - rect.width / 2) / rect.width);
-    y.set((e.clientY - rect.top - rect.height / 2) / rect.height);
-  };
-
-  return (
-    <motion.a
-      href={href}
-      download={download}
-      target={target}
-      rel={rel}
-      onClick={onClick}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={() => { x.set(0); y.set(0); }}
-      style={{ x: moveX, y: moveY }}
-      className={className}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.96 }}
-    >
-      {children}
-    </motion.a>
-  );
-}
 
 export default function Hero() {
   const [avatarUrl, setAvatarUrl] = useState(null);
@@ -50,183 +15,195 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center section-pad pt-28 overflow-hidden">
-      {/* 3D Background */}
-      <div className="absolute inset-0 z-0">
-        <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 5], fov: 60 }} gl={{ alpha: true, antialias: true }}>
-          <Suspense fallback={null}>
-            <Scene3D />
-          </Suspense>
-        </Canvas>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-stone-50/85 dark:via-slate-950/90 to-stone-50 dark:to-slate-950" />
+    <section
+      id="hero"
+      className="relative min-h-[92vh] flex items-center justify-center pt-24 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden"
+    >
+      {/* Background ambient glow - single accent color */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-violet-600/10 dark:bg-violet-600/15 blur-[120px] rounded-full" />
+        <div className="absolute inset-0 grid-pattern opacity-40 dark:opacity-30" />
       </div>
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto">
-        {/* Status badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/40 dark:border-white/10 bg-white/40 dark:bg-white/5 backdrop-blur-xl mb-10 shadow-lg shadow-slate-900/5"
-        >
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
-            B.Tech Mathematics & Computing @ RGIPT
-          </span>
-        </motion.div>
-
-        <div className="grid gap-12 lg:grid-cols-2 items-center">
-          {/* Copy */}
+      <div className="relative z-10 w-full max-w-5xl mx-auto">
+        <div className="grid lg:grid-cols-[1.25fr_0.75fr] gap-12 lg:gap-8 items-center">
+          {/* Main Info Column */}
           <div className="text-center lg:text-left">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-5 font-display flex flex-wrap justify-center lg:justify-start gap-0.5 md:gap-1">
-              <span className="text-slate-800 dark:text-white">Hi, I&apos;m&nbsp;</span>
-              {nameLetters.map((letter, i) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.25 + i * 0.035, duration: 0.4 }}
-                  className="bg-gradient-to-r from-violet-500 via-fuchsia-500 to-rose-500 bg-clip-text text-transparent"
-                  style={letter === ' ' ? { width: '0.25em', display: 'inline-block' } : {}}
-                >
-                  {letter}
-                </motion.span>
-              ))}
-            </h1>
+            {/* Status Pill */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 dark:bg-violet-950/40 text-violet-700 dark:text-violet-300 text-xs sm:text-sm font-semibold mb-6 shadow-sm"
+            >
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
+              <span>B.Tech Mathematics &amp; Computing @ RGIPT (2027)</span>
+            </motion.div>
 
+            {/* Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.1 }}
+              className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white"
+            >
+              Hi, I&apos;m{' '}
+              <span className="text-violet-600 dark:text-violet-400">
+                Pramod Yadav
+              </span>
+            </motion.h1>
+
+            {/* Typing animation */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.7 }}
-              className="text-lg sm:text-xl md:text-2xl font-medium text-slate-600 dark:text-slate-400"
+              transition={{ duration: 0.55, delay: 0.2 }}
+              className="mt-3 text-xl sm:text-2xl md:text-3xl font-semibold text-slate-700 dark:text-slate-300 min-h-[38px] flex items-center justify-center lg:justify-start"
             >
               <TypeAnimation
                 sequence={[
-                  'Full-Stack Developer',
-                  1200,
-                  'Automation & AI Engineer',
-                  1200,
-                  'MERN Stack Developer',
-                  1200,
-                  'Open Source Enthusiast',
-                  1200
+                  'Full Stack & AI Developer',
+                  2000,
+                  'B.Tech Mathematics & Computing',
+                  1800,
+                  'Open Source & GSoC Aspirant',
+                  1800,
+                  'Full Stack & AI Developer',
+                  2500
                 ]}
                 wrapper="span"
-                speed={55}
+                speed={50}
                 repeat={Infinity}
+                className="text-violet-600 dark:text-violet-400 font-bold"
               />
             </motion.div>
 
+            {/* One-line value statement */}
             <motion.p
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9 }}
-              className="mt-6 text-sm md:text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl mx-auto lg:mx-0"
+              transition={{ duration: 0.55, delay: 0.3 }}
+              className="mt-5 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-xl mx-auto lg:mx-0"
             >
-              Building automation tools, LLM-integrated apps, and full-stack products — from idea to production.
+              Engineering scalable distributed systems, agentic AI pipelines, and high-performance full-stack applications with measurable production impact.
             </motion.p>
 
-            {/* CTA buttons */}
+            {/* Action Buttons: Resume, GitHub, LinkedIn, Contact */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.05 }}
-              className="mt-8 flex flex-col sm:flex-row flex-wrap gap-4 justify-center lg:justify-start"
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.4 }}
+              className="mt-8 flex flex-wrap gap-3.5 justify-center lg:justify-start items-center"
             >
-              <MagneticButton
-                href="#projects"
-                className="relative px-7 py-4 rounded-2xl font-semibold overflow-hidden group inline-flex items-center justify-center gap-2"
-              >
-                <span className="absolute inset-0 bg-gradient-to-r from-violet-500 via-fuchsia-500 to-rose-500 transition-opacity group-hover:opacity-100 opacity-95" />
-                <span className="absolute inset-0 bg-gradient-to-r from-violet-400 via-fuchsia-400 to-rose-400 opacity-0 group-hover:opacity-100 blur-xl transition-opacity" />
-                <span className="relative text-white inline-flex items-center gap-2">
-                  View Projects <ArrowRight size={18} />
-                </span>
-              </MagneticButton>
-
-              <MagneticButton
+              {/* Resume download */}
+              <a
                 href={getResumePdfHref()}
-                download
+                download="Pramod_Yadav_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-7 py-4 rounded-2xl font-semibold border border-slate-200/70 dark:border-slate-700/60 bg-white/60 dark:bg-white/5 backdrop-blur-xl text-slate-700 dark:text-slate-200 hover:border-violet-400/70 dark:hover:border-violet-500/40 hover:shadow-[0_0_30px_-10px_rgba(139,92,246,0.45)] transition-all inline-flex items-center justify-center gap-2"
+                className="btn-accent"
+                aria-label="Download Pramod Yadav Resume PDF"
               >
-                <Download size={18} /> Download Resume
-              </MagneticButton>
+                <Download size={18} aria-hidden="true" />
+                <span>Resume (PDF)</span>
+              </a>
 
-              <MagneticButton
+              {/* GitHub */}
+              <a
+                href={PROFILE.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary"
+                aria-label="Pramod Yadav GitHub Profile"
+              >
+                <Github size={18} aria-hidden="true" />
+                <span>GitHub</span>
+              </a>
+
+              {/* LinkedIn */}
+              <a
+                href={PROFILE.linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary"
+                aria-label="Pramod Yadav LinkedIn Profile"
+              >
+                <Linkedin size={18} aria-hidden="true" />
+                <span>LinkedIn</span>
+              </a>
+
+              {/* Contact */}
+              <a
                 href="#contact"
-                className="px-7 py-4 rounded-2xl font-semibold border border-slate-200/70 dark:border-slate-700/60 bg-white/60 dark:bg-white/5 backdrop-blur-xl text-slate-700 dark:text-slate-200 hover:border-violet-400/70 dark:hover:border-violet-500/40 hover:shadow-[0_0_30px_-10px_rgba(139,92,246,0.45)] transition-all inline-flex items-center justify-center gap-2"
+                className="btn-secondary"
+                aria-label="Scroll to Contact section"
               >
-                <Mail size={18} /> Contact Me
-              </MagneticButton>
-            </motion.div>
-
-            {/* Social icons */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2 }}
-              className="mt-6 flex flex-wrap justify-center lg:justify-start gap-3"
-            >
-              {[
-                { href: PROFILE.githubUrl, icon: Github, label: 'GitHub' },
-                { href: PROFILE.linkedinUrl, icon: Linkedin, label: 'LinkedIn' },
-                { href: `mailto:${PROFILE.email}`, icon: Mail, label: 'Email' }
-              ].map(({ href, icon: Icon, label }) => (
-                <motion.a
-                  key={label}
-                  href={href}
-                  target={href.startsWith('mailto') ? undefined : '_blank'}
-                  rel={href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
-                  whileHover={{ y: -3, scale: 1.03 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl border border-slate-200/70 dark:border-slate-700/60 bg-white/60 dark:bg-white/5 backdrop-blur-xl text-slate-700 dark:text-slate-200 hover:border-violet-400/70 dark:hover:border-violet-500/40 hover:shadow-[0_0_28px_-10px_rgba(139,92,246,0.45)] transition-all"
-                >
-                  <Icon size={18} className="text-violet-600 dark:text-violet-300" />
-                  <span className="text-sm font-semibold">{label}</span>
-                </motion.a>
-              ))}
+                <Mail size={18} aria-hidden="true" />
+                <span>Contact</span>
+              </a>
             </motion.div>
           </div>
 
-          {/* Avatar */}
+          {/* Profile Card / Avatar Column */}
           <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.55, duration: 0.6 }}
-            className="flex justify-center lg:justify-end"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
+            className="flex justify-center"
           >
-            <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-              className="relative"
-            >
-              <div className="absolute -inset-6 rounded-full bg-gradient-to-r from-violet-500 via-blue-500 to-rose-500 opacity-30 blur-2xl animate-glow" />
-              <div className="relative p-[3px] rounded-full bg-gradient-to-r from-violet-500 via-fuchsia-500 to-rose-500 shadow-glow">
-                <div className="rounded-full bg-slate-950/60 backdrop-blur-xl p-1">
+            <div className="relative group">
+              {/* Outer accent glow */}
+              <div className="absolute -inset-1.5 rounded-3xl bg-violet-600/30 dark:bg-violet-500/25 blur-xl group-hover:bg-violet-600/40 transition-all duration-300" />
+              
+              {/* Glass profile container */}
+              <div className="relative p-5 sm:p-6 rounded-3xl card-glass border border-slate-200/80 dark:border-slate-800 flex flex-col items-center text-center max-w-[280px] sm:max-w-[320px]">
+                <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-2xl overflow-hidden border-2 border-violet-500/30 bg-slate-900 shadow-inner mb-4">
                   <img
                     src={avatarUrl || `https://github.com/${PROFILE.githubUsername}.png`}
-                    alt={`${PROFILE.name} profile`}
-                    className="h-56 w-56 sm:h-64 sm:w-64 md:h-72 md:w-72 rounded-full object-cover"
-                    loading="lazy"
+                    alt="Pramod Yadav profile portrait"
+                    className="w-full h-full object-cover"
+                    loading="eager"
+                    width="192"
+                    height="192"
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = 'https://avatars.githubusercontent.com/u/148766723?v=4';
+                    }}
                   />
                 </div>
+
+                <div className="space-y-1">
+                  <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+                    Pramod Yadav
+                  </h2>
+                  <p className="text-xs font-semibold text-violet-600 dark:text-violet-400">
+                    Math &amp; Computing · RGIPT &apos;27
+                  </p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 pt-1">
+                    Targeting Summer 2026 Internships &amp; GSoC 2026
+                  </p>
+                </div>
               </div>
-            </motion.div>
+            </div>
           </motion.div>
         </div>
 
-        <motion.a
-          href="#about"
+        {/* Scroll down prompt */}
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="inline-flex flex-col items-center mt-20 text-slate-400 hover:text-violet-500 transition-colors"
+          transition={{ delay: 0.7, duration: 0.5 }}
+          className="mt-16 text-center"
         >
-          <span className="text-[10px] uppercase tracking-[0.3em] mb-2">Scroll</span>
-          <ArrowDown size={20} className="animate-bounce" />
-        </motion.a>
+          <a
+            href="#about"
+            className="inline-flex flex-col items-center gap-1.5 text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
+            aria-label="Scroll to About section"
+          >
+            <span>DISCOVER</span>
+            <ArrowDown size={16} className="animate-bounce" />
+          </a>
+        </motion.div>
       </div>
     </section>
   );

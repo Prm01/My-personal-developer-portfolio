@@ -1,27 +1,42 @@
 import { Helmet } from 'react-helmet-async';
+import { PROFILE } from '../lib/profile';
 
 const PERSON_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'Pramod Yadav',
-  jobTitle: 'Full-Stack Developer & Automation/AI Engineer',
-  description: 'B.Tech Mathematics & Computing at RGIPT. Building automation tools, LLM-integrated apps, and full-stack products.',
+  name: PROFILE.name,
+  jobTitle: 'Full Stack & AI Developer',
+  description: 'B.Tech Mathematics & Computing at RGIPT (2027). Building distributed systems, agentic AI pipelines, and high-performance applications.',
   url: 'https://my-personal-developer-portfolio.onrender.com',
+  email: PROFILE.email,
   sameAs: [
-    'https://github.com/Prm01',
-    'https://linkedin.com/in/pramod-yadav-7810b5299'
+    PROFILE.githubUrl,
+    PROFILE.linkedinUrl,
+    PROFILE.leetcodeUrl
   ],
   alumniOf: {
     '@type': 'CollegeOrUniversity',
     name: 'Rajiv Gandhi Institute of Petroleum Technology (RGIPT)'
   },
-  knowsAbout: ['React', 'Node.js', 'Python', 'Machine Learning', 'Automation', 'Full-Stack Development']
+  knowsAbout: [
+    'Full Stack Development',
+    'Artificial Intelligence',
+    'FastAPI',
+    'React',
+    'PostgreSQL',
+    'AWS Bedrock',
+    'LangChain',
+    'TrOCR',
+    'Node.js',
+    'Docker',
+    'Mathematics & Computing'
+  ]
 };
 
 export default function SEO({
-  title = 'Pramod Yadav | Full-Stack Developer & Automation/AI Engineer',
-  description = 'B.Tech Mathematics & Computing at RGIPT. Building automation tools, LLM-integrated apps, and full-stack products. Explore my projects.',
-  keywords = 'Pramod Yadav, Full Stack Developer, Automation Engineer, MERN, React, Node.js, Python, Machine Learning, RGIPT',
+  title = 'Pramod Yadav | Full Stack & AI Developer (RGIPT 2027)',
+  description = 'Pramod Yadav — B.Tech Mathematics & Computing at RGIPT. Full Stack & AI Developer. Production systems: Rahat (heat/flood early warning with AWS Bedrock), BhoomiAI (TrOCR + LangChain), and MERN platforms.',
+  keywords = 'Pramod Yadav, Full Stack Developer, AI Developer, RGIPT, Mathematics and Computing, Rahat, BhoomiAI, FastAPI, AWS Bedrock, TrOCR, LangChain, GSoC 2026, React, Node.js',
   image = '/og-image.png'
 }) {
   const url = typeof window !== 'undefined' ? window.location.href : 'https://my-personal-developer-portfolio.onrender.com';
@@ -48,7 +63,7 @@ export default function SEO({
 
       <link rel="canonical" href={url} />
 
-      {/* Person schema */}
+      {/* Structured Schema Data */}
       <script type="application/ld+json">
         {JSON.stringify(PERSON_SCHEMA)}
       </script>
