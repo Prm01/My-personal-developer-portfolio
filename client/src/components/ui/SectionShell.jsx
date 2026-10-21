@@ -24,7 +24,7 @@ export default function SectionShell({
       >
         <div className="absolute inset-0 grid-dots" />
         <div className="absolute -top-40 -left-40 h-96 w-96 rounded-full bg-gradient-to-br from-violet-500/30 via-fuchsia-500/20 to-transparent blur-3xl" />
-        <div className="absolute -bottom-40 -right-40 h-96 w-96 rounded-full bg-gradient-to-tr from-rose-500/25 via-blue-500/15 to-transparent blur-3xl" />
+        <div className="absolute -bottom-40 -right-40 h-96 w-96 rounded-full bg-gradient-to-tr from-rose-500/25 via-emerald-500/15 to-transparent blur-3xl" />
       </div>
 
       <motion.header

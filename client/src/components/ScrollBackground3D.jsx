@@ -1,6 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
 
 function AmbientScrollParticles({ scrollYProgress }) {
   const pointsRef = useRef();
@@ -8,17 +7,12 @@ function AmbientScrollParticles({ scrollYProgress }) {
 
   const count = 90;
   const positions = useRef(new Float32Array(count * 3));
-  const colors = useRef(new Float32Array(count * 3));
 
   useEffect(() => {
     for (let i = 0; i < count; i++) {
       positions.current[i * 3] = (Math.random() - 0.5) * 20;
       positions.current[i * 3 + 1] = (Math.random() - 0.5) * 20;
       positions.current[i * 3 + 2] = (Math.random() - 0.5) * 10 - 3;
-
-      colors.current[i * 3] = 0.22;
-      colors.current[i * 3 + 1] = 0.74;
-      colors.current[i * 3 + 2] = 0.97;
     }
   }, []);
 
@@ -26,14 +20,13 @@ function AmbientScrollParticles({ scrollYProgress }) {
     if (!pointsRef.current) return;
     const scrollP = scrollYProgress.current || 0;
 
-    // Shift camera & particle rotation with scroll
     pointsRef.current.rotation.y = state.clock.elapsedTime * 0.01 + scrollP * 0.5;
     pointsRef.current.rotation.x = scrollP * 0.3;
 
-    // Shift color subtly based on scroll
     if (lightRef.current) {
-      const hue = (0.55 + scrollP * 0.3) % 1; // cyan -> purple -> magenta
-      lightRef.current.color.setHSL(hue, 0.8, 0.5);
+      // Shift hue across Purple (0.78), Fuchsia (0.88), and Emerald (0.42)
+      const hue = scrollP > 0.5 ? 0.42 : 0.78 + scrollP * 0.2;
+      lightRef.current.color.setHSL(hue, 0.85, 0.55);
     }
   });
 
@@ -51,7 +44,7 @@ function AmbientScrollParticles({ scrollYProgress }) {
         </bufferGeometry>
         <pointsMaterial
           size={0.05}
-          color="#818cf8"
+          color="#a855f7"
           transparent
           opacity={0.35}
           depthWrite={false}

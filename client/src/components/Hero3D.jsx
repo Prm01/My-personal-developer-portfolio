@@ -3,7 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, Text } from '@react-three/drei';
 import * as THREE from 'three';
 
-// Particle starfield background
+// Particle starfield background (Purple, Fuchsia, Emerald, White)
 function StarField({ count = 140 }) {
   const pointsRef = useRef();
 
@@ -11,9 +11,9 @@ function StarField({ count = 140 }) {
     const pos = new Float32Array(count * 3);
     const col = new Float32Array(count * 3);
     const palette = [
-      new THREE.Color('#38bdf8'), // cyan
-      new THREE.Color('#818cf8'), // indigo
       new THREE.Color('#c084fc'), // purple
+      new THREE.Color('#f472b6'), // fuchsia
+      new THREE.Color('#34d399'), // emerald
       new THREE.Color('#ffffff')  // white
     ];
 
@@ -64,12 +64,11 @@ function StarField({ count = 140 }) {
   );
 }
 
-// Neural Network / Connected Nodes Cluster
+// Neural Network / Connected Nodes Cluster (Purple & Emerald)
 function NeuralNetworkGlobe() {
   const groupRef = useRef();
   const innerRef = useRef();
 
-  // Create random node vertices for the neural cluster
   const nodes = useMemo(() => {
     const pts = [];
     const count = 18;
@@ -103,8 +102,8 @@ function NeuralNetworkGlobe() {
       <mesh scale={[1.7, 1.7, 1.7]}>
         <icosahedronGeometry args={[1, 2]} />
         <meshStandardMaterial
-          color="#38bdf8"
-          emissive="#0284c7"
+          color="#a855f7"
+          emissive="#7c3aed"
           emissiveIntensity={0.65}
           wireframe
           transparent
@@ -116,8 +115,8 @@ function NeuralNetworkGlobe() {
       <mesh ref={innerRef} scale={[1.1, 1.1, 1.1]}>
         <octahedronGeometry args={[1, 1]} />
         <meshStandardMaterial
-          color="#c084fc"
-          emissive="#7c3aed"
+          color="#10b981"
+          emissive="#059669"
           emissiveIntensity={0.8}
           wireframe
           transparent
@@ -129,14 +128,14 @@ function NeuralNetworkGlobe() {
       {nodes.map((pos, idx) => (
         <mesh key={idx} position={pos.toArray()}>
           <sphereGeometry args={[0.045, 8, 8]} />
-          <meshBasicMaterial color={idx % 2 === 0 ? '#38bdf8' : '#c084fc'} />
+          <meshBasicMaterial color={idx % 2 === 0 ? '#c084fc' : '#34d399'} />
         </mesh>
       ))}
     </group>
   );
 }
 
-// Stylized 3D Laptop / Cyber Terminal showing code
+// Stylized 3D Laptop / Cyber Terminal showing code (Emerald & Violet theme)
 function StylizedLaptop({ mouse }) {
   const laptopRef = useRef();
 
@@ -161,39 +160,38 @@ function StylizedLaptop({ mouse }) {
       {/* Laptop Base (chassis) */}
       <mesh position={[0, -0.04, 0.6]} receiveShadow castShadow>
         <boxGeometry args={[2.0, 0.08, 1.3]} />
-        <meshStandardMaterial color="#0f172a" roughness={0.3} metalness={0.8} />
+        <meshStandardMaterial color="#1a102a" roughness={0.3} metalness={0.8} />
       </mesh>
 
       {/* Trackpad */}
       <mesh position={[0, 0.005, 0.95]}>
         <boxGeometry args={[0.65, 0.002, 0.4]} />
-        <meshStandardMaterial color="#1e293b" roughness={0.4} metalness={0.6} />
+        <meshStandardMaterial color="#2d1b46" roughness={0.4} metalness={0.6} />
       </mesh>
 
       {/* Keyboard Bed */}
       <mesh position={[0, 0.005, 0.45]}>
         <boxGeometry args={[1.7, 0.002, 0.55]} />
-        <meshStandardMaterial color="#090d16" roughness={0.8} />
+        <meshStandardMaterial color="#0e0719" roughness={0.8} />
       </mesh>
 
-      {/* Glowing Accent line under keyboard */}
+      {/* Glowing Accent line under keyboard (Emerald) */}
       <mesh position={[0, 0.006, 0.16]}>
         <boxGeometry args={[1.65, 0.002, 0.02]} />
-        <meshBasicMaterial color="#38bdf8" />
+        <meshBasicMaterial color="#10b981" />
       </mesh>
 
-      {/* Laptop Screen Lid (tilted ~105 degrees) */}
+      {/* Laptop Screen Lid */}
       <group position={[0, 0, 0]} rotation={[-Math.PI / 8, 0, 0]}>
-        {/* Screen Frame */}
         <mesh position={[0, 0.65, 0]}>
           <boxGeometry args={[2.0, 1.3, 0.06]} />
-          <meshStandardMaterial color="#0f172a" roughness={0.3} metalness={0.8} />
+          <meshStandardMaterial color="#1a102a" roughness={0.3} metalness={0.8} />
         </mesh>
 
         {/* Display Panel */}
         <mesh position={[0, 0.65, 0.032]}>
           <planeGeometry args={[1.86, 1.16]} />
-          <meshStandardMaterial color="#050811" emissive="#0284c7" emissiveIntensity={0.15} />
+          <meshStandardMaterial color="#0b0615" emissive="#7c3aed" emissiveIntensity={0.18} />
         </mesh>
 
         {/* Top window dots */}
@@ -210,11 +208,11 @@ function StylizedLaptop({ mouse }) {
           <meshBasicMaterial color="#10b981" />
         </mesh>
 
-        {/* Terminal Text on Screen */}
+        {/* Terminal Text on Screen (Neon Emerald) */}
         <Text
           position={[-0.82, 0.98, 0.036]}
           fontSize={0.065}
-          color="#38bdf8"
+          color="#34d399"
           anchorX="left"
           anchorY="top"
           fontFamily="monospace"
@@ -231,7 +229,7 @@ const wardAlert = await rahat.dispatch({
   );
 }
 
-// Floating Tech Cube (Python, React, Node, AWS, Docker)
+// Floating Tech Cube (React=Fuchsia, Python=Amber, Node=Emerald, AWS=Orange, Docker=Purple)
 function TechCube({ position, color, emissiveColor, label, labelSub, speed = 2, rotSpeed = 0.5 }) {
   const cubeRef = useRef();
 
@@ -284,8 +282,8 @@ function TechCube({ position, color, emissiveColor, label, labelSub, speed = 2, 
   );
 }
 
-// Glowing 3D Code Bracket Object
-function CodeBracket({ text, position, color = '#38bdf8', scale = 1, speed = 1.8 }) {
+// Glowing 3D Code Bracket Object (Purple / Emerald)
+function CodeBracket({ text, position, color = '#c084fc', outlineColor = '#7c3aed', scale = 1, speed = 1.8 }) {
   return (
     <Float speed={speed} rotationIntensity={0.3} floatIntensity={0.5} position={position}>
       <Text
@@ -294,7 +292,7 @@ function CodeBracket({ text, position, color = '#38bdf8', scale = 1, speed = 1.8
         anchorX="center"
         anchorY="middle"
         outlineWidth={0.02}
-        outlineColor="#4338ca"
+        outlineColor={outlineColor}
       >
         {text}
       </Text>
@@ -317,11 +315,11 @@ function InteractiveScene({ mouse }) {
 
   return (
     <group ref={groupRef}>
-      {/* Lighting */}
+      {/* Lighting (Purple & Emerald) */}
       <ambientLight intensity={0.65} />
       <directionalLight position={[5, 8, 5]} intensity={1.2} />
-      <pointLight position={[-5, 3, 2]} intensity={0.9} color="#38bdf8" />
-      <pointLight position={[5, -3, 2]} intensity={0.9} color="#a855f7" />
+      <pointLight position={[-5, 3, 2]} intensity={0.9} color="#c084fc" />
+      <pointLight position={[5, -3, 2]} intensity={0.9} color="#34d399" />
 
       {/* Background Starfield */}
       <StarField count={120} />
@@ -333,14 +331,14 @@ function InteractiveScene({ mouse }) {
       <StylizedLaptop mouse={mouse} />
 
       {/* Floating Code Brackets */}
-      <CodeBracket text="{ }" position={[-2.8, 1.6, -1.5]} color="#38bdf8" scale={1.2} speed={2} />
-      <CodeBracket text="</>" position={[3.2, 1.8, -2]} color="#a855f7" scale={1.1} speed={1.7} />
+      <CodeBracket text="{ }" position={[-2.8, 1.6, -1.5]} color="#c084fc" outlineColor="#7c3aed" scale={1.2} speed={2} />
+      <CodeBracket text="</>" position={[3.2, 1.8, -2]} color="#34d399" outlineColor="#059669" scale={1.1} speed={1.7} />
 
-      {/* Floating Tech Cubes (React, Python, Node, AWS, Docker) */}
+      {/* Floating Tech Cubes: React (Fuchsia), Python (Amber), Node (Emerald), AWS (Orange), Docker (Purple) */}
       <TechCube
         position={[-2.4, -0.9, -1]}
-        color="#38bdf8"
-        emissiveColor="#0284c7"
+        color="#e879f9"
+        emissiveColor="#c026d3"
         label="React"
         labelSub="Full Stack"
         speed={1.9}
@@ -348,8 +346,8 @@ function InteractiveScene({ mouse }) {
       />
       <TechCube
         position={[1.2, 2.3, -1.8]}
-        color="#3b82f6"
-        emissiveColor="#1d4ed8"
+        color="#fbbf24"
+        emissiveColor="#d97706"
         label="Python"
         labelSub="FastAPI"
         speed={2.2}
@@ -357,8 +355,8 @@ function InteractiveScene({ mouse }) {
       />
       <TechCube
         position={[-1.2, 2.3, -2.2]}
-        color="#f59e0b"
-        emissiveColor="#b45309"
+        color="#f97316"
+        emissiveColor="#c2410c"
         label="AWS"
         labelSub="Bedrock"
         speed={1.7}
@@ -366,8 +364,8 @@ function InteractiveScene({ mouse }) {
       />
       <TechCube
         position={[3.2, -1.8, -1.5]}
-        color="#06b6d4"
-        emissiveColor="#0e7490"
+        color="#a855f7"
+        emissiveColor="#7c3aed"
         label="Docker"
         labelSub="DevOps"
         speed={2.4}
@@ -375,8 +373,8 @@ function InteractiveScene({ mouse }) {
       />
       <TechCube
         position={[-3.1, 0.4, -1.8]}
-        color="#22c55e"
-        emissiveColor="#15803d"
+        color="#10b981"
+        emissiveColor="#059669"
         label="Node"
         labelSub="Express"
         speed={1.8}
@@ -411,7 +409,7 @@ export default function Hero3D() {
 
   if (!webglSupported) {
     return (
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-950/40 via-slate-950 to-purple-950/40 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-950/40 via-slate-950 to-emerald-950/30 pointer-events-none" />
     );
   }
 

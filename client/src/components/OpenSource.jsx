@@ -34,7 +34,7 @@ export default function OpenSource() {
           <span className="section-label">05 — Community &amp; Open Source</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white">
             Open Source &amp;{' '}
-            <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-purple-400 via-fuchsia-400 to-emerald-400 bg-clip-text text-transparent">
               Community Impact
             </span>
           </h2>
@@ -51,7 +51,7 @@ export default function OpenSource() {
           className="p-6 sm:p-7 rounded-2xl border border-purple-500/30 bg-purple-500/5 dark:bg-purple-950/20 backdrop-blur-xl mb-10 relative overflow-hidden shadow-lg"
         >
           <div className="flex items-start gap-4">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white flex items-center justify-center shrink-0 shadow-md">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-purple-600 via-fuchsia-600 to-emerald-600 text-white flex items-center justify-center shrink-0 shadow-md">
               <Sparkles size={20} aria-hidden="true" />
             </div>
             <div>
@@ -76,19 +76,19 @@ export default function OpenSource() {
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="p-6 sm:p-7 rounded-2xl card-glass card-glass-hover border border-blue-500/20 dark:border-purple-500/20 flex flex-col justify-between shadow-xl"
+              className="p-6 sm:p-7 rounded-2xl card-glass card-glass-hover border border-purple-500/20 dark:border-emerald-500/20 flex flex-col justify-between shadow-xl"
             >
               <div>
                 <div className="flex items-start justify-between gap-4 mb-4">
                   <div>
-                    <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-purple-400">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-purple-600 dark:text-purple-400">
                       {item.type}
                     </span>
                     <h3 className="text-xl font-bold text-slate-900 dark:text-white font-display mt-0.5">
                       {item.name}
                     </h3>
                   </div>
-                  <div className="w-10 h-10 rounded-xl bg-blue-500/10 dark:bg-purple-950/40 border border-blue-500/20 dark:border-purple-500/20 flex items-center justify-center text-blue-600 dark:text-purple-400 shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-purple-500/10 dark:bg-purple-950/40 border border-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-400 shrink-0">
                     <Github size={20} aria-hidden="true" />
                   </div>
                 </div>
@@ -140,7 +140,7 @@ export default function OpenSource() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="p-6 sm:p-7 rounded-2xl card-glass border border-blue-500/20 dark:border-purple-500/20"
+          className="p-6 sm:p-7 rounded-2xl card-glass border border-purple-500/20 dark:border-emerald-500/20"
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
             <div className="flex items-center gap-3">
@@ -155,7 +155,7 @@ export default function OpenSource() {
                   href={PROFILE.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-blue-600 dark:text-purple-400 hover:underline flex items-center gap-1"
+                  className="text-xs text-purple-600 dark:text-purple-400 hover:underline flex items-center gap-1"
                 >
                   <span>github.com/{PROFILE.githubUsername}</span>
                   <ExternalLink size={11} aria-hidden="true" />
@@ -167,7 +167,7 @@ export default function OpenSource() {
             {profile && (
               <div className="flex items-center gap-4 text-xs font-semibold text-slate-600 dark:text-slate-300">
                 <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
-                  <GitFork size={13} className="text-blue-500" aria-hidden="true" />
+                  <GitFork size={13} className="text-emerald-500" aria-hidden="true" />
                   <span>{formatNumber(profile.public_repos)} Public Repos</span>
                 </div>
                 <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
@@ -178,10 +178,10 @@ export default function OpenSource() {
             )}
           </div>
 
-          {/* GitHub Activity Heatmap Image */}
+          {/* GitHub Activity Heatmap Image (Purple theme) */}
           <div className="overflow-x-auto rounded-xl p-3 bg-slate-900/60 border border-slate-800 flex justify-center">
             <img
-              src={`https://ghchart.rshah.org/38bdf8/${PROFILE.githubUsername}`}
+              src={`https://ghchart.rshah.org/a855f7/${PROFILE.githubUsername}`}
               alt={`Pramod Yadav (${PROFILE.githubUsername}) GitHub Contribution Heatmap`}
               className="max-w-none sm:max-w-full h-auto"
               loading="lazy"

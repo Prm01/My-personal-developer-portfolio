@@ -4,30 +4,30 @@ import { Text, OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 
 const SKILLS_LIST = [
-  { name: 'React.js', category: 'Frontend', color: '#38bdf8' },
-  { name: 'FastAPI', category: 'Backend', color: '#06b6d4' },
+  { name: 'React.js', category: 'Frontend', color: '#e879f9' },
+  { name: 'FastAPI', category: 'Backend', color: '#34d399' },
   { name: 'AWS Bedrock', category: 'Cloud & DevOps', color: '#f59e0b' },
-  { name: 'Python', category: 'Languages', color: '#3b82f6' },
+  { name: 'Python', category: 'Languages', color: '#fbbf24' },
   { name: 'TrOCR', category: 'AI-ML', color: '#a855f7' },
-  { name: 'LangChain', category: 'AI-ML', color: '#818cf8' },
-  { name: 'PostgreSQL', category: 'Backend', color: '#38bdf8' },
+  { name: 'LangChain', category: 'AI-ML', color: '#c084fc' },
+  { name: 'PostgreSQL', category: 'Backend', color: '#10b981' },
   { name: 'Node.js', category: 'Backend', color: '#22c55e' },
-  { name: 'Docker', category: 'Cloud & DevOps', color: '#0284c7' },
-  { name: 'C++', category: 'Languages', color: '#6366f1' },
-  { name: 'Tailwind CSS', category: 'Frontend', color: '#38bdf8' },
+  { name: 'Docker', category: 'Cloud & DevOps', color: '#9333ea' },
+  { name: 'C++', category: 'Languages', color: '#ec4899' },
+  { name: 'Tailwind CSS', category: 'Frontend', color: '#34d399' },
   { name: 'AWS S3', category: 'Cloud & DevOps', color: '#f59e0b' },
   { name: 'MongoDB', category: 'Backend', color: '#10b981' },
   { name: 'MCP', category: 'AI-ML', color: '#c084fc' },
   { name: 'Vite', category: 'Frontend', color: '#8b5cf6' },
   { name: 'Express.js', category: 'Backend', color: '#e2e8f0' },
   { name: 'JavaScript', category: 'Languages', color: '#fbbf24' },
-  { name: 'SQL', category: 'Languages', color: '#60a5fa' },
+  { name: 'SQL', category: 'Languages', color: '#f59e0b' },
   { name: 'CloudFront', category: 'Cloud & DevOps', color: '#f59e0b' },
-  { name: 'GitHub Actions', category: 'Cloud & DevOps', color: '#93c5fd' },
+  { name: 'GitHub Actions', category: 'Cloud & DevOps', color: '#c084fc' },
   { name: 'Web Push', category: 'Backend', color: '#f43f5e' },
   { name: 'scikit-learn', category: 'AI-ML', color: '#f97316' },
   { name: 'REST APIs', category: 'Backend', color: '#34d399' },
-  { name: 'Gemini API', category: 'AI-ML', color: '#818cf8' }
+  { name: 'Gemini API', category: 'AI-ML', color: '#d946ef' }
 ];
 
 function SkillWord({ position, skill, hoveredSkill, setHoveredSkill, selectedCategory }) {
@@ -69,7 +69,7 @@ function SphereCloud({ hoveredSkill, setHoveredSkill, selectedCategory }) {
   const sphereWords = useMemo(() => {
     const words = [];
     const count = SKILLS_LIST.length;
-    const phi = Math.PI * (3 - Math.sqrt(5)); // Golden ratio angle
+    const phi = Math.PI * (3 - Math.sqrt(5));
 
     for (let i = 0; i < count; i++) {
       const y = 1 - (i / (count - 1)) * 2;
@@ -89,14 +89,14 @@ function SphereCloud({ hoveredSkill, setHoveredSkill, selectedCategory }) {
 
   return (
     <group>
-      {/* Inner glowing wireframe cage */}
+      {/* Inner glowing wireframe cage (Purple) */}
       <mesh scale={[1.8, 1.8, 1.8]}>
         <sphereGeometry args={[1, 16, 16]} />
         <meshBasicMaterial
-          color="#38bdf8"
+          color="#a855f7"
           wireframe
           transparent
-          opacity={0.06}
+          opacity={0.08}
         />
       </mesh>
 
@@ -140,7 +140,7 @@ export default function SkillSphere3D() {
   }
 
   return (
-    <div className="relative w-full rounded-2xl overflow-hidden card-glass border border-blue-500/20 dark:border-purple-500/20 shadow-2xl mb-12">
+    <div className="relative w-full rounded-2xl overflow-hidden card-glass border border-purple-500/20 dark:border-emerald-500/20 shadow-2xl mb-12">
       {/* Category Pills directly above canvas */}
       <div className="p-4 border-b border-slate-200/60 dark:border-slate-800/60 flex flex-wrap items-center justify-between gap-3 bg-slate-100/50 dark:bg-slate-900/50">
         <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
@@ -153,7 +153,7 @@ export default function SkillSphere3D() {
               onClick={() => setSelectedCategory(cat)}
               className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
                 selectedCategory === cat
-                  ? 'bg-blue-600 text-white shadow-sm'
+                  ? 'bg-purple-600 text-white shadow-sm'
                   : 'bg-slate-200/70 dark:bg-slate-800/70 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
@@ -175,8 +175,8 @@ export default function SkillSphere3D() {
           className="w-full h-full cursor-grab active:cursor-grabbing"
         >
           <ambientLight intensity={0.7} />
-          <pointLight position={[10, 10, 10]} intensity={1} color="#38bdf8" />
-          <pointLight position={[-10, -10, -10]} intensity={0.8} color="#a855f7" />
+          <pointLight position={[10, 10, 10]} intensity={1} color="#a855f7" />
+          <pointLight position={[-10, -10, -10]} intensity={0.8} color="#10b981" />
           <SphereCloud
             hoveredSkill={hoveredSkill}
             setHoveredSkill={setHoveredSkill}
@@ -192,7 +192,7 @@ export default function SkillSphere3D() {
 
         {/* Floating Status & Instruction */}
         <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between pointer-events-none text-xs text-slate-400">
-          <span className="font-semibold text-blue-500 dark:text-purple-400 bg-slate-900/85 px-3 py-1.5 rounded-lg backdrop-blur-md border border-blue-500/20">
+          <span className="font-semibold text-purple-400 bg-slate-900/85 px-3 py-1.5 rounded-lg backdrop-blur-md border border-purple-500/20">
             {hoveredSkill ? `Inspecting: ${hoveredSkill}` : 'Click & Drag to Rotate in 3D'}
           </span>
           <span className="hidden sm:inline bg-slate-900/85 px-3 py-1.5 rounded-lg backdrop-blur-md border border-slate-800">

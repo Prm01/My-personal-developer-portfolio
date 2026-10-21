@@ -8,11 +8,11 @@ Interactive 3D developer portfolio for **Pramod Yadav**, B.Tech Mathematics & Co
 
 - **Interactive 3D Hero:** Full-screen 3D scene built with `@react-three/fiber` & `@react-three/drei` featuring a stylized 3D cyber laptop displaying terminal code, an orbiting neural-network wireframe globe, floating 3D code-brackets (`{ }` and `</>`), floating tech cubes (Python, React, Node, AWS, Docker), and mouse parallax tracking with starfield particle background.
 - **Interactive 3D Skill Sphere:** Fibonacci sphere distributing 24+ core technologies in 3D orbit with OrbitControls (drag to rotate), category filter highlighting, and categorized skill groups.
-- **3D Tilt Project Cards:** Specular cursor spotlight, spring-driven 3D tilt on hover with neon blue/purple glow borders, and depth popout screenshots.
+- **3D Tilt Project Cards:** Specular cursor spotlight, spring-driven 3D tilt on hover with neon purple/emerald glow borders, and depth popout screenshots.
 - **3D Interactive Timeline:** Glowing laser track and pulsating orbit nodes connecting Experience (Polluxa) and Education (RGIPT).
 - **Scroll & Motion Experience:** Smooth scrolling via **Lenis**, Framer Motion scroll-reveal transitions, ambient 3D particle background with scroll color shifts, reading progress bar, animated stat counters, and custom neon glow trailing cursor with particle stardust.
 - **Interactive Controls:** Floating 3D Contact launcher button, initial 3D cyber logo loading screen, and a draggable 3D polyhedron physics easter egg in the footer.
-- **Theme & Style:** Dark theme default with neon blue/purple/cyan gradient accents (`#38bdf8` to `#a855f7`), glass-style cards (`backdrop-blur-xl`), and dark/light toggle.
+- **Theme & Style:** Dark theme default with electric purple & neon emerald gradient accents (`#a855f7` to `#10b981`), glass-style cards (`backdrop-blur-xl`), and dark/light toggle.
 - **Performance & Standards:** Lazy-loaded 3D canvases, pixel ratio caps, mobile optimization, WCAG 2.1 AA accessible contrast ratios, and Lighthouse 90+ target.
 
 ---

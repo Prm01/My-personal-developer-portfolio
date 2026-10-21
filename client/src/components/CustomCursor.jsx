@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 
 /**
  * Custom animated neon cursor with glow trailing particles.
+ * Uses electric purple and emerald accents.
  * Automatically disabled on touch screens and when prefers-reduced-motion is active.
  */
 export default function CustomCursor() {
@@ -83,11 +84,11 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Trailing Particle Dots */}
+      {/* Trailing Particle Dots (Purple & Emerald) */}
       {trails.map((t, idx) => (
         <span
           key={t.id}
-          className="fixed z-[9996] pointer-events-none rounded-full bg-gradient-to-r from-blue-400 to-purple-400 opacity-40 blur-[0.5px] transition-opacity duration-300"
+          className="fixed z-[9996] pointer-events-none rounded-full bg-gradient-to-r from-purple-400 to-emerald-400 opacity-40 blur-[0.5px] transition-opacity duration-300"
           style={{
             left: t.x,
             top: t.y,
@@ -98,9 +99,9 @@ export default function CustomCursor() {
         />
       ))}
 
-      {/* Outer Glow Ring */}
+      {/* Outer Glow Ring (Purple) */}
       <motion.div
-        className="fixed z-[9997] pointer-events-none rounded-full border border-blue-400/60 dark:border-purple-400/60 shadow-[0_0_15px_rgba(56,189,248,0.35)]"
+        className="fixed z-[9997] pointer-events-none rounded-full border border-purple-400/60 shadow-[0_0_15px_rgba(168,85,247,0.4)]"
         style={{
           left: smoothPos.x,
           top: smoothPos.y,
@@ -111,9 +112,9 @@ export default function CustomCursor() {
         transition={{ type: 'spring', stiffness: 350, damping: 25 }}
       />
 
-      {/* Inner Neon Core */}
+      {/* Inner Neon Core (Fuchsia to Emerald) */}
       <div
-        className="fixed z-[9998] pointer-events-none rounded-full bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.9)]"
+        className="fixed z-[9998] pointer-events-none rounded-full bg-gradient-to-r from-purple-400 via-fuchsia-400 to-emerald-400 shadow-[0_0_10px_rgba(16,185,129,0.9)]"
         style={{
           left: mousePos.x,
           top: mousePos.y,

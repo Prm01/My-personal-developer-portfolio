@@ -100,7 +100,7 @@ function App() {
       {/* Skip to main content link for keyboard WCAG accessibility */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-gradient-to-r focus:from-blue-600 focus:to-purple-600 focus:text-white focus:rounded-lg focus:shadow-lg focus:outline-none"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-gradient-to-r focus:from-purple-600 focus:to-emerald-600 focus:text-white focus:rounded-lg focus:shadow-lg focus:outline-none"
       >
         Skip to main content
       </a>
@@ -114,7 +114,7 @@ function App() {
       {/* Ambient 3D background layer with scroll color shifts */}
       <ScrollBackground3D />
 
-      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#070b14] text-slate-900 dark:text-slate-100 transition-colors duration-300 relative z-10">
+      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#090714] text-slate-900 dark:text-slate-100 transition-colors duration-300 relative z-10">
         <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
 
         <main id="main-content" className="flex-1">

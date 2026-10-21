@@ -248,7 +248,7 @@ export const CODING_PROFILES = [
     handle: 'Prm01',
     url: 'https://codeforces.com/profile/Prm01',
     description: 'Regular participant in rated rounds focusing on graph theory, trees, and dynamic programming.',
-    accent: '#2563eb'
+    accent: '#9333ea'
   },
   {
     id: 'geeksforgeeks',

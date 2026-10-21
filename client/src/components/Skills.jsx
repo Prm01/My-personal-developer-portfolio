@@ -30,7 +30,7 @@ export default function Skills() {
           <span className="section-label">04 — Skills</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white">
             Interactive 3D Arsenal &amp;{' '}
-            <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-purple-400 via-fuchsia-400 to-emerald-400 bg-clip-text text-transparent">
               Core Stack
             </span>
           </h2>
@@ -59,14 +59,14 @@ export default function Skills() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
-                className={`p-6 rounded-2xl card-glass card-glass-hover border border-blue-500/20 dark:border-purple-500/20 flex flex-col justify-between ${
+                className={`p-6 rounded-2xl card-glass card-glass-hover border border-purple-500/20 dark:border-emerald-500/20 flex flex-col justify-between ${
                   isFullWidthOnMd ? 'md:col-span-2 lg:col-span-1' : ''
                 }`}
               >
                 <div>
                   {/* Category Header */}
                   <div className="flex items-center gap-3 mb-5">
-                    <div className="w-10 h-10 rounded-xl bg-blue-500/10 dark:bg-purple-950/40 border border-blue-500/20 dark:border-purple-500/20 flex items-center justify-center text-blue-600 dark:text-purple-400 shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-purple-500/10 dark:bg-purple-950/40 border border-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-400 shrink-0">
                       <IconComponent size={20} aria-hidden="true" />
                     </div>
                     <div>
@@ -84,7 +84,7 @@ export default function Skills() {
                     {group.skills.map((skill) => (
                       <span
                         key={skill}
-                        className="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 border border-slate-200/60 dark:border-slate-700/60 hover:border-blue-500/50 hover:text-blue-600 dark:hover:text-purple-300 transition-colors"
+                        className="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 border border-slate-200/60 dark:border-slate-700/60 hover:border-purple-500/50 hover:text-purple-600 dark:hover:text-emerald-300 transition-colors"
                       >
                         {skill}
                       </span>

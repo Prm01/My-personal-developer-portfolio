@@ -6,7 +6,6 @@ export default function LoadingScreen({ onLoaded }) {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    // Check if user already saw the loader in this session to not annoy on reload
     const hasSeen = sessionStorage.getItem('portfolio_loaded');
     if (hasSeen) {
       setVisible(false);
@@ -38,10 +37,10 @@ export default function LoadingScreen({ onLoaded }) {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.5, ease: 'easeInOut' } }}
-          className="fixed inset-0 z-[10000] bg-[#070b14] flex flex-col items-center justify-center p-4 selection:bg-transparent"
+          className="fixed inset-0 z-[10000] bg-[#090714] flex flex-col items-center justify-center p-4 selection:bg-transparent"
         >
           {/* Subtle neon ambient circles */}
-          <div className="absolute w-72 h-72 rounded-full bg-blue-500/10 blur-3xl pointer-events-none" />
+          <div className="absolute w-72 h-72 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
           <div className="absolute w-72 h-72 rounded-full bg-purple-500/10 blur-3xl translate-x-20 translate-y-20 pointer-events-none" />
 
           {/* 3D Spinning Geometric Wireframe Emblem */}
@@ -50,7 +49,7 @@ export default function LoadingScreen({ onLoaded }) {
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ repeat: Infinity, duration: 8, ease: 'linear' }}
-              className="absolute inset-0 rounded-3xl border-2 border-dashed border-blue-400/40"
+              className="absolute inset-0 rounded-3xl border-2 border-dashed border-emerald-400/40"
             />
             {/* Inner counter-rotating ring */}
             <motion.div
@@ -59,7 +58,7 @@ export default function LoadingScreen({ onLoaded }) {
               className="absolute inset-2 rounded-2xl border-2 border-purple-400/50"
             />
             {/* Central Monogram */}
-            <div className="w-16 h-16 rounded-xl bg-gradient-to-tr from-blue-600 to-purple-600 flex items-center justify-center text-white font-black text-xl tracking-tight shadow-xl shadow-blue-500/25">
+            <div className="w-16 h-16 rounded-xl bg-gradient-to-tr from-purple-600 to-emerald-600 flex items-center justify-center text-white font-black text-xl tracking-tight shadow-xl shadow-purple-500/25">
               PY
             </div>
           </div>
@@ -69,7 +68,7 @@ export default function LoadingScreen({ onLoaded }) {
             <h2 className="text-xl sm:text-2xl font-black text-white font-display tracking-tight">
               Pramod Yadav
             </h2>
-            <p className="text-xs text-blue-400 font-mono tracking-widest uppercase">
+            <p className="text-xs text-emerald-400 font-mono tracking-widest uppercase">
               Initializing 3D Workspace · {Math.min(100, progress)}%
             </p>
           </div>
@@ -77,7 +76,7 @@ export default function LoadingScreen({ onLoaded }) {
           {/* Cyber Progress Bar */}
           <div className="w-56 h-1.5 bg-slate-900 rounded-full mt-6 overflow-hidden border border-slate-800">
             <motion.div
-              className="h-full bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-500"
+              className="h-full bg-gradient-to-r from-purple-400 via-fuchsia-500 to-emerald-400"
               style={{ width: `${progress}%` }}
               transition={{ duration: 0.1 }}
             />

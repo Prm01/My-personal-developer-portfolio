@@ -21,7 +21,7 @@ export default function Achievements() {
           <span className="section-label">06 — Profiles &amp; Honors</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white">
             Coding Profiles &amp;{' '}
-            <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-purple-400 via-fuchsia-400 to-emerald-400 bg-clip-text text-transparent">
               Achievements
             </span>
           </h2>
@@ -34,10 +34,10 @@ export default function Achievements() {
         <div className="mb-12">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-bold text-slate-900 dark:text-white font-display flex items-center gap-2">
-              <Terminal size={18} className="text-blue-500" />
+              <Terminal size={18} className="text-purple-400" />
               <span>Competitive Programming Profiles</span>
             </h3>
-            <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-300 border border-blue-500/20">
+            <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-300 border border-purple-500/20">
               500+ DSA Problems Solved
             </span>
           </div>
@@ -52,16 +52,16 @@ export default function Achievements() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.45, delay: idx * 0.08 }}
-                className="p-5 rounded-2xl card-glass card-glass-hover border border-blue-500/20 dark:border-purple-500/20 group flex flex-col justify-between"
+                className="p-5 rounded-2xl card-glass card-glass-hover border border-purple-500/20 dark:border-emerald-500/20 group flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between gap-3 mb-3">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-blue-500 dark:text-purple-400 group-hover:scale-110 transition-transform">
+                      <div className="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-purple-500 dark:text-purple-400 group-hover:scale-110 transition-transform">
                         <Code2 size={18} />
                       </div>
                       <div>
-                        <h4 className="text-base font-bold text-slate-900 dark:text-white font-display group-hover:text-blue-500 dark:group-hover:text-purple-400 transition-colors">
+                        <h4 className="text-base font-bold text-slate-900 dark:text-white font-display group-hover:text-purple-400 transition-colors">
                           {profile.platform}
                         </h4>
                         <span className="text-xs text-slate-500 dark:text-slate-400">
@@ -69,14 +69,14 @@ export default function Achievements() {
                         </span>
                       </div>
                     </div>
-                    <ExternalLink size={15} className="text-slate-400 group-hover:text-blue-500 dark:group-hover:text-purple-400 transition-colors" />
+                    <ExternalLink size={15} className="text-slate-400 group-hover:text-purple-400 transition-colors" />
                   </div>
                   <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mt-2">
                     {profile.description}
                   </p>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-slate-200/50 dark:border-slate-800/50 flex items-center justify-between text-[11px] text-blue-600 dark:text-purple-400 font-semibold">
+                <div className="mt-4 pt-3 border-t border-slate-200/50 dark:border-slate-800/50 flex items-center justify-between text-[11px] text-purple-600 dark:text-purple-400 font-semibold">
                   <span>View Public Profile</span>
                   <span>→</span>
                 </div>
@@ -88,7 +88,7 @@ export default function Achievements() {
         {/* Part 2: Honors & Achievements (JEE Main & Advanced, Scholarship, GDSC) */}
         <div>
           <h3 className="text-lg font-bold text-slate-900 dark:text-white font-display flex items-center gap-2 mb-4">
-            <Trophy size={18} className="text-purple-500" />
+            <Trophy size={18} className="text-emerald-400" />
             <span>Honors &amp; Recognized Milestones</span>
           </h3>
 
@@ -101,11 +101,11 @@ export default function Achievements() {
                   initial={{ opacity: 0, y: 24 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                  className="p-6 sm:p-7 rounded-2xl card-glass card-glass-hover border border-blue-500/20 dark:border-purple-500/20 flex flex-col justify-between"
+                  className="p-6 sm:p-7 rounded-2xl card-glass card-glass-hover border border-purple-500/20 dark:border-emerald-500/20 flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-center justify-between gap-3 mb-4">
-                      <div className="w-11 h-11 rounded-xl bg-blue-500/10 dark:bg-purple-950/40 border border-blue-500/20 dark:border-purple-500/20 flex items-center justify-center text-blue-600 dark:text-purple-400 shrink-0">
+                      <div className="w-11 h-11 rounded-xl bg-purple-500/10 dark:bg-purple-950/40 border border-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-400 shrink-0">
                         <Icon size={22} aria-hidden="true" />
                       </div>
                       <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20">

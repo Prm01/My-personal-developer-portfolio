@@ -47,11 +47,11 @@ function TiltCard3D({ children, className = '' }) {
       }}
       className={`relative group rounded-2xl transition-shadow duration-300 ${className}`}
     >
-      {/* Specular spotlight glow on hover */}
+      {/* Specular spotlight glow on hover (Purple to Emerald) */}
       <motion.div
         className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"
         style={{
-          background: `radial-gradient(420px circle at ${glowX} ${glowY}, rgba(56, 189, 248, 0.28), rgba(168, 85, 247, 0.18), transparent 70%)`
+          background: `radial-gradient(420px circle at ${glowX} ${glowY}, rgba(168, 85, 247, 0.28), rgba(16, 185, 129, 0.18), transparent 70%)`
         }}
       />
       {children}
@@ -69,7 +69,7 @@ function ProjectCard({ project, index }) {
       transition={{ duration: 0.45, delay: index * 0.08 }}
       className="h-full"
     >
-      <TiltCard3D className="h-full rounded-2xl card-glass border border-blue-500/20 dark:border-purple-500/20 group-hover:border-blue-400/50 dark:group-hover:border-purple-400/50 overflow-hidden flex flex-col shadow-xl">
+      <TiltCard3D className="h-full rounded-2xl card-glass border border-purple-500/20 dark:border-emerald-500/20 group-hover:border-purple-400/50 dark:group-hover:border-emerald-400/50 overflow-hidden flex flex-col shadow-xl">
         {/* Screenshot / Preview with floating 3D popout */}
         <div
           className="relative aspect-video w-full overflow-hidden bg-slate-900 border-b border-slate-200/80 dark:border-slate-800/80"
@@ -87,7 +87,7 @@ function ProjectCard({ project, index }) {
             {project.categories.map((cat) => (
               <span
                 key={cat}
-                className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-950/85 backdrop-blur-md text-blue-300 border border-blue-500/30"
+                className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-950/85 backdrop-blur-md text-purple-300 border border-purple-500/30"
               >
                 {cat}
               </span>
@@ -98,7 +98,7 @@ function ProjectCard({ project, index }) {
         {/* Card Content with depth layers */}
         <div className="p-6 flex flex-col flex-1" style={{ transform: 'translateZ(18px)' }}>
           {/* Title */}
-          <h3 className="text-xl font-bold text-slate-900 dark:text-white font-display group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors">
+          <h3 className="text-xl font-bold text-slate-900 dark:text-white font-display group-hover:text-purple-400 transition-colors">
             {project.title}
           </h3>
 
@@ -107,7 +107,7 @@ function ProjectCard({ project, index }) {
             className="mt-3 p-3 rounded-xl bg-slate-100/90 dark:bg-slate-950/50 border border-slate-200/60 dark:border-slate-800/60 text-xs sm:text-sm text-slate-700 dark:text-slate-300"
             style={{ transform: 'translateZ(22px)' }}
           >
-            <span className="font-semibold text-blue-600 dark:text-blue-400 block mb-0.5">
+            <span className="font-semibold text-purple-600 dark:text-purple-400 block mb-0.5">
               Problem:
             </span>
             {project.problem}
@@ -123,7 +123,7 @@ function ProjectCard({ project, index }) {
                 <li key={idx} className="flex items-start gap-2 leading-relaxed">
                   <CheckCircle2
                     size={15}
-                    className="text-blue-500 dark:text-purple-400 shrink-0 mt-0.5"
+                    className="text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5"
                     aria-hidden="true"
                   />
                   <span>{outcome}</span>
@@ -202,7 +202,7 @@ export default function Projects() {
             <span className="section-label">02 — Featured Work</span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white">
               Featured{' '}
-              <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-purple-400 via-fuchsia-400 to-emerald-400 bg-clip-text text-transparent">
                 Projects
               </span>
             </h2>
@@ -229,7 +229,7 @@ export default function Projects() {
                   {active && (
                     <motion.div
                       layoutId="activeFilterPill"
-                      className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 shadow-md"
+                      className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-600 to-emerald-600 shadow-md"
                       transition={{ type: 'spring', stiffness: 350, damping: 28 }}
                     />
                   )}

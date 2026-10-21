@@ -19,17 +19,17 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center pt-24 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-slate-50 dark:bg-[#070b14]"
+      className="relative min-h-screen flex items-center justify-center pt-24 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-slate-50 dark:bg-[#090714]"
     >
       {/* 3D Interactive Scene Background */}
       <Suspense fallback={
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-950/20 via-transparent to-purple-950/20 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-purple-950/20 via-transparent to-emerald-950/20 pointer-events-none" />
       }>
         <Hero3D />
       </Suspense>
 
       {/* Subtle ambient lighting layer */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-50/70 dark:via-[#070b14]/75 to-slate-50 dark:to-[#070b14] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-50/70 dark:via-[#090714]/75 to-slate-50 dark:to-[#090714] pointer-events-none" />
 
       {/* Hero Content Overlay */}
       <div className="relative z-10 w-full max-w-5xl mx-auto">
@@ -43,7 +43,7 @@ export default function Hero() {
               transition={{ duration: 0.5 }}
               className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 mb-6"
             >
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 text-xs sm:text-sm font-semibold shadow-sm backdrop-blur-md">
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 text-xs sm:text-sm font-semibold shadow-sm backdrop-blur-md">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
                 <span>B.Tech Mathematics &amp; Computing @ RGIPT (2027)</span>
               </span>
@@ -62,7 +62,7 @@ export default function Hero() {
               className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white"
             >
               Hi, I&apos;m{' '}
-              <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-purple-400 via-fuchsia-400 to-emerald-400 bg-clip-text text-transparent">
                 Pramod Yadav
               </span>
             </motion.h1>
@@ -86,7 +86,7 @@ export default function Hero() {
                 wrapper="span"
                 speed={50}
                 repeat={Infinity}
-                className="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 bg-clip-text text-transparent font-bold"
+                className="bg-gradient-to-r from-purple-400 via-fuchsia-400 to-emerald-400 bg-clip-text text-transparent font-bold"
               />
             </motion.div>
 
@@ -147,12 +147,12 @@ export default function Hero() {
             className="flex justify-center"
           >
             <div className="relative group">
-              {/* Outer neon glow */}
-              <div className="absolute -inset-1.5 rounded-3xl bg-gradient-to-r from-blue-600 to-purple-600 opacity-30 blur-xl group-hover:opacity-50 transition-all duration-300" />
+              {/* Outer neon glow (Purple to Emerald) */}
+              <div className="absolute -inset-1.5 rounded-3xl bg-gradient-to-r from-purple-600 via-fuchsia-600 to-emerald-600 opacity-30 blur-xl group-hover:opacity-50 transition-all duration-300" />
 
               {/* Glass profile container */}
-              <div className="relative p-5 sm:p-6 rounded-3xl card-glass border border-blue-500/30 dark:border-purple-500/30 flex flex-col items-center text-center max-w-[280px] sm:max-w-[320px] shadow-2xl">
-                <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-2xl overflow-hidden border-2 border-blue-400/40 dark:border-purple-400/40 bg-slate-900 shadow-inner mb-4">
+              <div className="relative p-5 sm:p-6 rounded-3xl card-glass border border-purple-500/30 dark:border-purple-500/30 flex flex-col items-center text-center max-w-[280px] sm:max-w-[320px] shadow-2xl">
+                <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-2xl overflow-hidden border-2 border-purple-400/40 dark:border-emerald-400/40 bg-slate-900 shadow-inner mb-4">
                   <img
                     src={avatarUrl || `https://github.com/${PROFILE.githubUsername}.png`}
                     alt="Pramod Yadav profile portrait"
@@ -171,7 +171,7 @@ export default function Hero() {
                   <h2 className="text-lg font-bold text-slate-900 dark:text-white">
                     Pramod Yadav
                   </h2>
-                  <p className="text-xs font-semibold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+                  <p className="text-xs font-semibold bg-gradient-to-r from-purple-400 to-emerald-400 bg-clip-text text-transparent">
                     Math &amp; Computing · RGIPT &apos;27
                   </p>
                   <p className="text-xs text-slate-500 dark:text-slate-400 pt-1">
@@ -192,7 +192,7 @@ export default function Hero() {
         >
           <a
             href="#about"
-            className="inline-flex flex-col items-center gap-1.5 text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-blue-500 dark:hover:text-purple-400 transition-colors"
+            className="inline-flex flex-col items-center gap-1.5 text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-purple-400 dark:hover:text-emerald-400 transition-colors"
             aria-label="Scroll to About section"
           >
             <span>DISCOVER</span>

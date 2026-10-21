@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Float } from '@react-three/drei';
-import * as THREE from 'three';
 
 function DraggableGem() {
   const meshRef = useRef();
@@ -12,13 +11,11 @@ function DraggableGem() {
   useFrame(() => {
     if (!meshRef.current) return;
     if (!isDragging) {
-      // Natural momentum & slow decay
       meshRef.current.rotation.x += velocity.current.x;
       meshRef.current.rotation.y += velocity.current.y;
       velocity.current.x *= 0.985;
       velocity.current.y *= 0.985;
 
-      // Keep minimum idle rotation
       if (Math.abs(velocity.current.x) < 0.005) velocity.current.x = 0.005;
       if (Math.abs(velocity.current.y) < 0.008) velocity.current.y = 0.008;
     }
@@ -59,7 +56,7 @@ function DraggableGem() {
       >
         <icosahedronGeometry args={[1, 1]} />
         <meshStandardMaterial
-          color="#38bdf8"
+          color="#c084fc"
           emissive="#7c3aed"
           emissiveIntensity={0.6}
           wireframe
@@ -74,11 +71,11 @@ function DraggableGem() {
 export default function FooterEasterEgg() {
   return (
     <div className="relative w-full max-w-xs mx-auto text-center my-6">
-      <div className="w-full h-36 rounded-2xl card-glass border border-blue-500/20 dark:border-purple-500/20 overflow-hidden relative flex items-center justify-center">
+      <div className="w-full h-36 rounded-2xl card-glass border border-purple-500/20 dark:border-emerald-500/20 overflow-hidden relative flex items-center justify-center">
         <Canvas camera={{ position: [0, 0, 3], fov: 45 }} gl={{ alpha: true }}>
           <ambientLight intensity={0.8} />
-          <pointLight position={[5, 5, 5]} intensity={1.5} color="#38bdf8" />
-          <pointLight position={[-5, -5, -5]} intensity={1} color="#a855f7" />
+          <pointLight position={[5, 5, 5]} intensity={1.5} color="#a855f7" />
+          <pointLight position={[-5, -5, -5]} intensity={1} color="#10b981" />
           <DraggableGem />
         </Canvas>
 

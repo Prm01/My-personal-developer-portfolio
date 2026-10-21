@@ -35,8 +35,8 @@ function TimelineCard3D({ item, index, inView }) {
       {/* Glowing Node on Timeline Path */}
       <div className="absolute -left-3 sm:-left-3 top-8 flex items-center justify-center">
         {/* Outer pulsating glow ring */}
-        <div className={`w-8 h-8 rounded-full ${isWork ? 'bg-blue-500/20 border-blue-400' : 'bg-purple-500/20 border-purple-400'} border-2 flex items-center justify-center animate-pulse`}>
-          <div className={`w-3.5 h-3.5 rounded-full ${isWork ? 'bg-blue-500 shadow-blue-500/50' : 'bg-purple-500 shadow-purple-500/50'} shadow-lg`} />
+        <div className={`w-8 h-8 rounded-full ${isWork ? 'bg-purple-500/20 border-purple-400' : 'bg-emerald-500/20 border-emerald-400'} border-2 flex items-center justify-center animate-pulse`}>
+          <div className={`w-3.5 h-3.5 rounded-full ${isWork ? 'bg-purple-500 shadow-purple-500/50' : 'bg-emerald-500 shadow-emerald-500/50'} shadow-lg`} />
         </div>
       </div>
 
@@ -52,17 +52,17 @@ function TimelineCard3D({ item, index, inView }) {
           rotateY,
           transformStyle: 'preserve-3d'
         }}
-        className="p-6 sm:p-8 rounded-2xl card-glass card-glass-hover border border-blue-500/20 dark:border-purple-500/20 relative shadow-xl overflow-hidden group"
+        className="p-6 sm:p-8 rounded-2xl card-glass card-glass-hover border border-purple-500/20 dark:border-emerald-500/20 relative shadow-xl overflow-hidden group"
       >
         {/* Header Row */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200/60 dark:border-slate-800/60" style={{ transform: 'translateZ(18px)' }}>
           <div className="flex items-start sm:items-center gap-3.5">
-            <div className={`w-12 h-12 rounded-xl ${isWork ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20' : 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20'} border flex items-center justify-center shrink-0`}>
+            <div className={`w-12 h-12 rounded-xl ${isWork ? 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20' : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20'} border flex items-center justify-center shrink-0`}>
               <Icon size={22} aria-hidden="true" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${isWork ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20' : 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20'}`}>
+                <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${isWork ? 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20' : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20'}`}>
                   {item.type}
                 </span>
                 <span className="text-xs text-slate-400 flex items-center gap-1">
@@ -72,7 +72,7 @@ function TimelineCard3D({ item, index, inView }) {
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white font-display mt-1">
                 {item.role}{' '}
-                <span className={isWork ? 'text-blue-600 dark:text-blue-400' : 'text-purple-600 dark:text-purple-400'}>
+                <span className={isWork ? 'text-purple-600 dark:text-purple-400' : 'text-emerald-600 dark:text-emerald-400'}>
                   @ {item.org}
                 </span>
               </h3>
@@ -82,7 +82,7 @@ function TimelineCard3D({ item, index, inView }) {
             </div>
           </div>
 
-          <div className="inline-flex items-center gap-1.5 self-start sm:self-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 dark:bg-purple-500/15 text-blue-700 dark:text-purple-300 border border-blue-500/20 dark:border-purple-500/30 shrink-0">
+          <div className="inline-flex items-center gap-1.5 self-start sm:self-center px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/10 dark:bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/20 dark:border-purple-500/30 shrink-0">
             <Calendar size={13} aria-hidden="true" />
             <span>{item.period}</span>
           </div>
@@ -91,7 +91,7 @@ function TimelineCard3D({ item, index, inView }) {
         {/* Impact Bullets */}
         <div className="mt-5" style={{ transform: 'translateZ(14px)' }}>
           <p className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3 flex items-center gap-1.5">
-            <Sparkles size={12} className={isWork ? 'text-blue-400' : 'text-purple-400'} />
+            <Sparkles size={12} className={isWork ? 'text-purple-400' : 'text-emerald-400'} />
             <span>Key Metrics &amp; Engineering Contributions:</span>
           </p>
           <ul className="space-y-3">
@@ -99,7 +99,7 @@ function TimelineCard3D({ item, index, inView }) {
               <li key={idx} className="flex items-start gap-2.5 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                 <TrendingUp
                   size={16}
-                  className={`${isWork ? 'text-blue-500' : 'text-purple-400'} shrink-0 mt-1`}
+                  className={`${isWork ? 'text-purple-400' : 'text-emerald-400'} shrink-0 mt-1`}
                   aria-hidden="true"
                 />
                 <span>{bullet}</span>
@@ -115,7 +115,7 @@ function TimelineCard3D({ item, index, inView }) {
               key={tag}
               className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800/70 text-slate-700 dark:text-slate-300 border border-slate-200/50 dark:border-slate-700/50"
             >
-              <Zap size={11} className={isWork ? 'text-blue-500' : 'text-purple-400'} aria-hidden="true" />
+              <Zap size={11} className={isWork ? 'text-purple-400' : 'text-emerald-400'} aria-hidden="true" />
               <span>{tag}</span>
             </span>
           ))}
@@ -141,7 +141,7 @@ export default function Experience() {
           <span className="section-label">03 — Experience &amp; Education</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white">
             Interactive{' '}
-            <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-purple-400 via-fuchsia-400 to-emerald-400 bg-clip-text text-transparent">
               Timeline
             </span>
           </h2>
@@ -150,10 +150,10 @@ export default function Experience() {
           </p>
         </motion.div>
 
-        {/* 3D Timeline Track Container */}
+        {/* 3D Timeline Track Container (Purple to Emerald) */}
         <div className="relative space-y-10">
           {/* Glowing Vertical Laser Line */}
-          <div className="absolute top-4 bottom-4 left-1 sm:left-1 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-emerald-500 shadow-[0_0_12px_rgba(56,189,248,0.6)]" />
+          <div className="absolute top-4 bottom-4 left-1 sm:left-1 w-0.5 bg-gradient-to-b from-purple-500 via-fuchsia-500 to-emerald-500 shadow-[0_0_12px_rgba(168,85,247,0.6)]" />
 
           {TIMELINE_DATA.map((item, i) => (
             <TimelineCard3D key={item.id} item={item} index={i} inView={inView} />

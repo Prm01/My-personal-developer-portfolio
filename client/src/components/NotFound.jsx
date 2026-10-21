@@ -11,9 +11,9 @@ export default function NotFound({ onHome }) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-slate-50 dark:bg-[#070b14] text-slate-900 dark:text-white">
-      <div className="max-w-md w-full p-8 rounded-3xl card-glass border border-blue-500/30 dark:border-purple-500/30 text-center shadow-2xl">
-        <span className="text-6xl font-extrabold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent font-display block mb-2">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-slate-50 dark:bg-[#090714] text-slate-900 dark:text-white">
+      <div className="max-w-md w-full p-8 rounded-3xl card-glass border border-purple-500/30 dark:border-emerald-500/30 text-center shadow-2xl">
+        <span className="text-6xl font-extrabold bg-gradient-to-r from-purple-400 via-fuchsia-400 to-emerald-400 bg-clip-text text-transparent font-display block mb-2">
           404
         </span>
         <h1 className="text-2xl font-bold font-display mb-3">
