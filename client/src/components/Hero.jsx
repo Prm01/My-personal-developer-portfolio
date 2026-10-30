@@ -1,8 +1,8 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, Download, Mail, FolderGit2, GitBranch } from 'lucide-react';
+import { Mail, FolderGit2, GitBranch } from 'lucide-react';
 import { TypeAnimation } from 'react-type-animation';
-import { PROFILE, getResumePdfHref } from '../lib/profile';
+import { PROFILE } from '../lib/profile';
 
 const Hero3D = lazy(() => import('./Hero3D'));
 
@@ -43,12 +43,12 @@ export default function Hero() {
               transition={{ duration: 0.5 }}
               className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 mb-6"
             >
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 text-xs sm:text-sm font-semibold shadow-sm backdrop-blur-md">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-amber-400/40 bg-amber-400/10 dark:bg-amber-950/30 text-amber-800 dark:text-amber-300 text-xs sm:text-sm font-semibold shadow-sm backdrop-blur-md">
+                <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" aria-hidden="true" />
                 <span>B.Tech Mathematics &amp; Computing @ RGIPT (2027)</span>
               </span>
 
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 text-xs sm:text-sm font-semibold shadow-sm backdrop-blur-md">
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 text-xs sm:text-sm font-semibold shadow-sm backdrop-blur-md">
                 <GitBranch size={13} className="text-purple-400" />
                 <span>Open Source: Learning Unlimited &amp; Neutralinojs</span>
               </span>
@@ -62,7 +62,7 @@ export default function Hero() {
               className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white"
             >
               Hi, I&apos;m{' '}
-              <span className="bg-gradient-to-r from-purple-400 via-fuchsia-400 to-emerald-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-purple-500 via-amber-400 to-emerald-400 bg-clip-text text-transparent">
                 Pramod Yadav
               </span>
             </motion.h1>
@@ -86,7 +86,7 @@ export default function Hero() {
                 wrapper="span"
                 speed={50}
                 repeat={Infinity}
-                className="bg-gradient-to-r from-purple-400 via-fuchsia-400 to-emerald-400 bg-clip-text text-transparent font-bold"
+                className="bg-gradient-to-r from-purple-500 via-amber-400 to-emerald-400 bg-clip-text text-transparent font-bold"
               />
             </motion.div>
 
@@ -100,7 +100,7 @@ export default function Hero() {
               Engineering scalable distributed systems, agentic AI pipelines, and high-performance full-stack applications with measurable production impact.
             </motion.p>
 
-            {/* Action Buttons: View Projects, Download Resume, Contact */}
+            {/* Action Buttons: View Projects, Contact */}
             <motion.div
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
@@ -114,18 +114,6 @@ export default function Hero() {
               >
                 <FolderGit2 size={18} aria-hidden="true" />
                 <span>View Projects</span>
-              </a>
-
-              <a
-                href={getResumePdfHref()}
-                download="Pramod_Yadav_Resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-secondary"
-                aria-label="Download Pramod Yadav Resume PDF"
-              >
-                <Download size={18} aria-hidden="true" />
-                <span>Download Resume</span>
               </a>
 
               <a

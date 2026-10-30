@@ -12,19 +12,5 @@ export const PROFILE = {
   codolioUrl: 'https://codolio.com/profile/xcodex',
   institution: 'Rajiv Gandhi Institute of Petroleum Technology (RGIPT)',
   degree: 'B.Tech Mathematics & Computing',
-  batch: '2027',
-  resumeUrl: '/resume.pdf',
-  resumeDriveUrl:
-    'https://drive.google.com/open?id=1dephhzBTIKX-E0BAzrMot2fsc0T82vrU'
+  batch: '2027'
 };
-
-/** Absolute URL to the PDF — avoids broken iframe/embed with relative paths on some hosts. */
-export function getResumePdfHref() {
-  if (typeof window === 'undefined') return '/resume.pdf';
-  const base = import.meta.env.BASE_URL || '/';
-  try {
-    return new URL('resume.pdf', window.location.origin + base).href;
-  } catch {
-    return '/resume.pdf';
-  }
-}

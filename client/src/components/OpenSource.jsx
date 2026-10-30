@@ -34,7 +34,7 @@ export default function OpenSource() {
           <span className="section-label">05 — Community &amp; Open Source</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white">
             Open Source &amp;{' '}
-            <span className="bg-gradient-to-r from-purple-400 via-fuchsia-400 to-emerald-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-purple-500 via-amber-400 to-emerald-400 bg-clip-text text-transparent">
               Community Impact
             </span>
           </h2>
@@ -79,25 +79,36 @@ export default function OpenSource() {
               className="p-6 sm:p-7 rounded-2xl card-glass card-glass-hover border border-purple-500/20 dark:border-emerald-500/20 flex flex-col justify-between shadow-xl"
             >
               <div>
-                <div className="flex items-start justify-between gap-4 mb-4">
+                <div className="flex items-start justify-between gap-4 mb-3">
                   <div>
                     <span className="text-xs font-semibold uppercase tracking-wider text-purple-600 dark:text-purple-400">
                       {item.type}
                     </span>
                     <h3 className="text-xl font-bold text-slate-900 dark:text-white font-display mt-0.5">
-                      {item.name}
+                      <a
+                        href={item.repoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-purple-600 dark:hover:text-purple-400 inline-flex items-center gap-1.5 transition-colors group/title"
+                        aria-label={`Open ${item.name} repository on GitHub`}
+                      >
+                        <span>{item.name}</span>
+                        <ExternalLink size={16} className="text-slate-400 dark:text-slate-500 group-hover/title:text-purple-600 dark:group-hover/title:text-purple-400 transition-colors" />
+                      </a>
                     </h3>
                   </div>
-                  <div className="w-10 h-10 rounded-xl bg-purple-500/10 dark:bg-purple-950/40 border border-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-400 shrink-0">
+                  <a
+                    href={item.repoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-xl bg-purple-500/10 dark:bg-purple-950/40 border border-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-400 hover:scale-105 transition-transform shrink-0"
+                    aria-label={`GitHub repository for ${item.name}`}
+                  >
                     <Github size={20} aria-hidden="true" />
-                  </div>
+                  </a>
                 </div>
 
-                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                  {item.description}
-                </p>
-
-                <div className="mt-4 flex flex-wrap gap-2">
+                <div className="mb-4 flex flex-wrap gap-2">
                   {item.tech.map((t) => (
                     <span
                       key={t}
@@ -107,6 +118,42 @@ export default function OpenSource() {
                     </span>
                   ))}
                 </div>
+
+                <ul className="space-y-2.5">
+                  {item.pullRequests.map((pr) => {
+                    const isMerged = pr.status.toLowerCase().includes('merged');
+                    return (
+                      <li
+                        key={pr.number}
+                        className="p-3 rounded-xl bg-slate-50/70 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-800/60 flex items-start justify-between gap-3 text-xs sm:text-sm"
+                      >
+                        <div className="flex-1 leading-snug">
+                          <a
+                            href={pr.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-medium text-slate-800 dark:text-slate-200 hover:text-purple-600 dark:hover:text-purple-400 transition-colors inline"
+                          >
+                            <span className="font-bold text-purple-600 dark:text-purple-400">PR #{pr.number}</span>
+                            <span className="text-slate-400 dark:text-slate-500"> — </span>
+                            <span className="group-hover:underline">{pr.title}</span>
+                            {pr.note && <span className="text-[11px] text-slate-500 dark:text-slate-400 font-normal ml-1">({pr.note})</span>}
+                            <ExternalLink size={12} className="inline-block ml-1 opacity-60" aria-hidden="true" />
+                          </a>
+                        </div>
+                        <span
+                          className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold border shrink-0 ${
+                            isMerged
+                              ? 'bg-purple-500/10 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border-purple-500/30'
+                              : 'bg-amber-400/15 dark:bg-yellow-400/15 text-amber-800 dark:text-yellow-300 border-amber-400/40 dark:border-yellow-400/30'
+                          }`}
+                        >
+                          {pr.status}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
 
               <div className="mt-6 pt-4 border-t border-slate-200/60 dark:border-slate-800/60 flex items-center gap-3">

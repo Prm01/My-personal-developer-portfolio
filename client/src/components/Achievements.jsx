@@ -21,7 +21,7 @@ export default function Achievements() {
           <span className="section-label">06 — Profiles &amp; Honors</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white">
             Coding Profiles &amp;{' '}
-            <span className="bg-gradient-to-r from-purple-400 via-fuchsia-400 to-emerald-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-purple-500 via-amber-400 to-emerald-400 bg-clip-text text-transparent">
               Achievements
             </span>
           </h2>
@@ -88,7 +88,7 @@ export default function Achievements() {
         {/* Part 2: Honors & Achievements (JEE Main & Advanced, Scholarship, GDSC) */}
         <div>
           <h3 className="text-lg font-bold text-slate-900 dark:text-white font-display flex items-center gap-2 mb-4">
-            <Trophy size={18} className="text-emerald-400" />
+            <Trophy size={18} className="text-amber-500 dark:text-yellow-400" />
             <span>Honors &amp; Recognized Milestones</span>
           </h3>
 
@@ -105,10 +105,10 @@ export default function Achievements() {
                 >
                   <div>
                     <div className="flex items-center justify-between gap-3 mb-4">
-                      <div className="w-11 h-11 rounded-xl bg-purple-500/10 dark:bg-purple-950/40 border border-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-400 shrink-0">
+                      <div className="w-11 h-11 rounded-xl bg-amber-500/10 dark:bg-amber-950/40 border border-amber-500/30 flex items-center justify-center text-amber-600 dark:text-yellow-400 shrink-0">
                         <Icon size={22} aria-hidden="true" />
                       </div>
-                      <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20">
+                      <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-400/15 dark:bg-yellow-400/15 text-amber-800 dark:text-yellow-300 border border-amber-400/40 dark:border-yellow-400/30">
                         {item.badge}
                       </span>
                     </div>

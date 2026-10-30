@@ -141,7 +141,7 @@ export default function Experience() {
           <span className="section-label">03 — Experience &amp; Education</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white">
             Interactive{' '}
-            <span className="bg-gradient-to-r from-purple-400 via-fuchsia-400 to-emerald-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-purple-500 via-amber-400 to-emerald-400 bg-clip-text text-transparent">
               Timeline
             </span>
           </h2>

@@ -139,17 +139,19 @@ export const TIMELINE_DATA = [
   {
     id: 'polluxa',
     type: 'Experience',
-    role: 'Automation Intern',
+    role: 'Software Engineer Intern',
     org: 'Polluxa',
     period: 'May 2026 – Jul 2026',
     location: 'Remote',
-    summary: 'High-volume lead pipeline automation, Apollo.io API integration, and CRM test automation tools.',
+    summary: 'Chrome extension development, Playwright test automation, and Apollo.io API lead workflows.',
     bullets: [
-      'Reduced lead-processing turnaround time from 30 minutes to 10 minutes per lead (67% faster processing) via automated Python/JS Playwright workflows and Chrome extensions.',
-      'Drove a +20% increase in qualified client acquisition by integrating Apollo.io verified-email retrieval with REST APIs, token authentication, and deduplication logic.',
-      'Built a dedicated CRM test automation tool and resolved 20 of 25+ critical automation and pipeline issues to achieve robust production stability.'
+      'Built a Chrome extension (JavaScript, service worker) that captures a LinkedIn profile and writes the lead to the Polluxa CRM via REST API in one click, with token handling, retry logic and duplicate detection.',
+      'Developed Python and JavaScript Playwright scripts that retrieve verified emails from Apollo.io, completing a LinkedIn-to-email workflow with no manual step.',
+      'Wrote an end-to-end Playwright regression suite that replaced manual pre-release checks and produced a PDF report per run.',
+      'Built an email deliverability checker that ran tests against seed inboxes across Gmail, Outlook, MS365, Yahoo and Zoho and generated per-run reports.',
+      'Improved reliability with retry and fallback selectors and duplicate checks; used Git for version control throughout.'
     ],
-    tags: ['Python', 'JavaScript', 'Playwright', 'Chrome Extensions', 'REST APIs', 'Apollo.io', 'CRM Test Automation']
+    tags: ['Python', 'JavaScript', 'Node.js', 'Playwright', 'REST APIs', 'Chrome Extension', 'Git']
   },
   {
     id: 'rgipt',
@@ -208,22 +210,49 @@ export const OPEN_SOURCE_DATA = {
   statement: 'Open Source: contributed to two organizations, Learning Unlimited and Neutralinojs',
   contributions: [
     {
-      id: 'neutralinojs',
-      name: 'Neutralinojs (neutralinojs-cli)',
-      type: 'Desktop Application Framework',
-      description: 'Contributed to the portable cross-platform desktop application framework CLI, focusing on CLI stability, toolchain reliability, developer experience (DX), and release readiness.',
-      tech: ['Node.js', 'CLI', 'Tooling', 'Open Source'],
-      prUrl: 'https://github.com/search?q=org%3Aneutralinojs+author%3APrm01&type=pullrequests',
-      repoUrl: 'https://github.com/neutralinojs/neutralinojs-cli'
+      id: 'esp-website',
+      name: 'ESP-Website (Learning Unlimited)',
+      type: 'Educational Logistics Platform',
+      repoUrl: 'https://github.com/learning-unlimited/ESP-Website',
+      prUrl: 'https://github.com/search?q=org%3Alearning-unlimited+author%3APrm01&type=pullrequests',
+      tech: ['Python', 'Django', 'PostgreSQL', 'Docker'],
+      pullRequests: [
+        {
+          number: '4968',
+          title: 'Fixed indefinite hangs in custom form schema operations by adding PostgreSQL lock timeouts with graceful error handling.',
+          status: 'Merged',
+          url: 'https://github.com/learning-unlimited/ESP-Website/pull/4968'
+        },
+        {
+          number: '5052',
+          title: 'Replaced redundant count() + get() queries with a single .first() query in context processors.',
+          status: 'Merged',
+          url: 'https://github.com/learning-unlimited/ESP-Website/pull/5052'
+        },
+        {
+          number: '5691',
+          title: 'Query builder feature to wrap an existing query with an AND/OR condition.',
+          status: 'Open',
+          note: 'under review',
+          url: 'https://github.com/learning-unlimited/ESP-Website/pull/5691'
+        }
+      ]
     },
     {
-      id: 'learning-unlimited',
-      name: 'Learning Unlimited (ESP-Website)',
-      type: 'Educational Logistics Platform',
-      description: 'Contributed to the open-source educational software powering Splash programs nationwide. Solved platform issues, improved interface workflows, and collaborated on PR reviews.',
-      tech: ['Python', 'Web Framework', 'Logistics', 'Open Source'],
-      prUrl: 'https://github.com/search?q=org%3Alearning-unlimited+author%3APrm01&type=pullrequests',
-      repoUrl: 'https://github.com/learning-unlimited/ESP-Website'
+      id: 'neutralinojs',
+      name: 'Neutralinojs CLI',
+      type: 'Desktop Application Framework',
+      repoUrl: 'https://github.com/neutralinojs/neutralinojs-cli',
+      prUrl: 'https://github.com/search?q=org%3Aneutralinojs+author%3APrm01&type=pullrequests',
+      tech: ['JavaScript'],
+      pullRequests: [
+        {
+          number: '376',
+          title: 'Improved the installation instructions in the README.',
+          status: 'Merged',
+          url: 'https://github.com/neutralinojs/neutralinojs-cli/pull/376'
+        }
+      ]
     }
   ],
   highlightNote: {

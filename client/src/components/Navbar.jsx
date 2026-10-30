@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sun, Moon, Download } from 'lucide-react';
-import { getResumePdfHref } from '../lib/profile';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 
 const navLinks = [
   { href: '#about', label: 'About' },
@@ -61,7 +60,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
               PY
             </span>
             <span className="tracking-tight">
-              Pramod <span className="bg-gradient-to-r from-purple-400 via-fuchsia-400 to-emerald-400 bg-clip-text text-transparent">Yadav</span>
+              Pramod <span className="bg-gradient-to-r from-purple-500 via-amber-400 to-emerald-400 bg-clip-text text-transparent">Yadav</span>
             </span>
           </a>
 
@@ -83,7 +82,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
                   {isActive && (
                     <motion.span
                       layoutId="navIndicator"
-                      className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-to-r from-purple-500 via-fuchsia-500 to-emerald-400 rounded-full"
+                      className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-to-r from-purple-500 via-amber-400 to-emerald-400 rounded-full"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -94,18 +93,6 @@ export default function Navbar({ darkMode, setDarkMode }) {
 
           {/* Right side controls */}
           <div className="flex items-center gap-2.5">
-            {/* Resume button */}
-            <a
-              href={getResumePdfHref()}
-              download="Pramod_Yadav_Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold bg-gradient-to-r from-purple-600 via-fuchsia-600 to-emerald-600 hover:from-purple-500 hover:to-emerald-500 text-white shadow-sm transition-all duration-200 active:scale-95"
-              aria-label="Download Resume PDF"
-            >
-              <Download size={14} aria-hidden="true" />
-              <span>Resume</span>
-            </a>
 
             {/* Dark / Light toggle */}
             <button
@@ -162,18 +149,6 @@ export default function Navbar({ darkMode, setDarkMode }) {
                   </a>
                 );
               })}
-              <div className="pt-2">
-                <a
-                  href={getResumePdfHref()}
-                  download="Pramod_Yadav_Resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setOpen(false)}
-                  className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-semibold bg-gradient-to-r from-purple-600 via-fuchsia-600 to-emerald-600 text-white transition-colors"
-                >
-                  <Download size={16} /> Download Resume
-                </a>
-              </div>
             </div>
           </motion.div>
         )}

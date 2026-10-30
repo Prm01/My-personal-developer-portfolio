@@ -23,11 +23,11 @@ import FloatingContact3D from './components/FloatingContact3D';
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('theme');
+      const saved = localStorage.getItem('portfolio_theme');
       if (saved) return saved === 'dark';
-      return true; // default dark theme
+      return false; // default light theme
     }
-    return true;
+    return false;
   });
 
   const [isNotFound, setIsNotFound] = useState(() => {
@@ -65,6 +65,7 @@ function App() {
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode);
+    localStorage.setItem('portfolio_theme', darkMode ? 'dark' : 'light');
     localStorage.setItem('theme', darkMode ? 'dark' : 'light');
   }, [darkMode]);
 
@@ -127,7 +128,7 @@ function App() {
           {/* 3. Featured Projects (3D tilt cards, floating popout screenshot, filter tabs) */}
           <Projects />
 
-          {/* 4. Experience (Polluxa 3 impact bullets + RGIPT 3D timeline) */}
+          {/* 4. Experience (Polluxa 5 impact bullets + RGIPT 3D timeline) */}
           <Experience />
 
           {/* 5. Skills (3D rotating skill sphere + categorized panels) */}

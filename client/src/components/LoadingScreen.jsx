@@ -37,7 +37,7 @@ export default function LoadingScreen({ onLoaded }) {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.5, ease: 'easeInOut' } }}
-          className="fixed inset-0 z-[10000] bg-[#090714] flex flex-col items-center justify-center p-4 selection:bg-transparent"
+          className="fixed inset-0 z-[10000] bg-slate-50 dark:bg-[#090714] flex flex-col items-center justify-center p-4 selection:bg-transparent transition-colors duration-300"
         >
           {/* Subtle neon ambient circles */}
           <div className="absolute w-72 h-72 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
@@ -58,25 +58,25 @@ export default function LoadingScreen({ onLoaded }) {
               className="absolute inset-2 rounded-2xl border-2 border-purple-400/50"
             />
             {/* Central Monogram */}
-            <div className="w-16 h-16 rounded-xl bg-gradient-to-tr from-purple-600 to-emerald-600 flex items-center justify-center text-white font-black text-xl tracking-tight shadow-xl shadow-purple-500/25">
+            <div className="w-16 h-16 rounded-xl bg-gradient-to-tr from-purple-600 via-amber-500 to-emerald-600 flex items-center justify-center text-white font-black text-xl tracking-tight shadow-xl shadow-purple-500/25">
               PY
             </div>
           </div>
 
           {/* Title & Status */}
           <div className="text-center space-y-2">
-            <h2 className="text-xl sm:text-2xl font-black text-white font-display tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white font-display tracking-tight">
               Pramod Yadav
             </h2>
-            <p className="text-xs text-emerald-400 font-mono tracking-widest uppercase">
+            <p className="text-xs text-emerald-600 dark:text-emerald-400 font-mono tracking-widest uppercase">
               Initializing 3D Workspace · {Math.min(100, progress)}%
             </p>
           </div>
 
           {/* Cyber Progress Bar */}
-          <div className="w-56 h-1.5 bg-slate-900 rounded-full mt-6 overflow-hidden border border-slate-800">
+          <div className="w-56 h-1.5 bg-slate-200 dark:bg-slate-900 rounded-full mt-6 overflow-hidden border border-slate-300 dark:border-slate-800">
             <motion.div
-              className="h-full bg-gradient-to-r from-purple-400 via-fuchsia-500 to-emerald-400"
+              className="h-full bg-gradient-to-r from-purple-500 via-amber-400 to-emerald-400"
               style={{ width: `${progress}%` }}
               transition={{ duration: 0.1 }}
             />

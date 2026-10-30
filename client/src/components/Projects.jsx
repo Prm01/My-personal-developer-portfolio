@@ -202,7 +202,7 @@ export default function Projects() {
             <span className="section-label">02 — Featured Work</span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white">
               Featured{' '}
-              <span className="bg-gradient-to-r from-purple-400 via-fuchsia-400 to-emerald-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-purple-500 via-amber-400 to-emerald-400 bg-clip-text text-transparent">
                 Projects
               </span>
             </h2>

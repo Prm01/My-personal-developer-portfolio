@@ -15,10 +15,12 @@ About Pramod:
 - Competitive Programming: CodeChef, Codeforces, GeeksforGeeks (500+ DSA problems solved)
 
 Experience:
-- Automation Intern at Polluxa (May–Jul 2026):
-  1. Reduced lead-processing turnaround time from 30 minutes to 10 minutes per lead (67% faster processing) using automated Python/JS Playwright workflows and Chrome extensions.
-  2. Drove +20% increase in qualified client acquisition by integrating Apollo.io verified-email retrieval with REST APIs, token authentication, and deduplication.
-  3. Built a CRM test automation tool and fixed 20 of 25+ critical automation and pipeline issues to achieve robust production stability.
+- Software Engineer Intern at Polluxa (May–Jul 2026):
+  1. Built a Chrome extension (JavaScript, service worker) that captures a LinkedIn profile and writes the lead to the Polluxa CRM via REST API in one click, with token handling, retry logic and duplicate detection.
+  2. Developed Python and JavaScript Playwright scripts that retrieve verified emails from Apollo.io, completing a LinkedIn-to-email workflow with no manual step.
+  3. Wrote an end-to-end Playwright regression suite that replaced manual pre-release checks and produced a PDF report per run.
+  4. Built an email deliverability checker that ran tests against seed inboxes across Gmail, Outlook, MS365, Yahoo and Zoho and generated per-run reports.
+  5. Improved reliability with retry and fallback selectors and duplicate checks; used Git for version control throughout.
 
 Featured Projects:
 1. Rahat:
@@ -50,8 +52,12 @@ Skills:
 
 Open Source Contributions:
 - Contributed to two organizations, Learning Unlimited and Neutralinojs
-- Neutralinojs (neutralinojs-cli): Contributed to portable desktop framework CLI focusing on stability, developer experience, and release readiness.
-- Learning Unlimited (ESP-Website): Open-source educational logistics management platform for Splash programs; bug fixes and UX improvements.
+- ESP-Website (Learning Unlimited) [Python, Django, PostgreSQL, Docker]:
+  - PR #4968: Fixed indefinite hangs in custom form schema operations by adding PostgreSQL lock timeouts with graceful error handling (Merged).
+  - PR #5052: Replaced redundant count() + get() queries with a single .first() query in context processors (Merged).
+  - PR #5691: Query builder feature to wrap an existing query with an AND/OR condition (Open, under review).
+- Neutralinojs CLI [JavaScript]:
+  - PR #376: Improved the installation instructions in the README (Merged).
 
 Achievements:
 - JEE Main & Advanced Qualified: Ranked in the top 2% nationally among 1.2M+ candidates.

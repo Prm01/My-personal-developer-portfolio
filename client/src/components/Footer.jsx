@@ -1,5 +1,5 @@
-import { Github, Linkedin, Mail, Download, ArrowUp, Code2 } from 'lucide-react';
-import { PROFILE, getResumePdfHref } from '../lib/profile';
+import { Github, Linkedin, Mail, ArrowUp, Code2 } from 'lucide-react';
+import { PROFILE } from '../lib/profile';
 import FooterEasterEgg from './FooterEasterEgg';
 
 const QUICK_LINKS = [
@@ -27,24 +27,11 @@ export default function Footer() {
               <span className="w-7 h-7 rounded-lg bg-gradient-to-r from-purple-600 to-emerald-600 flex items-center justify-center text-white text-xs font-bold">
                 PY
               </span>
-              <span>Pramod <span className="bg-gradient-to-r from-purple-400 via-fuchsia-400 to-emerald-400 bg-clip-text text-transparent">Yadav</span></span>
+              <span>Pramod <span className="bg-gradient-to-r from-purple-500 via-amber-400 to-emerald-400 bg-clip-text text-transparent">Yadav</span></span>
             </a>
             <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
               Full Stack &amp; AI Developer · B.Tech Mathematics &amp; Computing at RGIPT (2027). Open Source Contributor (Learning Unlimited &amp; Neutralinojs). Building high-throughput systems and agentic AI.
             </p>
-            <div className="mt-4">
-              <a
-                href={getResumePdfHref()}
-                download="Pramod_Yadav_Resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-accent !py-2 !px-3.5 text-xs font-semibold"
-                aria-label="Download Resume PDF from footer"
-              >
-                <Download size={14} aria-hidden="true" />
-                <span>Download Resume (PDF)</span>
-              </a>
-            </div>
           </div>
 
           {/* Quick Section Links */}

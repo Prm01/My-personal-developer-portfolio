@@ -21,14 +21,14 @@ Interactive 3D developer portfolio for **Pramod Yadav**, B.Tech Mathematics & Co
 
 ## 📋 Sections in Order
 
-1. **Hero (3D):** Full-screen interactive 3D scene with typing animation (*"Full Stack & AI Developer"*, *"Backend Engineer"*, *"Open Source Contributor"*), one-line value statement, and instant CTA buttons (*View Projects*, *Download Resume*, *Contact*).
+1. **Hero (3D):** Full-screen interactive 3D scene with typing animation (*"Full Stack & AI Developer"*, *"Backend Engineer"*, *"Open Source Contributor"*), one-line value statement, and instant CTA buttons (*View Projects*, *Contact*).
 2. **About:** 3–4 line passionate bio highlighting Mathematics & Computing background at RGIPT, plus 4 animated 3D counters for 500+ DSA problems solved, JEE Advanced qualification (Top 2%), 3 major production projects, and 2 open-source organizations.
 3. **Featured Projects (Filter Tabs: All / Full Stack / AI / Backend):**
    - **Rahat:** Heat and flood early warning system for Delhi's 290 municipal wards (*FastAPI, PostgreSQL, AWS Bedrock, AWS Rekognition, AWS S3, RDS, CloudFront, MCP, Web Push, 35 e2e tests*).
    - **BhoomiAI:** Land record digitization and agentic validation platform (*TrOCR, LangChain agentic verification, 92% field accuracy, 15 min to under 1 min per record*).
    - **Doctor Appointment System:** Full-stack MERN platform with 3 discrete role dashboards (*Patient, Doctor, Admin*) and Lighthouse accessibility elevated from 79 to 100.
    - **Finance Dashboard UI:** High-performance portfolio analytics interface with responsive charting and 95+ mobile Lighthouse benchmark.
-4. **Experience & Education:** 3D glowing path timeline featuring Automation Intern at Polluxa (May–Jul 2026: 30 to 10 min per lead 67%, +20% acquisition, Apollo.io API, CRM test automation tool, resolved 20 of 25+ issues) and B.Tech Mathematics & Computing at RGIPT.
+4. **Experience & Education:** 3D glowing path timeline featuring Software Engineer Intern at Polluxa (May–Jul 2026: Chrome extension, Apollo.io Playwright workflows, regression suite, email deliverability checker, Git) and B.Tech Mathematics & Computing at RGIPT.
 5. **Skills:** Interactive 3D rotating skill sphere paired with grouped technical panels (*Frontend*, *Backend*, *Cloud & DevOps*, *AI-ML*, *Languages*).
 6. **Open Source:** *"Open Source: contributed to two organizations, Learning Unlimited and Neutralinojs"* with links to PRs and live GitHub commit heatmap.
 7. **Coding Profiles & Achievements:** Competitive programming profiles (*CodeChef, Codeforces, GeeksforGeeks*), 500+ DSA problems solved, JEE Main & Advanced (top 2%), RGIPT Merit-cum-Means Scholarship, Design Executive at GDSC RGIPT.
