@@ -1,6 +1,6 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, FolderGit2, GitBranch } from 'lucide-react';
+import { Mail, FolderGit2, GitBranch, ArrowDown } from 'lucide-react';
 import { TypeAnimation } from 'react-type-animation';
 import { PROFILE } from '../lib/profile';
 
