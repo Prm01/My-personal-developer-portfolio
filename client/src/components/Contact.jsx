@@ -4,8 +4,8 @@ import { useInView } from 'react-intersection-observer';
 import { Mail, Send, CheckCircle2, Copy, Check, Github, Linkedin } from 'lucide-react';
 import { PROFILE } from '../lib/profile';
 
-const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID || 'mqkenbwd';
-const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY;
+const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID || '';
+const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || '9d6d9618-88a2-40fe-bd0d-48626de484dc';
 
 export default function Contact() {
   const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
