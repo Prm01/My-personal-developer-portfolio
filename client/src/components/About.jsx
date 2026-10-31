@@ -117,7 +117,7 @@ export default function About() {
           className="mt-6 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl space-y-3"
         >
           <p>
-            I am a third-year undergraduate in <strong className="text-slate-900 dark:text-white font-semibold">Mathematics &amp; Computing</strong> at <strong className="text-slate-900 dark:text-white font-semibold">Rajiv Gandhi Institute of Petroleum Technology (RGIPT, 2027)</strong>, with experience as a <strong className="text-slate-900 dark:text-white font-semibold">Software Engineer Intern</strong> at <strong className="text-slate-900 dark:text-white font-semibold">Polluxa</strong>.
+            I am a final year student in <strong className="text-slate-900 dark:text-white font-semibold">Mathematics &amp; Computing</strong> at <strong className="text-slate-900 dark:text-white font-semibold">Rajiv Gandhi Institute of Petroleum Technology (RGIPT, 2027)</strong>, with experience as a <strong className="text-slate-900 dark:text-white font-semibold">Software Engineer Intern</strong> at <strong className="text-slate-900 dark:text-white font-semibold">Polluxa</strong>.
           </p>
           <p>
             I architect high-performance full-stack web platforms, agentic AI systems, and automated data workflows with mathematical precision. My engineering philosophy combines algorithmic rigor with clean systems design to ship reliable, production-ready software.
