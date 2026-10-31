@@ -4,6 +4,9 @@ import { useInView } from 'react-intersection-observer';
 import { Mail, Send, CheckCircle2, Copy, Check, Github, Linkedin } from 'lucide-react';
 import { PROFILE } from '../lib/profile';
 
+const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID || 'mqkenbwd';
+const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY;
+
 export default function Contact() {
   const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
@@ -17,6 +20,8 @@ export default function Contact() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const mailtoHref = `mailto:${PROFILE.email}?subject=${encodeURIComponent(form.subject || 'Portfolio Inquiry')}&body=${encodeURIComponent(`From: ${form.name} (${form.email})\n\n${form.message}`)}`;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
@@ -27,28 +32,48 @@ export default function Contact() {
     setErrMsg('');
 
     try {
-      const response = await fetch('https://formspree.io/f/mqkenbwd', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          subject: form.subject || 'Portfolio Inquiry',
-          message: form.message,
-          to: PROFILE.email
-        })
-      });
+      let response;
 
-      if (response.ok) {
+      if (WEB3FORMS_KEY) {
+        response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_KEY,
+            name: form.name,
+            email: form.email,
+            subject: form.subject || 'Portfolio Inquiry',
+            message: form.message,
+            from_name: form.name
+          })
+        });
+      } else {
+        response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            name: form.name,
+            email: form.email,
+            subject: form.subject || 'Portfolio Inquiry',
+            message: form.message,
+            _replyto: form.email
+          })
+        });
+      }
+
+      const data = await response.json().catch(() => ({}));
+
+      if (response.ok && data.success !== false) {
         setStatus('success');
         setForm({ name: '', email: '', subject: '', message: '' });
       } else {
-        window.location.href = `mailto:${PROFILE.email}?subject=${encodeURIComponent(form.subject || 'Portfolio Inquiry')}&body=${encodeURIComponent(`From: ${form.name} (${form.email})\n\n${form.message}`)}`;
-        setStatus('success');
+        const errorDetail = data?.error || (data?.errors && data.errors[0]?.message) || 'Service unavailable';
+        setStatus('error');
+        setErrMsg(`Delivery service notice: "${errorDetail}". Please send directly via your email client or copy the address below.`);
       }
     } catch (err) {
-      window.location.href = `mailto:${PROFILE.email}?subject=${encodeURIComponent(form.subject || 'Portfolio Inquiry')}&body=${encodeURIComponent(`From: ${form.name} (${form.email})\n\n${form.message}`)}`;
-      setStatus('success');
+      setStatus('error');
+      setErrMsg('Network error delivering message. Please send directly via email below.');
     }
   };
 
@@ -214,9 +239,26 @@ export default function Contact() {
                   {errMsg && (
                     <div
                       role="alert"
-                      className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs font-semibold"
+                      className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-700 dark:text-rose-300 text-xs space-y-2"
                     >
-                      {errMsg}
+                      <p className="font-semibold leading-relaxed">{errMsg}</p>
+                      <div className="flex flex-wrap gap-2 pt-1">
+                        <a
+                          href={mailtoHref}
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-rose-600 text-white font-bold text-xs hover:bg-rose-500 transition-colors"
+                        >
+                          <Mail size={13} aria-hidden="true" />
+                          <span>Open in Email Client</span>
+                        </a>
+                        <button
+                          type="button"
+                          onClick={handleCopyEmail}
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-rose-500/20 text-rose-800 dark:text-rose-200 font-semibold text-xs hover:bg-rose-500/30 transition-colors"
+                        >
+                          <Copy size={13} aria-hidden="true" />
+                          <span>Copy Email ({PROFILE.email})</span>
+                        </button>
+                      </div>
                     </div>
                   )}
 
